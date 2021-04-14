@@ -124,7 +124,17 @@
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.12.RELEASE</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>tech.jhipster</groupId>
+            <artifactId>jhipster-dependencies</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+		<dependency>
+			<groupId>tech.jhipster</groupId>
+			<artifactId>jhipster-framework</artifactId>
+			<version>7.0.1</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

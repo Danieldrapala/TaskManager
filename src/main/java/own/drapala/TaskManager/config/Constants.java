@@ -10,8 +10,15 @@ public final class Constants {
 
     public static final String SYSTEM = "system";
     public static final String DEFAULT_LANGUAGE = "en";
-//    security.remember-me.key: 0b32a651e6a65d5731e869dc136fb301b0a8c0e4
+//  security.remember-me.key: 0b32a651e6a65d5731e869dc136fb301b0a8c0e4
     public static final String KEY =  "0b32a651e6a65d5731e869dc136fb301b0a8c0e4";
-    public static final String POLICY = "default-src 'self'";
+    public static final String DEFAULT_POLICY = "default-src 'self';";
+    public static final String SCRIPT_CSP ="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com;";
+    public static final String FRAME_CSP = "frame-src 'self';";
+    public static final String STYLE_POLICY = "style-src 'self' 'unsafe-inline';";
+    public static final String IMAGE_POLICY = "img-src 'self';";
+    public static final String FONT_POLICY = "font-src 'self';";
+
+
     private Constants() {}
 }
