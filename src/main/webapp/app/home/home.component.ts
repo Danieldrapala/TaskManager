@@ -18,15 +18,34 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+    if(!this.isAuthenticated()){
+      this.router.navigate(['/login']);
+    }
   }
 
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
   }
 
-  login(): void {
-    this.router.navigate(['/login']);
+  teammates(): void {
+    this.router.navigate(['/teammates']);
   }
+
+  // settings(): void {
+  //   this.router.navigate(['/settings']);
+  // }
+
+  board(): void {
+    this.router.navigate(['/board']);
+  }
+
+  tasks(): void {
+    this.router.navigate(['/tasks']);
+  }
+
+  // charts(): void {
+  //   this.router.navigate(['/charts']);
+  // }
 
   ngOnDestroy(): void {
     if (this.authSubscription) {

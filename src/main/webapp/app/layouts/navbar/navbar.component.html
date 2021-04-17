@@ -41,6 +41,22 @@
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+          <a class="dropdown-item" routerLink="/teammates" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <span>Users List</span>
+          </a>
+          <a class="dropdown-item" routerLink="/boards" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <span>Board</span>
+          </a>
+          <!-- <a class="dropdown-item" routerLink="/charts" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <span>Charts</span>
+          </a> -->
+          <a class="dropdown-item" routerLink="/tasks" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <span>Tasks List</span>
+          </a>
         </ul>
       </li>
       <li

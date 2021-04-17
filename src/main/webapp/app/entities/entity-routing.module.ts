@@ -4,7 +4,18 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
+      {
+        path: 'teammates',
+        loadChildren: () => import('./../teamlist/teamlist.module').then(m => m.TeamListModule),
+      },
+      {
+        path: 'tasks',
+        loadChildren: () => import('./../task/task.module').then(m => m.TaskModule),
+      },
+      {
+        path: 'boards',
+        loadChildren: () => import('./../board/board.module').then(m => m.BoardModule),
+      },
     ]),
   ],
 })

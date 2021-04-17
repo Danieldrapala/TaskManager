@@ -25,15 +25,14 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 
+
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     HomeModule,
-    // j-needle-angular-add-module J will add new module here
     EntityRoutingModule,
     AppRoutingModule,
-    // Set this to true to enable service worker (PWA)
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
