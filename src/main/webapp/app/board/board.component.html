@@ -1,1 +1,36 @@
-<p>board works!</p>
+<div class="root">
+    <div class="board">
+
+        <div class="board-bar">
+            <p class="board-name">{{ board.name }}</p>
+            <div></div>
+            <div></div>
+            <button class="add-task-btn" (click)="addTask()">Add Task</button>
+            <button class="add-board-btn" (click)="addBoard()">Add Board</button>
+        </div>
+
+        <div class="board-wrapper">
+
+            <div class="board-columns" cdkDropListGroup>
+                <div class="board-column" *ngFor="let column of board.columns">
+
+                    <div class="column-title">
+                        {{ column.name }}
+                    </div>
+
+                    <div class="tasks-container"
+                         cdkDropList
+                         [cdkDropListData]="column.tasks"
+                         (cdkDropListDropped)="drop($event)">
+                        <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+                            {{ item }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
