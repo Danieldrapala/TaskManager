@@ -10,11 +10,11 @@ import { RouterModule } from '@angular/router';
       },
       {
         path: 'tasks',
-        loadChildren: () => import('./../task/task.module').then(m => m.TaskModule),
+        loadChildren: () => import('./../tasklist/tasklist.module').then(m => m.TaskListModule),
       },
       {
-        path: 'boards',
-        loadChildren: () => import('./../board/board.module').then(m => m.BoardModule),
+        path: '',
+        loadChildren: () => import('./../home/home.module').then(m => m.HomeModule),
       },
     ]),
   ],

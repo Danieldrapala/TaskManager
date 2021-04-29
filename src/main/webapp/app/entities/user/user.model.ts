@@ -1,6 +1,10 @@
 export interface IUser {
   id?: number;
   login?: string;
+  image?: string;
+  createdBy?: string;
+  createdWhen?: Date;
+  
 }
 
 export class User implements IUser {

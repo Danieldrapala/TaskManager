@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 import { AccountService } from 'app/core/auth/account.service';
 import { TeamListComponent } from './teamlist.component';
 import { TeamListService } from './teamlist.service';
-import { UserForUser } from './user.model';
+import { UserForUser } from '../model/user.model';
 
 
 describe('Component Tests', () => {

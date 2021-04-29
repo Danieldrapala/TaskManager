@@ -14,7 +14,6 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import './config/dayjs';
 import { SharedModule } from 'app/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './home/home.module';
 import { EntityRoutingModule } from './entities/entity-routing.module';
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
@@ -26,13 +25,15 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ManagerComponent } from './manager/manager.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BoardModule } from './board/board.module';
+import { TaskListComponent } from './tasklist/tasklist.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
-    HomeModule,
     EntityRoutingModule,
+    BoardModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,

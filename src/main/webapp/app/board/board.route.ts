@@ -5,7 +5,7 @@ import { BoardComponent } from './board.component';
 
 export const boardRoute: Routes = [
   {
-    path: '',
+    path: 'board',
     component: BoardComponent
   }
 ];

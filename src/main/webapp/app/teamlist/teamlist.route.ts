@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-
 import { TeamListComponent } from './teamlist.component';
+
 
 
 export const teamListRoute: Routes = [

@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,15 +9,16 @@ import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { UserForUser } from '../model/user.model';
-import { TeamListService } from './teamlist.service';
+import { TaskListService } from './tasklist.service';
+import { Task } from 'app/model/task.model';
 
 @Component({
-  selector: 'jhi-team-list',
-  templateUrl: './teamlist.component.html'
+  selector: 'jhi-task-list',
+  templateUrl: './tasklist.component.html'
 })
-export class TeamListComponent implements OnInit {
+export class TaskListComponent implements OnInit {
   currentAccount: Account | null = null;
-  users: UserForUser[] | null = null;
+  tasks: Task[] | null = null;
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -25,7 +27,7 @@ export class TeamListComponent implements OnInit {
   ascending!: boolean;
 
   constructor(
-    private userService: TeamListService,
+    private taskService: TaskListService,
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -46,7 +48,7 @@ export class TeamListComponent implements OnInit {
 
   loadAll(): void {
     this.isLoading = true;
-    this.userService
+    this.taskService
       .query({
         page: this.page - 1,
         size: this.itemsPerPage,
@@ -90,8 +92,8 @@ export class TeamListComponent implements OnInit {
     return result;
   }
 
-  private onSuccess(users: UserForUser[] | null, headers: HttpHeaders): void {
+  private onSuccess(tasks: Task[] | null, headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
-    this.users = users;
+    this.tasks = tasks;
   }
 }
