@@ -1,21 +1,15 @@
 package own.drapala.TaskManager.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
-import java.time.Instant;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.BatchSize;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * A Task.

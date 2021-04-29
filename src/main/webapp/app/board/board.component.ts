@@ -1,7 +1,12 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Board } from './board.model';
+import { BoardService } from './board.service';
 import { Column } from './column.model';
+import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { AddTaskComponent } from './add-task/add-task.component';
+import { DeleteTaskComponent } from './delete-task/delete-task.component';
+import { UpdateTaskComponent } from './update-task/update-task.component';
 
 @Component({
   selector: 'board',
@@ -9,8 +14,11 @@ import { Column } from './column.model';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+  
+  bsModalRef: BsModalRef | undefined;
+  taskList: any[] = [];
 
-  constructor() { }
+  constructor(private boardService: BoardService, private bsModalService: BsModalService ) { }
 
   board: Board = new Board('Test Board', [
     new Column('Ideas', [
@@ -51,10 +59,51 @@ export class BoardComponent implements OnInit {
         event.currentIndex);
     }
   }
-  addTask(){
-
+  getTasks() {
+    // this.boardService.getTaskList().subscribe((data: any) => {
+    //   Object.assign(this.taskList, data);
+    // }, (error: any) => {
+    //   console.log("Error while getting posts ", error);
+    // });
   }
-  addBoard(){
-    
+
+  addTask() {
+    this.bsModalRef = this.bsModalService.show(AddTaskComponent);
+    this.bsModalRef.content.event.subscribe((result: string) => {
+      if (result == 'OK') {
+        this.getTasks();
+      }
+    });
+  }
+
+  deleteTask(taskId: number, title: string) {
+    this.bsModalRef = this.bsModalService.show(DeleteTaskComponent);
+    this.bsModalRef.content.taskId = taskId;
+    this.bsModalRef.content.title = title;
+    this.bsModalRef.content.event.subscribe((result: string) => {
+      console.log("deleted", result);
+      if (result == 'OK') {
+        setTimeout(() => {
+          this.taskList=[];
+          this.getTasks();
+        }, 5000);
+      }
+    });
+  }
+
+  updateTask(taskId: number) {
+    this.boardService.updateTask(taskId);
+
+    this.bsModalRef = this.bsModalService.show(UpdateTaskComponent);
+    this.bsModalRef.content.event.subscribe((result: string) => {
+      if (result == 'OK') {
+        setTimeout(() => {
+          this.getTasks();
+        }, 5000);
+      }
+    });
+  }
+  addColumn(){
+
   }
 }
