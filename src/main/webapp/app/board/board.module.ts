@@ -7,7 +7,6 @@ import { BoardComponent } from './board.component';
 import { boardRoute } from './board.route';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { DeleteTaskComponent } from './delete-task/delete-task.component';
-import { UpdateTaskComponent } from './update-task/update-task.component';
 import { ShowTaskComponent } from './show-task/show-task.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { BoardService } from './board.service';
@@ -30,7 +29,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BoardComponent,
     AddTaskComponent,
     DeleteTaskComponent,
-    UpdateTaskComponent,
     ShowTaskComponent
   ]})
 export class BoardModule {}

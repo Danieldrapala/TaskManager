@@ -33,7 +33,7 @@ public class Task {
     private boolean isCompleted;
     private String creatorName;
     @ManyToOne
-    @JoinColumn(name = "OWNER_ID")
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     public long daysLeftUntilDeadline(LocalDate date) {

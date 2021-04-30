@@ -54,8 +54,6 @@ export class AlertService {
     (extAlerts ?? this.alerts).push(alert);
 
     if (alert.timeout > 0) {
-      // Workaround protractor waiting for setTimeout.
-      // Reference https://www.protractortest.org/#/timeouts
       this.ngZone.runOutsideAngular(() => {
         setTimeout(() => {
           this.ngZone.run(() => {
@@ -71,7 +69,6 @@ export class AlertService {
   private closeAlert(alertId: number, extAlerts?: Alert[]): void {
     const alerts = extAlerts ?? this.alerts;
     const alertIndex = alerts.map(alert => alert.id).indexOf(alertId);
-    // if found alert then remove
     if (alertIndex >= 0) {
       alerts.splice(alertIndex, 1);
     }

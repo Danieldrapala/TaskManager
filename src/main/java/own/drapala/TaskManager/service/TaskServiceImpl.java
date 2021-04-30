@@ -9,9 +9,7 @@ import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {

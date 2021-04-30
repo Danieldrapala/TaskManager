@@ -15,4 +15,7 @@
     <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
 
     <include file="liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-   </databaseChangeLog>
+    <include file="liquibase/changelog/00000000000001_addingtasktable_schema.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/00000000000002_addingboardcolumntable_schema.xml" relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="00000000000003" author="dd">
+        <createTable tableName="board">
+            <column name="board_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(200)"/>
+            <column name="card" type="int">
+            </column>
+        </createTable>
+
+        <createTable tableName="card">
+            <column name="card_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(30)">
+            </column>
+            <column name="status" type="bigint"/>
+            <column name="board_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="board_id"
+                                 baseTableName="card"
+                                 constraintName="fk_board_id"
+                                 referencedColumnNames="board_id"
+                                 referencedTableName="board"/>
+        <createTable tableName="task_assigned">
+            <column name="task_id" type="bigint">
+            </column>
+            <column name="card_id" type="bigint">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="task_assigned"
+                                 constraintName="fk_task_id"
+                                 referencedColumnNames="task_id"
+                                 referencedTableName="task"/>
+
+        <addForeignKeyConstraint baseColumnNames="card_id"
+                                 baseTableName="task_assigned"
+                                 constraintName="fk_column_id"
+                                 referencedColumnNames="card_id"
+                                 referencedTableName="card"/>
+    </changeSet>
+</databaseChangeLog>

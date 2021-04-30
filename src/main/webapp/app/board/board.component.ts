@@ -6,7 +6,7 @@ import { Column } from './column.model';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { AddTaskComponent } from './add-task/add-task.component';
 import { DeleteTaskComponent } from './delete-task/delete-task.component';
-import { UpdateTaskComponent } from './update-task/update-task.component';
+import { Task } from 'app/model/task.model';
 
 @Component({
   selector: 'board',
@@ -17,9 +17,6 @@ export class BoardComponent implements OnInit {
   
   bsModalRef: BsModalRef | undefined;
   taskList: any[] = [];
-
-  constructor(private boardService: BoardService, private bsModalService: BsModalService ) { }
-
   board: Board = new Board('Test Board', [
     new Column('Ideas', [
       "Some random idea",
@@ -45,8 +42,11 @@ export class BoardComponent implements OnInit {
       'Walk dog'
     ])
   ]);
+  constructor(private boardServiceImpl: BoardService, private bsModalService: BsModalService ) { }
+
 
   ngOnInit() {
+    // this.board = this.getBoard()
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -60,13 +60,17 @@ export class BoardComponent implements OnInit {
     }
   }
   getTasks() {
-    // this.boardService.getTaskList().subscribe((data: any) => {
+    // this.boardServiceImpl.getTaskList().subscribe((data: any) => {
     //   Object.assign(this.taskList, data);
     // }, (error: any) => {
     //   console.log("Error while getting posts ", error);
     // });
   }
+  print(task: Task){
+    console.log(task.id);
 
+    console.log(task.name);
+  }
   addTask() {
     this.bsModalRef = this.bsModalService.show(AddTaskComponent);
     this.bsModalRef.content.event.subscribe((result: string) => {
@@ -91,19 +95,14 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  updateTask(taskId: number) {
-    this.boardService.updateTask(taskId);
 
-    this.bsModalRef = this.bsModalService.show(UpdateTaskComponent);
-    this.bsModalRef.content.event.subscribe((result: string) => {
-      if (result == 'OK') {
-        setTimeout(() => {
-          this.getTasks();
-        }, 5000);
-      }
-    });
-  }
   addColumn(){
+
+  }
+   getBoard(){
+
+  }
+  getColumns(){
 
   }
 }

@@ -5,32 +5,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import own.drapala.TaskManager.config.Constants;
 import own.drapala.TaskManager.domain.Task;
-import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.TaskRepository;
-import own.drapala.TaskManager.repository.UserRepository;
 import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
-import own.drapala.TaskManager.rest.errors.EmailAlreadyUsedException;
-import own.drapala.TaskManager.rest.errors.LoginAlreadyUsedException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
-import own.drapala.TaskManager.security.AuthoritiesConstants;
 import own.drapala.TaskManager.service.TaskService;
-import own.drapala.TaskManager.service.dto.AdminUserDTO;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
-
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -39,7 +28,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class TaskResource {
-
 
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
@@ -67,8 +55,8 @@ public class TaskResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/task")
-    public ResponseEntity<Task> createUser(@Valid @RequestBody TaskDTO taskDTO) throws URISyntaxException {
-        log.debug("REST request to save User : {}", taskDTO);
+    public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO) throws URISyntaxException {
+        log.debug("REST request to save Task : {}", taskDTO);
 
         if (taskDTO.getId() != null) {
             throw new BadRequestAlertException("A new task cannot already have an ID", "task", "idexists");
@@ -109,15 +97,12 @@ public class TaskResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all tasks.
      */
     @GetMapping("/tasks")
-    public ResponseEntity<List<TaskDTO>> getAllUsers(Pageable pageable) {
+    public ResponseEntity<List<TaskDTO>> getAllTasks(Pageable pageable) {
         log.debug("REST request to get all tasks for an user");
         final Page<TaskDTO> page = taskService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
-
-
 
     /**
      * {@code DELETE /api/task/:id} : delete the  Task.

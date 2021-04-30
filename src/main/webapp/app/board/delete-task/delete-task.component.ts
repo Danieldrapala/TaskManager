@@ -13,12 +13,12 @@ export class DeleteTaskComponent implements OnInit {
   event: EventEmitter<any> = new EventEmitter();
   taskId: number = -1;
   title: string= '';
-  constructor(private bsModalRef: BsModalRef, private boardService: BoardService) {
+  constructor(private bsModalRef: BsModalRef, private boardServiceImpl: BoardService) {
 
   }
 
   deleteTask() {
-    this.boardService.deleteTask(this.taskId).subscribe();
+    this.boardServiceImpl.deleteTask(this.taskId).subscribe();
     this.event.emit('OK');
     this.bsModalRef.hide();
   }

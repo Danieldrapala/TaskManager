@@ -23,10 +23,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
-import { ManagerComponent } from './manager/manager.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { BoardModule } from './board/board.module';
-import { TaskListComponent } from './tasklist/tasklist.component';
 
 @NgModule({
   imports: [
@@ -45,7 +42,7 @@ import { TaskListComponent } from './tasklist/tasklist.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, ManagerComponent, DashboardComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

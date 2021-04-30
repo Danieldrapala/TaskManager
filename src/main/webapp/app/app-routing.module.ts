@@ -27,7 +27,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'teammates',
-          loadChildren: () => import('./teamlist/teamlist.module').then(m => m.TeamListModule),
+          loadChildren: () => import('./entities/teamlist/teamlist.module').then(m => m.TeamListModule),
         },
         {
           path: 'login',

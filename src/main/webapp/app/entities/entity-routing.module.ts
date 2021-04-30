@@ -6,11 +6,11 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: 'teammates',
-        loadChildren: () => import('./../teamlist/teamlist.module').then(m => m.TeamListModule),
+        loadChildren: () => import('./teamlist/teamlist.module').then(m => m.TeamListModule),
       },
       {
         path: 'tasks',
-        loadChildren: () => import('./../tasklist/tasklist.module').then(m => m.TaskListModule),
+        loadChildren: () => import('./tasklist/tasklist.module').then(m => m.TaskListModule),
       },
       {
         path: '',

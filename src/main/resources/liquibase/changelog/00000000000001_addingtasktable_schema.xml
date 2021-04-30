@@ -21,7 +21,7 @@
             </column>
             <column name="isCompleted" type="boolean"/>
             <column name="creatorName" type="varchar(100)"/>
-            <column name="owner_id" type="varchar(100)"/>
+            <column name="owner_id" type="bigint"/>
 
         </createTable>
         <addForeignKeyConstraint baseColumnNames="owner_id"
