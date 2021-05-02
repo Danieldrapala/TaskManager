@@ -12,18 +12,18 @@
         <div class="board-wrapper">
 
             <div class="board-columns" cdkDropListGroup>
-                <div class="board-column" *ngFor="let column of board.columns">
+                <div class="board-column" *ngFor="let column of cards">
 
                     <div class="column-title">
-                        {{ column.name }}
+                        {{ column.name }} 
                     </div>
-
+                    
                     <div class="tasks-container"
                          cdkDropList
                          [cdkDropListData]="column.tasks"
                          (cdkDropListDropped)="drop($event)">
                         <div class="task" *ngFor="let task of column.tasks" cdkDrag>
-                            {{task}}
+                            {{task.name}}
 
                         </div>
                     </div>

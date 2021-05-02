@@ -1,6 +1,7 @@
 package own.drapala.TaskManager.service;
 
 import own.drapala.TaskManager.domain.Card;
+import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.service.dto.CardDTO;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface CardService {
     Card createColumn(CardDTO cardDTO);
 
     Optional<List<Card>> getColumnForBoardId(Long boardId);
+
+    Optional<List<Task>> getTasksForCardId(long l);
 }

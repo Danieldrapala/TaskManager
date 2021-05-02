@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/board")
 public class TaskResource {
 
 
@@ -118,5 +119,15 @@ public class TaskResource {
                 .noContent()
                 .headers(HeaderUtil.createAlert(applicationName, "A task is deleted with identifier " + id, String.valueOf(id)))
                 .build();
+    }
+
+    @GetMapping("/card/{id}")
+    public ResponseEntity<List<Task>> getTasksForCardId(@PathVariable Long id) {
+
+        Optional<List<Task>> task = taskService.getTasksForCardId(id);
+        return ResponseUtil.wrapOrNotFound(
+                task,
+                HeaderUtil.createAlert(applicationName, "A Task list for column "+ id ,"Task")
+        );
     }
 }

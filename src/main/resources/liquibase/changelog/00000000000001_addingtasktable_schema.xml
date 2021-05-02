@@ -12,16 +12,16 @@
             <column name="task_id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="bigint"/>
+            <column name="name" type="varchar(200)"/>
             <column name="description" type="varchar(1200)">
                 <constraints nullable="false" />
             </column>
             <column name="date" type="date">
                 <constraints nullable="false" />
             </column>
-            <column name="isCompleted" type="boolean"/>
-            <column name="creatorName" type="varchar(100)"/>
+            <column name="is_completed" type="boolean"/>
             <column name="owner_id" type="bigint"/>
+            <column name="card_id" type="bigint"/>
 
         </createTable>
         <addForeignKeyConstraint baseColumnNames="owner_id"
@@ -29,6 +29,7 @@
                                  constraintName="fk_owner_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user"/>
+
     </changeSet>
 
 </databaseChangeLog>

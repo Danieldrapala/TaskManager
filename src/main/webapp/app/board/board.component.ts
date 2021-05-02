@@ -2,11 +2,11 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, OnInit } from '@angular/core';
 import { Board } from './board.model';
 import { BoardService } from './board.service';
-import { Column } from './column.model';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { AddTaskComponent } from './add-task/add-task.component';
 import { DeleteTaskComponent } from './delete-task/delete-task.component';
 import { Task } from 'app/model/task.model';
+import { Card } from './card.model';
 
 @Component({
   selector: 'board',
@@ -17,39 +17,37 @@ export class BoardComponent implements OnInit {
   
   bsModalRef: BsModalRef | undefined;
   taskList: any[] = [];
-  board: Board = new Board('Test Board', [
-    new Column('Ideas', [
-      "Some random idea",
-      "This is another random idea",
-      "build an awesome application"
-    ]),
-    new Column('Research', [
-      "Lorem ipsum",
-      "foo",
-      "This was in the 'Research' column"
-    ]),
-    new Column('Todo', [
-      'Get to work',
-      'Pick up groceries',
-      'Go home',
-      'Fall asleep'
-    ]),
-    new Column('Done', [
-      'Get up',
-      'Brush teeth',
-      'Take a shower',
-      'Check e-mail',
-      'Walk dog'
-    ])
-  ]);
-  constructor(private boardServiceImpl: BoardService, private bsModalService: BsModalService ) { }
+  board: Board =new Board(1,"",0);
+  cards: Card[]= [];
+  constructor(private boardServiceImpl: BoardService, private bsModalService: BsModalService ) {
+    this.boardServiceImpl.getBoard().subscribe( data =>{
+      this.board =data
+    });
+    this.boardServiceImpl.getCards().subscribe( data =>{
+      this.cards = data
+      let i =0;
+      data.forEach(aaa=>{
+        this.boardServiceImpl.getTasks(aaa.id).subscribe( tasks=>{
+          this.cards[i++].tasks=tasks;
+        }
+        )
+      })
+
+    });
+  
+
+  }
+   
 
 
   ngOnInit() {
-    // this.board = this.getBoard()
+    
   }
+  getTaskLists(){
+    
 
-  drop(event: CdkDragDrop<string[]>) {
+  }
+  drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -57,7 +55,16 @@ export class BoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-    }
+        console.log(event.currentIndex);
+        console.log(event.previousContainer);
+        console.log(event.previousIndex);
+
+        console.log(event.container);
+        console.log(event.item);
+    
+
+        // this.boardServiceImpl.updateTaskColumn(event.item.data, event.container.id)
+      }
   }
   getTasks() {
     // this.boardServiceImpl.getTaskList().subscribe((data: any) => {
@@ -97,12 +104,6 @@ export class BoardComponent implements OnInit {
 
 
   addColumn(){
-
-  }
-   getBoard(){
-
-  }
-  getColumns(){
 
   }
 }

@@ -8,7 +8,6 @@ public class CardDTO {
     private Long id;
     private String name;
     private Long status;
-    private Long board_id;
 
     public CardDTO() {
         // Empty constructor needed for Jackson.
@@ -19,7 +18,6 @@ public class CardDTO {
         // Customize it here if you need, or not, firstName/lastName/etc
         this.name = card.getName();
         this.status = card.getStatus();
-        this.board_id = card.getBoard_id();
     }
 
     public Long getId() {

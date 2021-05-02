@@ -1,5 +1,11 @@
-import { Column } from './column.model';
+import { Card } from './card.model';
 
-export class Board {
-    constructor(public name: string, public columns: Column[]) {}
+export class Board implements IBoard {
+    constructor(public id: number, public name: string, public count: number) {}
+}
+
+export interface IBoard {
+    id:number;
+    name: string;
+    count: number;
 }

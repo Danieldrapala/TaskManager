@@ -3,9 +3,7 @@ package own.drapala.TaskManager.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -47,8 +45,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String lastName;
 
     @Email
-    @Size(min = 5, max = 254)
-    @Column(length = 254, unique = true)
+    @Size(min = 5, max = 100)
+    @Column(length = 100, unique = true)
     private String email;
 
     @NotNull
@@ -75,6 +73,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private Instant resetDate = null;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Task> owned_tasks = new ArrayList<Task>();
 
     @JsonIgnore
     @ManyToMany
@@ -221,5 +222,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
+    }
+
+    public List<Task> getOwned_tasks() {
+        return owned_tasks;
+    }
+
+    public void setOwned_tasks(List<Task> owned_tasks) {
+        this.owned_tasks = owned_tasks;
     }
 }

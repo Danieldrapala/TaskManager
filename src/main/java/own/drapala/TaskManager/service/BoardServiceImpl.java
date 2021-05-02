@@ -1,6 +1,7 @@
 package own.drapala.TaskManager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import own.drapala.TaskManager.domain.Board;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.repository.BoardRepository;
@@ -8,9 +9,10 @@ import own.drapala.TaskManager.service.dto.BoardDTO;
 
 import java.util.Optional;
 
+@Service
 public class BoardServiceImpl implements BoardService{
 
-    private BoardRepository boardRepository;
+    private final BoardRepository boardRepository;
 
     @Autowired
     public BoardServiceImpl(BoardRepository boardRepository) {
@@ -23,16 +25,4 @@ public class BoardServiceImpl implements BoardService{
         return boardRepository.findById(id).map(BoardDTO::new);
     }
 
-    @Override
-    public void addColumn(Long id){
-        Board board = boardRepository.getOne(id);
-        board.setCards(board.getCards() + 1);
-        boardRepository.save(board);
-    }
-    @Override
-    public void deleteColumn(Long id){
-        Board board = boardRepository.getOne(id);
-        board.setCards(board.getCards()-1);
-        boardRepository.save(board);
-    }
 }

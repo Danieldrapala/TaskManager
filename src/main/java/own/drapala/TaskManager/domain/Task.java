@@ -30,11 +30,15 @@ public class Task {
     @NotNull(message = "{task.date.not.null}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private boolean isCompleted;
-    private String creatorName;
-    @ManyToOne
+    private boolean is_completed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "card_id")
+    private Card card;
 
     public long daysLeftUntilDeadline(LocalDate date) {
         return ChronoUnit.DAYS.between(LocalDate.now(), date);
@@ -46,27 +50,25 @@ public class Task {
     public Task(@NotEmpty String name,
                 @NotEmpty @Size(max = 1200) String description,
                 @NotNull LocalDate date,
-                boolean isCompleted,
-                String creatorName) {
+                boolean is_completed) {
         this.name = name;
         this.description = description;
         this.date = date;
-        this.isCompleted = isCompleted;
-        this.creatorName = creatorName;
+        this.is_completed = is_completed;
     }
 
     public Task(@NotEmpty String name,
                 @NotEmpty @Size(max = 1200) String description,
                 @NotNull LocalDate date,
-                boolean isCompleted,
-                String creatorName,
-                User owner) {
+                boolean is_completed,
+                User owner,
+                Card card) {
         this.name = name;
         this.description = description;
         this.date = date;
-        this.isCompleted = isCompleted;
-        this.creatorName = creatorName;
+        this.is_completed = is_completed;
         this.owner = owner;
+        this.card = card;
     }
 
     public Long getId() {
@@ -102,19 +104,11 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return is_completed;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public String getCreatorName() {
-        return creatorName;
-    }
-
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
+    public void setCompleted(boolean is_completed) {
+        is_completed = is_completed;
     }
 
     public User getOwner() {
@@ -130,17 +124,24 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return isCompleted == task.isCompleted &&
+        return is_completed == task.is_completed &&
                 Objects.equals(id, task.id) &&
                 name.equals(task.name) &&
                 description.equals(task.description) &&
                 date.equals(task.date) &&
-                Objects.equals(creatorName, task.creatorName) &&
                 Objects.equals(owner, task.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, date, isCompleted, creatorName, owner);
+        return Objects.hash(id, name, description, date, is_completed, owner);
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

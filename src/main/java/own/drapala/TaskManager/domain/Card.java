@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,17 +29,11 @@ public class Card {
     private Long status;
 
     @JoinColumn(name ="board_id", referencedColumnName = "board_id")
-    private Long board_id;
+    @ManyToOne
+    private Board board;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "task_assigned",
-            joinColumns = { @JoinColumn(name = "card_id", referencedColumnName = "card_id") },
-            inverseJoinColumns = { @JoinColumn(name = "task_id", referencedColumnName = "task_id") }
-    )
-    @BatchSize(size = 20)
-    private final Set<Task> tasks = new HashSet<>();
+    @OneToMany(mappedBy = "card")
+    private List<Task> tasks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -72,15 +68,19 @@ public class Card {
         this.status = status;
     }
 
-    public Long getBoard_id() {
-        return board_id;
+    public Board getBoard() {
+        return board;
     }
 
-    public void setBoard_id(Long board_id) {
-        this.board_id = board_id;
+    public void setBoard(Board board_id) {
+        this.board = board_id;
     }
 
-    public Set<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 }

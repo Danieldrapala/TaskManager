@@ -9,6 +9,7 @@ import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,6 @@ public class TaskServiceImpl implements TaskService {
         newTask.setDate(taskDTO.getDate());
         newTask.setCompleted(false);
         newTask.setOwner(taskDTO.getOwner());
-        newTask.setCreatorName(taskDTO.getCreatorName());
         taskRepository.save(newTask);
         return newTask;
     }
@@ -46,7 +46,6 @@ public class TaskServiceImpl implements TaskService {
                     task.setCompleted(updatedTaskDTO.isCompleted());
                     task.setDate(updatedTaskDTO.getDate());
                     task.setOwner(updatedTaskDTO.getOwner());
-                    task.setCreatorName(updatedTaskDTO.getCreatorName());
                     return task;
                 }
                 )
@@ -103,6 +102,11 @@ public class TaskServiceImpl implements TaskService {
     public void unassignTask(Task task) {
         task.setOwner(null);
         taskRepository.save(task);
+    }
+
+    @Override
+    public Optional<List<Task>> getTasksForCardId(Long id) {
+        return taskRepository.findByColumnId(id);
     }
 
 }

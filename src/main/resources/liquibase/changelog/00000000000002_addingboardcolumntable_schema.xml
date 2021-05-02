@@ -13,8 +13,6 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(200)"/>
-            <column name="card" type="int">
-            </column>
         </createTable>
 
         <createTable tableName="card">
@@ -26,27 +24,16 @@
             <column name="status" type="bigint"/>
             <column name="board_id" type="bigint"/>
         </createTable>
+        <addForeignKeyConstraint baseColumnNames="card_id"
+                                 baseTableName="task"
+                                 constraintName="fk_card_assigned_id"
+                                 referencedColumnNames="card_id"
+                                 referencedTableName="card"/>
+
         <addForeignKeyConstraint baseColumnNames="board_id"
                                  baseTableName="card"
                                  constraintName="fk_board_id"
                                  referencedColumnNames="board_id"
                                  referencedTableName="board"/>
-        <createTable tableName="task_assigned">
-            <column name="task_id" type="bigint">
-            </column>
-            <column name="card_id" type="bigint">
-            </column>
-        </createTable>
-        <addForeignKeyConstraint baseColumnNames="task_id"
-                                 baseTableName="task_assigned"
-                                 constraintName="fk_task_id"
-                                 referencedColumnNames="task_id"
-                                 referencedTableName="task"/>
-
-        <addForeignKeyConstraint baseColumnNames="card_id"
-                                 baseTableName="task_assigned"
-                                 constraintName="fk_column_id"
-                                 referencedColumnNames="card_id"
-                                 referencedTableName="card"/>
     </changeSet>
 </databaseChangeLog>

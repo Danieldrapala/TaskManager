@@ -1,3 +1,4 @@
+import { Card } from "app/board/card.model";
 import { User } from "app/entities/user/user.model";
 
 export interface ITask {
@@ -7,7 +8,7 @@ export interface ITask {
     date?: Date | null;
     isCompleted?: boolean | false;
     owner?: User;
-
+    card?:Card;
   }
   
   export class Task implements ITask {
@@ -17,6 +18,7 @@ export interface ITask {
       date?: Date | null;
       isCompleted?: boolean | false;
       owner?: User;
+      card?: Card;
     constructor(
       id?: number,
       name?: string,
@@ -24,6 +26,7 @@ export interface ITask {
       date?: Date | null,
       isCompleted?: boolean | false,
       owner?: User,
+      card?: Card
     ) {
       this.id = id;
       this.name = name;
@@ -31,5 +34,6 @@ export interface ITask {
       this.description = description;
       this.isCompleted = isCompleted;
       this.owner = owner;
+      this.card =  card;
     }
   }

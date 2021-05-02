@@ -2,6 +2,7 @@ package own.drapala.TaskManager.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.service.dto.TaskDTO;
@@ -32,4 +33,6 @@ public interface TaskService {
     void assignTaskToUser(Task task, User user);
 
     void unassignTask(Task task);
+
+    Optional<List<Task>> getTasksForCardId(Long l);
 }

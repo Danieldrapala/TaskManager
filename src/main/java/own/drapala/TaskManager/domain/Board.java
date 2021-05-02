@@ -3,6 +3,7 @@ package own.drapala.TaskManager.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "board")
@@ -15,8 +16,9 @@ public class Board {
         @Column(length = 1200)
         @Size(max = 1200, message = "{board.name.size}")
         private String name;
-        @NotEmpty(message = "{board.card.not.empty}")
-        private int cards;
+
+        @OneToMany(mappedBy = "board")
+        private List<Card> card;
 
         public Long getId() {
             return id;
@@ -34,21 +36,20 @@ public class Board {
             return name;
         }
 
-        public void setCards(int cards) {
-            this.cards = cards;
+        public void setCard(List<Card> card) {
+            this.card = card;
         }
 
-        public @NotEmpty(message = "{board.cards.not.empty}")
-        int getCards() {
-            return cards;
+        public List<Card> getCard() {
+            return card;
         }
-
         public Board() {
         }
 
-        public Board(@NotEmpty String name,
-                       int cards) {
+        public Board(@NotEmpty String name) {
             this.name = name;
-            this.cards = cards;
+        }
+        public Board(Long id) {
+            this.id = id;
         }
     }

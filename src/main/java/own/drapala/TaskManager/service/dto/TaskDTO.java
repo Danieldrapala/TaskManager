@@ -1,16 +1,10 @@
 package own.drapala.TaskManager.service.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 public class TaskDTO {
 
@@ -19,8 +13,8 @@ public class TaskDTO {
     private String description;
     private LocalDate date;
     private boolean isCompleted;
-    private String creatorName;
     private User owner;
+    private Card card;
 
 
     public TaskDTO() {
@@ -73,13 +67,6 @@ public class TaskDTO {
         isCompleted = completed;
     }
 
-    public String getCreatorName() {
-        return creatorName;
-    }
-
-    public void setCreatorName(String creatorName) {
-        this.creatorName = creatorName;
-    }
 
     public User getOwner() {
         return owner;
