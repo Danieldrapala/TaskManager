@@ -5,33 +5,24 @@
             <p class="board-name">{{ board.name }}</p>
             <div></div>
             <div></div>
-            <button class="add-task-btn" (click)="addTask()">Add Task</button>
-            <button class="add-board-btn" (click)="addColumn()">Add Column</button>
         </div>
-
         <div class="board-wrapper">
-
             <div class="board-columns" cdkDropListGroup>
                 <div class="board-column" *ngFor="let column of cards">
-
                     <div class="column-title">
                         {{ column.name }} 
                     </div>
-                    
                     <div class="tasks-container"
                          cdkDropList
+                         id = "{{column.id}}"
                          [cdkDropListData]="column.tasks"
                          (cdkDropListDropped)="drop($event)">
-                        <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+                        <div class="task" id="{{task.id}}" *ngFor="let task of column.tasks" cdkDrag>
                             {{task.name}}
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>

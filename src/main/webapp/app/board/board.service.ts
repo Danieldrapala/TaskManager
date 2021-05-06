@@ -4,19 +4,18 @@ import { ApplicationConfigService } from "app/core/config/application-config.ser
 import { createRequestOption } from "app/core/request/request-util";
 import { Pagination } from "app/core/request/request.model";
 import { ITask, Task } from "app/model/task.model";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { IBoard } from "./board.model";
 import { ICard } from "./card.model";
 
 @Injectable({ providedIn: 'root' })
 export class BoardService{
-  
-   
     
     public resourceUrl = this.applicationConfigService.getEndpointFor('api/board');
     
     constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {
     }
+
     addTask(task: Task): Observable<ITask> {
       return this.http.post<ITask>(`${this.resourceUrl}/task`, task);
     }
@@ -44,18 +43,14 @@ export class BoardService{
 
     getCards() :Observable<ICard[]>{
       let cards = this.http.get<ICard[]>(`${this.resourceUrl}/card`);
-  
       return cards;
     }
-    getTasks(cardId: number){
+
+    getTasks(cardId: number|undefined){
       return this.http.get<Task[]>(`${this.resourceUrl}/card/${cardId}`)
-
     }
 
-    updateTaskColumn(task: Task, currentIndex: string) {
-      console.log(task.card);
-      console.log(currentIndex);
-      return this.http.put<ITask>(`${this.resourceUrl}/task`, task);
+    updateTaskColumn(previousIndex: string, currentIndex: string, taskId: number |undefined ) {
+      return this.http.put<ITask>(`${this.resourceUrl}/draganddrop`, [previousIndex, currentIndex, taskId]);
     }
-  
 } 

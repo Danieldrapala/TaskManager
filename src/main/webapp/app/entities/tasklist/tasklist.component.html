@@ -1,26 +1,22 @@
 <div>
 
-    <jhi-alert-error></jhi-alert-error>
-  
-    <jhi-alert></jhi-alert>
+    
   
     <div class="table-responsive" *ngIf="tasks">
       <table class="table table-striped" >
         <thead>
           <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
             <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col" jhiSortBy="login"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col" jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col"></th>
+            <th scope="col" jhiSortBy="name"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
           </tr>
         </thead>
         <tbody *ngIf="tasks">
-          <tr *ngFor="let user of tasks; trackBy: trackIdentity">
+          <tr *ngFor="let task of tasks; trackBy: trackIdentity">
             <td>
-              <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
+              <a [routerLink]="['./', task.id, 'view']">{{ task.id }}</a>
             </td>
-            <td>{{ user.login }}</td>
-            <td>{{ user.email }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.card }}</td>
           </tr>
         </tbody>
       </table>

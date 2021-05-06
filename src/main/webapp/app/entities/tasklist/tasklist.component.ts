@@ -39,10 +39,8 @@ export class TaskListComponent implements OnInit {
     this.handleNavigation();
   }
 
-
-
-  trackIdentity(index: number, item: UserForUser): number {
-    return item.id!;
+  trackIdentity(index: number, task: Task): number {
+    return task.id!;
   }
 
 
@@ -55,7 +53,7 @@ export class TaskListComponent implements OnInit {
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<UserForUser[]>) => {
+        (res: HttpResponse<Task[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers);
         },

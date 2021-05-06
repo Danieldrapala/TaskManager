@@ -1,5 +1,6 @@
 package own.drapala.TaskManager.rest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
+import own.drapala.TaskManager.repository.CardRepository;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
+import own.drapala.TaskManager.service.CardService;
 import own.drapala.TaskManager.service.TaskService;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
@@ -38,11 +41,14 @@ public class TaskResource {
 
     private final TaskService taskService;
 
+    private final CardRepository cardRepository;
+
     private final TaskRepository taskRepository;
 
-    public TaskResource(TaskService taskService, TaskRepository taskRepository) {
+    public TaskResource(TaskService taskService, TaskRepository taskRepository, CardRepository cardRepository) {
         this.taskService = taskService;
         this.taskRepository = taskRepository;
+        this.cardRepository = cardRepository;
     }
 
     /**
@@ -128,6 +134,18 @@ public class TaskResource {
         return ResponseUtil.wrapOrNotFound(
                 task,
                 HeaderUtil.createAlert(applicationName, "A Task list for column "+ id ,"Task")
+        );
+    }
+
+    @PutMapping("/draganddrop")
+    public ResponseEntity<TaskDTO> updateTaskCard(@RequestBody String[] ids) {
+
+        //ids[2] taskid
+        Card actualCard = cardRepository.getOne(Long.valueOf(ids[1]));
+        Optional<TaskDTO> task = taskService.updateTasksCard(actualCard, Long.valueOf(ids[2]));
+        return ResponseUtil.wrapOrNotFound(
+                task,
+                HeaderUtil.createAlert(applicationName, "A Task id "+ ids[2] ,"Task")
         );
     }
 }

@@ -35,4 +35,6 @@ public interface TaskService {
     void unassignTask(Task task);
 
     Optional<List<Task>> getTasksForCardId(Long l);
+
+    Optional<TaskDTO> updateTasksCard(Card cardId, Long taskId);
 }

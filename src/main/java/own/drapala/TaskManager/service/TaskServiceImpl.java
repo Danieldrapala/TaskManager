@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.TaskRepository;
@@ -107,6 +108,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Optional<List<Task>> getTasksForCardId(Long id) {
         return taskRepository.findByColumnId(id);
+    }
+
+    @Override
+    public Optional<TaskDTO> updateTasksCard(Card card, Long taskId) {
+        Task task = getTaskById(taskId);
+        task.setCard(card);
+        return  Optional.of(taskRepository.save(task)).map(TaskDTO::new);
+
     }
 
 }
