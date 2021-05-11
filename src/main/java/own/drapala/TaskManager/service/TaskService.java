@@ -28,7 +28,7 @@ public interface TaskService {
 
     Page<TaskDTO> findFreeTasks(Pageable pageable);
 
-    Task getTaskById(Long taskId);
+    Optional<TaskDTO> getTaskById(Long taskId);
 
     void assignTaskToUser(Task task, User user);
 

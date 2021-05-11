@@ -46,15 +46,15 @@
             <span>Users List</span>
           </a>
           <a class="dropdown-item" routerLink="/board" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <fa-icon icon="chalkboard" [fixedWidth]="true"></fa-icon>
             <span>Board</span>
           </a>
-          <!-- <a class="dropdown-item" routerLink="/charts" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+          <a class="dropdown-item" routerLink="/charts" routerLinkActive="active" (click)="collapseNavbar()">
+            <fa-icon icon="chart-bar" [fixedWidth]="true"></fa-icon>
             <span>Charts</span>
-          </a> -->
+          </a>
           <a class="dropdown-item" routerLink="/tasks" routerLinkActive="active" (click)="collapseNavbar()">
-            <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+            <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
             <span>Tasks List</span>
           </a>
         </ul>
@@ -80,13 +80,12 @@
               <span>User management</span>
             </a>
           </li>
-          <li *ngIf="openAPIEnabled">
-            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-              <span>API</span>
+          <li>
+            <a class="dropdown-item" routerLink="admin/board-managment" routerLinkActive="active" (click)="collapseNavbar()">
+              <fa-icon icon="tools" [fixedWidth]="true"></fa-icon>
+              <span>Manage Board</span>
             </a>
           </li>
-          <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
         </ul>
       </li>
       <li

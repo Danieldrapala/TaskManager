@@ -26,6 +26,10 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { BoardModule } from './board/board.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ChartsComponent } from './charts/charts.component';
+import { ChartsModule } from './charts/charts.module';
+import { FormsModule } from '@angular/forms';
+import { ShowTaskModule } from './show-task/showtask.module';
 
 @NgModule({
   imports: [
@@ -34,11 +38,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     BrowserModule,
     SharedModule,
     EntityRoutingModule,
+    ChartsModule,
     BoardModule,
+    ShowTaskModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
-    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true })
+    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
+    FormsModule
     ],
   providers: [
     Title,

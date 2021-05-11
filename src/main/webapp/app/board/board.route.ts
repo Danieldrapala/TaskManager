@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
+import { ShowTaskComponent } from 'app/show-task/show-task.component';
 import { BoardComponent } from './board.component';
-import { ShowTaskComponent } from './show-task/show-task.component';
 
 
 
@@ -10,7 +10,8 @@ export const boardRoute: Routes = [
     component: BoardComponent
   },
   {
-    path: 'showtask',
+    path: 'showtask/:id',
     component: ShowTaskComponent
+    
   }
 ];

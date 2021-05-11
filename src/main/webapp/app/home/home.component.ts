@@ -31,9 +31,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/teammates']);
   }
 
-  // settings(): void {
-  //   this.router.navigate(['/settings']);
-  // }
+  settings(): void {
+    this.router.navigate(['/settings']);
+  }
 
   board(): void {
     this.router.navigate(['/board']);
@@ -43,9 +43,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/tasks']);
   }
 
-  // charts(): void {
-  //   this.router.navigate(['/charts']);
-  // }
+  charts(): void {
+    this.router.navigate(['/charts']);
+  }
 
   ngOnDestroy(): void {
     if (this.authSubscription) {

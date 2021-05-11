@@ -5,6 +5,7 @@ import { BoardService } from './board.service';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Task } from 'app/model/task.model';
 import { Card } from './card.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'board',
@@ -17,7 +18,7 @@ export class BoardComponent implements OnInit {
   taskList: any[] = [];
   board: Board =new Board(1,"",0);
   cards: Card[]= [];
-  constructor(private boardServiceImpl: BoardService, private bsModalService: BsModalService ) {
+  constructor(private router: Router, private boardServiceImpl: BoardService, private bsModalService: BsModalService ) {
   }
    
   ngOnInit() {
@@ -51,4 +52,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  showTask(task: Task){
+    this.router.navigate(["./showtask", task.id]);
+  }
 }

@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import own.drapala.TaskManager.config.Constants;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.repository.CardRepository;
@@ -19,18 +21,21 @@ import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
+import own.drapala.TaskManager.security.AuthoritiesConstants;
 import own.drapala.TaskManager.service.CardService;
 import own.drapala.TaskManager.service.TaskService;
+import own.drapala.TaskManager.service.dto.AdminUserDTO;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/board")
+@RequestMapping("/api")
 public class TaskResource {
 
 
@@ -103,9 +108,9 @@ public class TaskResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all tasks.
      */
-    @GetMapping("/tasks")
+    @GetMapping("/task/tasks")
     public ResponseEntity<List<TaskDTO>> getAllTasks(Pageable pageable) {
-        log.debug("REST request to get all tasks for an user");
+        log.info("REST request to get all tasks for an user");
         final Page<TaskDTO> page = taskService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -127,25 +132,16 @@ public class TaskResource {
                 .build();
     }
 
-    @GetMapping("/card/{id}")
-    public ResponseEntity<List<Task>> getTasksForCardId(@PathVariable Long id) {
-
-        Optional<List<Task>> task = taskService.getTasksForCardId(id);
-        return ResponseUtil.wrapOrNotFound(
-                task,
-                HeaderUtil.createAlert(applicationName, "A Task list for column "+ id ,"Task")
-        );
+    /**
+     * {@code GET /api/task/:id} : get the "id" task.
+     *
+     * @param id the id of the task to find.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "id" task, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/task/{id}")
+    public ResponseEntity<TaskDTO> getTask(@PathVariable Long id) {
+        log.debug("REST request to get Task : {}", id);
+        return ResponseUtil.wrapOrNotFound(taskService.getTaskById(id));
     }
 
-    @PutMapping("/draganddrop")
-    public ResponseEntity<TaskDTO> updateTaskCard(@RequestBody String[] ids) {
-
-        //ids[2] taskid
-        Card actualCard = cardRepository.getOne(Long.valueOf(ids[1]));
-        Optional<TaskDTO> task = taskService.updateTasksCard(actualCard, Long.valueOf(ids[2]));
-        return ResponseUtil.wrapOrNotFound(
-                task,
-                HeaderUtil.createAlert(applicationName, "A Task id "+ ids[2] ,"Task")
-        );
-    }
 }

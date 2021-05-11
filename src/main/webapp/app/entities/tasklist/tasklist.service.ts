@@ -9,7 +9,7 @@ import { Task } from 'app/model/task.model';
 
 @Injectable({ providedIn: 'root' })
 export class TaskListService {
-  public resourceUrl = this.applicationConfigService.getEndpointFor('api/board/tasks');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/task/tasks');
 
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

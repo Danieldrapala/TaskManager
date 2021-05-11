@@ -1,5 +1,3 @@
-import { Card } from "app/board/card.model";
-import { User } from "app/entities/user/user.model";
 
 export interface ITask {
     id?: number;
@@ -7,8 +5,8 @@ export interface ITask {
     description?: string;
     date?: Date | null;
     isCompleted?: boolean | false;
-    owner?: User;
-    card?:Card;
+    owner?: number;
+    card?:number;
   }
   
   export class Task implements ITask {
@@ -17,16 +15,16 @@ export interface ITask {
       description?: string;
       date?: Date | null;
       isCompleted?: boolean | false;
-      owner?: User;
-      card?: Card;
+      owner?: number;
+      card?: number;
     constructor(
       id?: number,
       name?: string,
       description?: string,
       date?: Date | null,
       isCompleted?: boolean | false,
-      owner?: User,
-      card?: Card
+      owner?: number,
+      card?: number
     ) {
       this.id = id;
       this.name = name;

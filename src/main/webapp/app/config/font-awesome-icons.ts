@@ -1,4 +1,5 @@
 import {
+  faChartBar,
   faArrowLeft,
   faAsterisk,
   faBan,
@@ -37,9 +38,14 @@ import {
   faUsers,
   faUsersCog,
   faWrench,
+  faChalkboard,
+  faTools,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
+  faTools,
+  faChalkboard,
+  faChartBar,
   faArrowLeft,
   faAsterisk,
   faBan,

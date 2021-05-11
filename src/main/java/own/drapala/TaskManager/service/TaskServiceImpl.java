@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
+import own.drapala.TaskManager.repository.CardRepository;
 import own.drapala.TaskManager.repository.TaskRepository;
+import own.drapala.TaskManager.repository.UserRepository;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
 import java.util.List;
@@ -16,10 +18,15 @@ import java.util.Optional;
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
+    private UserRepository userRepository;
+    private CardRepository cardRepository;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CardRepository cardRepository) {
         this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
+        this.cardRepository = cardRepository;
+
     }
 
     @Override
@@ -29,7 +36,8 @@ public class TaskServiceImpl implements TaskService {
         newTask.setDescription(taskDTO.getDescription());
         newTask.setDate(taskDTO.getDate());
         newTask.setCompleted(false);
-        newTask.setOwner(taskDTO.getOwner());
+        newTask.setOwner(userRepository.getOne(taskDTO.getOwner()));
+        newTask.setCard(cardRepository.getOne(taskDTO.getCard()));
         taskRepository.save(newTask);
         return newTask;
     }
@@ -46,7 +54,8 @@ public class TaskServiceImpl implements TaskService {
                     task.setName(updatedTaskDTO.getName());
                     task.setCompleted(updatedTaskDTO.isCompleted());
                     task.setDate(updatedTaskDTO.getDate());
-                    task.setOwner(updatedTaskDTO.getOwner());
+                    task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner()));
+                    task.setCard(cardRepository.getOne(updatedTaskDTO.getCard()));
                     return task;
                 }
                 )
@@ -89,8 +98,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task getTaskById(Long id) {
-        return taskRepository.findById(id).orElse(null);
+    public Optional<TaskDTO> getTaskById(Long id) {
+        return taskRepository.findById(id).map(TaskDTO::new);
     }
 
     @Override
@@ -112,7 +121,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Optional<TaskDTO> updateTasksCard(Card card, Long taskId) {
-        Task task = getTaskById(taskId);
+        Task task = taskRepository.getOne(taskId);
         task.setCard(card);
         return  Optional.of(taskRepository.save(task)).map(TaskDTO::new);
 

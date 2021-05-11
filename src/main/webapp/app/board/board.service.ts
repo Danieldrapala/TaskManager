@@ -15,28 +15,6 @@ export class BoardService{
     
     constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {
     }
-
-    addTask(task: Task): Observable<ITask> {
-      return this.http.post<ITask>(`${this.resourceUrl}/task`, task);
-    }
-  
-    updateTask(task: Task): Observable<ITask> {
-      return this.http.put<ITask>(`${this.resourceUrl}/task`, task);
-    }
-  
-    getTask(id: number): Observable<ITask>  {
-      return this.http.get<ITask>(`${this.resourceUrl}/task/${id}`);
-    }
-  
-    getTaskList(req?: Pagination): Observable<HttpResponse<ITask[]>> {
-      const options = createRequestOption(req);
-      return this.http.get<ITask[]>(`${this.resourceUrl}/tasks`, { params: options, observe: 'response' });
-    }
-  
-    deleteTask(id: number): Observable<{}> {
-      return this.http.delete(`${this.resourceUrl}/task/${id}`);
-    }
-
     getBoard():Observable<IBoard> {
       return this.http.get<IBoard>(`${this.resourceUrl}`);
     }
