@@ -8,6 +8,9 @@
           <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
             <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
             <th scope="col" jhiSortBy="name"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span>Card id</span></th>
+            <th scope="col"><span>Show Task</span> </th>
+
           </tr>
         </thead>
         <tbody *ngIf="tasks">
@@ -17,6 +20,8 @@
             </td>
             <td>{{ task.name }}</td>
             <td>{{ task.card }}</td>
+            <td><button mat-button-raised (click)="showTask(task)">Go to Task</button></td>
+
           </tr>
         </tbody>
       </table>

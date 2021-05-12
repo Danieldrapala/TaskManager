@@ -60,7 +60,9 @@ export class TaskListComponent implements OnInit {
         () => (this.isLoading = false)
       );
   }
-
+  showTask(task: Task){
+    this.router.navigate(["./showtask", task.id]);
+  }
   transition(): void {
     this.router.navigate(['./'], {
       relativeTo: this.activatedRoute.parent,

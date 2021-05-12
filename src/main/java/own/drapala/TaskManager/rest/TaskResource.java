@@ -1,6 +1,5 @@
 package own.drapala.TaskManager.rest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,11 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import own.drapala.TaskManager.config.Constants;
-import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.repository.CardRepository;
 import own.drapala.TaskManager.repository.TaskRepository;
@@ -21,14 +17,10 @@ import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
-import own.drapala.TaskManager.security.AuthoritiesConstants;
-import own.drapala.TaskManager.service.CardService;
 import own.drapala.TaskManager.service.TaskService;
-import own.drapala.TaskManager.service.dto.AdminUserDTO;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -46,14 +38,10 @@ public class TaskResource {
 
     private final TaskService taskService;
 
-    private final CardRepository cardRepository;
 
-    private final TaskRepository taskRepository;
-
-    public TaskResource(TaskService taskService, TaskRepository taskRepository, CardRepository cardRepository) {
+    public TaskResource(TaskService taskService) {
         this.taskService = taskService;
-        this.taskRepository = taskRepository;
-        this.cardRepository = cardRepository;
+
     }
 
     /**
@@ -93,7 +81,6 @@ public class TaskResource {
     @PutMapping("/task")
     public ResponseEntity<TaskDTO> updateTask(@Valid @RequestBody TaskDTO taskDTO) {
         log.debug("REST request to update Task : {}", taskDTO);
-
         Optional<TaskDTO> updatedTask= taskService.updateTask(taskDTO.getId(),taskDTO);
 
         return ResponseUtil.wrapOrNotFound(

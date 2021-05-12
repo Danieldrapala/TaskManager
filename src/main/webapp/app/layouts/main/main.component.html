@@ -1,19 +1,15 @@
+<div class="general">
 <jhi-page-ribbon></jhi-page-ribbon>
 
-<div>
+<div class="navbargeneral">
   <router-outlet name="navbar"></router-outlet>
 </div>
 
-<div class="container-fluid">
+<div class="child container-fluid" style="align-self: flex-end;" [style.background-color]="getBackgroundColor()" >
   <div class="card jh-card">
     <router-outlet></router-outlet>
   </div>
-
-  <jhi-footer></jhi-footer>
 </div>
+<jhi-footer class="footer" [style.background-color]="getBackgroundColor()"></jhi-footer>
 
-<style>
-  bs-datepicker-container{
-    z-index: 2000 !important; /* has to be larger than 1050 */
-  }
-</style>
+</div>

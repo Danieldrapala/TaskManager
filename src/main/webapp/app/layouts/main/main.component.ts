@@ -25,6 +25,15 @@ export class MainComponent implements OnInit {
     });
   }
 
+  getBackgroundColor() {
+        if (this.router.url === '/board'){
+          return 'cadetblue'
+        } else {
+        return '#ffffff'
+        }
+  
+}
+
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
     let title: string = routeSnapshot.data['pageTitle'] ?? '';
     if (routeSnapshot.firstChild) {

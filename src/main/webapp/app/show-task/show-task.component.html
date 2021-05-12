@@ -1,4 +1,4 @@
-<div style="width: 400px; margin: auto;">
+<div class="showtask" >
     <div *ngIf="task" class="edit-form">
       <h4>Task</h4>
       <form>
@@ -8,6 +8,8 @@
             type="text"
             class="form-control"
             id="title"
+            [disabled] ="!isEditClicked()"
+
             [(ngModel)]="task.name"
             name="title"
           />
@@ -18,6 +20,7 @@
             type="text"
             class="form-control"
             id="description"
+            [disabled] ="!isEditClicked()"
             [(ngModel)] = "task.description"
             name="description"
           />
@@ -25,26 +28,49 @@
   
         <div class="form-group">
           <label><strong>Status:</strong></label>
-          {{ task.isCompleted ? "Completed" : "In progress" }}
+            <input
+            class="checkbox"
+            type="checkbox"
+            class="form-control"
+            id="isCompleted"
+            [disabled] ="!isEditClicked()"
+            [(ngModel)] = "task.isCompleted"
+            name="isCompleted"
+            checked ="task.isCompleted ? 'checked' : ''"
+          />
+          <span>{{task.isCompleted ? 'Task Completed' : 'Task in Progress'}}</span>
         </div>
         <div class="form-group">
           <label><strong>Deadline date:</strong></label>
-          {{ task.date }}
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            [disabled] ="!isEditClicked()"
+            [(ngModel)] = "task.date"
+            name="date"
+          />
         </div>
       </form>
   
-  
-      <button class="badge badge-danger mr-2" (click)="deleteTask()">
-        Delete
-      </button>
-  
-      <button
-        type="submit"
-        class="badge badge-success"
-        (click)="updateTask()"
-      >
-        Update
-      </button>
+      <div class="buttons">
+        <button mat-raised-button (click)="deleteTask()" color="warn">    
+           <fa-icon icon="trash-alt"></fa-icon> Delete Task 
+          </button>
+        <button mat-raised-button
+          (click)="updateStateTask()"
+          [hidden] ="isEditClicked()"
+        >
+          Edit
+        </button>
+        <button mat-raised-button
+          type="submit"
+          (click)="updateTask()"
+          [hidden] ="!isEditClicked()"
+        >
+          Ok
+        </button></div>
+      
     </div>
   
     <div *ngIf="!task">

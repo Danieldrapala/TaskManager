@@ -9,17 +9,17 @@ import { Observable } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class TaskService{
     
-    public resourceUrl = this.applicationConfigService.getEndpointFor('api/task/');
+    public resourceUrl = this.applicationConfigService.getEndpointFor('api/task');
     
     constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {
     }
 
     getTask(id: number): Observable<ITask>  {
 
-        return this.http.get<ITask>(`${this.resourceUrl}${id}`);
+        return this.http.get<ITask>(`${this.resourceUrl}/${id}`);
       }
     deleteTask(id: number): Observable<{}> {
-        return this.http.delete(`${this.resourceUrl}${id}`);
+        return this.http.delete(`${this.resourceUrl}/${id}`);
       }
 
       addTask(task: Task): Observable<ITask> {

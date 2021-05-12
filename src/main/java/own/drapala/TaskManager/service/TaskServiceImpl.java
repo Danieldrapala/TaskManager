@@ -56,6 +56,7 @@ public class TaskServiceImpl implements TaskService {
                     task.setDate(updatedTaskDTO.getDate());
                     task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner()));
                     task.setCard(cardRepository.getOne(updatedTaskDTO.getCard()));
+                    taskRepository.save(task);
                     return task;
                 }
                 )

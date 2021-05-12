@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'app/model/task.model';
+import { updateStatement } from 'typescript';
 import { TaskService } from './task.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { TaskService } from './task.service';
 })
 export class ShowTaskComponent implements OnInit {
 
-  task: any = null;
+  task: Task =new Task();
+
+  updateState: boolean = false;
 
   constructor(private route: ActivatedRoute, private taskService: TaskService, private router: Router) { }
 
@@ -20,25 +23,37 @@ export class ShowTaskComponent implements OnInit {
 
       this.taskService.getTask(params.id).subscribe(task =>{
         this.task = task;
-        console.log(task.card);
-        console.log(task.id);
-        console.log(task.date);
-        console.log(task.name);
-        console.log(this.task.card);
-        console.log(this.task.id);
-        console.log(this.task.date);
-        console.log(this.task.name);
       });
     });
   }
 
 
+  isEditClicked(){
+    return this.updateState;
+  }
+  updateStateTask(){
+    this.updateState = true;
 
+  }
   updateTask(): void {
-    // this.taskService.updateTask();
+    this.updateState = false;
+    this.taskService.updateTask(this.task).subscribe(
+      task=>{
+        if(task)
+        {
+
+        }
+      }
+    );
   }
 
   deleteTask(): void {
-    // this.taskService.updateTask();
+    if(this.task.id)
+    this.taskService.deleteTask(this.task.id).subscribe(
+      data =>
+      {
+        this.router.navigate(['/tasks']);
+      }
+    )
   }
 }

@@ -12,7 +12,8 @@ import { TeamListService } from './teamlist.service';
 
 @Component({
   selector: 'jhi-team-list',
-  templateUrl: './teamlist.component.html'
+  templateUrl: './teamlist.component.html',
+  styleUrls: ['./teamlist.component.scss']
 })
 export class TeamListComponent implements OnInit {
   currentAccount: Account | null = null;

@@ -1,4 +1,4 @@
-<div>
+<div class="root">
 
   <jhi-alert-error></jhi-alert-error>
 
@@ -7,8 +7,8 @@
   <div class="table-responsive" *ngIf="users">
     <table class="table table-striped" >
       <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
-          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+        <tr jhiSort  [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+          <th scope="col" jhiSortBy="id" style="width: ;"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="login"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
