@@ -5,16 +5,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
-import own.drapala.TaskManager.repository.BoardRepository;
-import own.drapala.TaskManager.repository.CardRepository;
+import own.drapala.TaskManager.domain.TaskMovement;
+import own.drapala.TaskManager.repository.TaskMovementRepository;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
-import own.drapala.TaskManager.service.BoardServiceImpl;
 import own.drapala.TaskManager.service.CardService;
+import own.drapala.TaskManager.service.TaskMovementService;
 import own.drapala.TaskManager.service.TaskService;
-import own.drapala.TaskManager.service.dto.BoardDTO;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +28,14 @@ public class CardResource {
 
     private final CardService cardService;
     private final TaskService taskService;
+    private final TaskMovementService taskMovementService;
 
-
-    public CardResource(CardService cardService,TaskService taskService  ) {
+    public CardResource(CardService cardService, TaskService taskService, TaskMovementService taskMovementService) {
 
         this.cardService = cardService;
         this.taskService = taskService;
 
+        this.taskMovementService = taskMovementService;
     }
 
     @GetMapping("/card")
@@ -59,6 +61,7 @@ public class CardResource {
     public ResponseEntity<TaskDTO> updateTaskCard(@RequestBody String[] ids) {
 
         //ids[2] taskid
+        taskMovementService.saveTaskMovement(Long.valueOf(ids[0]),Long.valueOf(ids[1]),Long.valueOf(ids[2]));
         Card actualCard = cardService.getColumn(Long.valueOf(ids[1])).get();
         Optional<TaskDTO> task = taskService.updateTasksCard(actualCard, Long.valueOf(ids[2]));
         return ResponseUtil.wrapOrNotFound(

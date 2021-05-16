@@ -10,7 +10,7 @@
     <changeSet id="00000000000002" author="dd">
         <createTable tableName="task">
             <column name="task_id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="name" type="varchar(200)"/>
             <column name="description" type="varchar(1200)">
@@ -24,6 +24,7 @@
             <column name="card_id" type="bigint"/>
 
         </createTable>
+
         <addForeignKeyConstraint baseColumnNames="owner_id"
                                  baseTableName="task"
                                  constraintName="fk_owner_id"

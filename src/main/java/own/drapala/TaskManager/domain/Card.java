@@ -1,17 +1,10 @@
 package own.drapala.TaskManager.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "card")
@@ -27,6 +20,13 @@ public class Card {
     private String name;
     @NotEmpty(message = "{card.status.not.empty}")
     private Long status;
+
+    @NotEmpty(message = "{card.default.not.empty}")
+    @Column(name = "default")
+    private Boolean defaultState;
+
+    @Column(name = "completed_state")
+    private Boolean completedState;
 
     @JoinColumn(name ="board_id", referencedColumnName = "board_id")
     @ManyToOne
@@ -63,9 +63,11 @@ public class Card {
     }
 
     public Card(@NotEmpty String name,
-                Long status) {
+                Long status, @NotEmpty(message = "{card.default.not.empty}") boolean defaultState, boolean completedState) {
         this.name = name;
         this.status = status;
+        this.defaultState = defaultState;
+        this.completedState = completedState;
     }
 
     public Board getBoard() {
@@ -83,4 +85,19 @@ public class Card {
         this.tasks = tasks;
     }
 
+    public Boolean isCompletedState() {
+        return completedState;
+    }
+
+    public void setCompletedState(Boolean completedState) {
+        this.completedState = completedState;
+    }
+
+    public Boolean isDefaultState() {
+        return defaultState;
+    }
+
+    public void setDefaultState(Boolean defaultState) {
+        this.defaultState = defaultState;
+    }
 }

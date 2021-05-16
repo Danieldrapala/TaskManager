@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <changeSet id="00000000000005" author="dd">
+        <createTable tableName="task_assignment">
+            <column name="history_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="task_id" type="bigint">
+            </column>
+            <column name="assigned_to_id" type="bigint"/>
+            <column name="timestamp" type="timestamp"/>
+        </createTable>
+        <addAutoIncrement
+                          columnDataType="bigint"
+                          columnName="history_id"
+                          incrementBy="1"
+                          schemaName="taskmanager"
+                          startWith="1"
+                          tableName="task_assignment"/>
+
+<!--        <addForeignKeyConstraint baseColumnNames="assigned_to_id"-->
+<!--                                 baseTableName="task_assigment"-->
+<!--                                 constraintName="fk_history_assigned_to_id"-->
+<!--                                 referencedColumnNames="assigned_to"-->
+<!--                                 referencedTableName="task"/>-->
+
+<!--        <addForeignKeyConstraint baseColumnNames="task_id"-->
+<!--                                 baseTableName="task_assigment"-->
+<!--                                 constraintName="fk_task_assigned_to_id"-->
+<!--                                 referencedColumnNames="task_id"-->
+<!--                                 referencedTableName="task"/>-->
+
+
+        <createTable tableName="task_drag_drop">
+            <column name="history_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="task_id" type="bigint"/>
+            <column name="previous_card_id" type="bigint"/>
+            <column name="current_card_id" type="bigint"/>
+            <column name="timestamp" type="timestamp"/>
+        </createTable>
+        <addAutoIncrement
+                          columnDataType="bigint"
+                          columnName="history_id"
+                          incrementBy="1"
+                          schemaName="taskmanager"
+                          startWith="1"
+                          tableName="task_drag_drop"/>
+<!--        <addForeignKeyConstraint baseColumnNames="current_card_id"-->
+<!--                                 baseTableName="task_drag_drop"-->
+<!--                                 constraintName="fk_current_card_to_id"-->
+<!--                                 referencedColumnNames="card_id"-->
+<!--                                 referencedTableName="card"/>-->
+
+<!--        <addForeignKeyConstraint baseColumnNames="previous_card_id"-->
+<!--                                 baseTableName="task_drag_drop"-->
+<!--                                 constraintName="fk_previous_card_to_id"-->
+<!--                                 referencedColumnNames="card_id"-->
+<!--                                 referencedTableName="card"/>-->
+
+        <addColumn tableName="card">
+            <column name="default" type="boolean"/>
+            <column name="completed_state" type="boolean"/>
+        </addColumn>
+        <addColumn tableName="task">
+            <column name="assigned_to" type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="assigned_to"
+                                 baseTableName="task"
+                                 constraintName="fk_assigned_to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+
+
+        <createTable tableName="task_completed">
+            <column name="history_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="task_id" type="bigint"/>
+            <column name="completed_by" type="bigint"/>
+            <column name="timestamp" type="timestamp"/>
+        </createTable>
+        <addAutoIncrement
+                columnDataType="bigint"
+                columnName="history_id"
+                incrementBy="1"
+                schemaName="taskmanager"
+                startWith="1"
+                tableName="task_completed"/>
+
+<!--        <addForeignKeyConstraint baseColumnNames="completed_by"-->
+<!--                                 baseTableName="task_completed"-->
+<!--                                 constraintName="fk_task_completed_by_id"-->
+<!--                                 referencedColumnNames="id"-->
+<!--                                 referencedTableName="user"/>-->
+
+
+        <createTable tableName="comment">
+            <column name="comment_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_by" type="bigint"/>
+            <column name="description" type="varchar(200)"/>
+            <column name="timestamp" type="timestamp"/>
+            <column name="task_commented" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="task_commented"
+                                 baseTableName="comment"
+                                 constraintName="fk_comment_id"
+                                 referencedColumnNames="task_id"
+                                 referencedTableName="task"/>
+        <addForeignKeyConstraint baseColumnNames="created_by"
+                                 baseTableName="comment"
+                                 constraintName="fk_commented_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+</databaseChangeLog>

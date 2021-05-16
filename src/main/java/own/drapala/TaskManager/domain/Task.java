@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,11 +32,19 @@ public class Task {
     @NotNull(message = "{task.date.not.null}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+
     private boolean is_completed;
 
+    @OneToMany(mappedBy = "taskCommented")
+    private List<Comment> commentList = new ArrayList<Comment>();;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_to", referencedColumnName = "id")
+    private User assignedTo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
@@ -62,11 +72,13 @@ public class Task {
                 @NotNull LocalDate date,
                 boolean is_completed,
                 User owner,
+                User assignedTo,
                 Card card) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.is_completed = is_completed;
+        this.assignedTo = assignedTo;
         this.owner = owner;
         this.card = card;
     }
@@ -143,5 +155,21 @@ public class Task {
 
     public void setCard(Card card) {
         this.card = card;
+    }
+
+    public User getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

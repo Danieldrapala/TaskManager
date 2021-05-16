@@ -74,6 +74,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @OneToMany(mappedBy = "assignedTo")
+    private List<Task> assigned_to_tasks = new ArrayList<Task>();
+
     @OneToMany(mappedBy = "owner")
     private List<Task> owned_tasks = new ArrayList<Task>();
 
@@ -230,5 +233,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setOwned_tasks(List<Task> owned_tasks) {
         this.owned_tasks = owned_tasks;
+    }
+
+    public List<Task> getAssigned_to_tasks() {
+        return assigned_to_tasks;
+    }
+
+    public void setAssigned_to_tasks(List<Task> assigned_to_tasks) {
+        this.assigned_to_tasks = assigned_to_tasks;
     }
 }
