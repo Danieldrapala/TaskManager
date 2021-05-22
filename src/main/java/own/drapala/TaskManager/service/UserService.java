@@ -1,6 +1,7 @@
 package own.drapala.TaskManager.service;
 
 
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -41,12 +42,18 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    static {
+        SECURE_RANDOM.nextBytes(new byte[64]);
+    }
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
     }
-
+    public static String generateRandomAlphanumericString() {
+        return RandomStringUtils.random(20, 0, 0, true, true, (char[])null, SECURE_RANDOM);
+    }
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         return userRepository
@@ -83,7 +90,7 @@ public class UserService {
             .filter(User::isActivated)
             .map(
                 user -> {
-                    user.setResetKey(RandomStringUtils.random(4));
+                    user.setResetKey(generateRandomAlphanumericString());
                     user.setResetDate(Instant.now());
                     return user;
                 }
@@ -126,7 +133,7 @@ public class UserService {
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
-        newUser.setActivationKey(RandomStringUtils.random(4));
+        newUser.setActivationKey(generateRandomAlphanumericString());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
@@ -158,9 +165,9 @@ public class UserService {
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
-        String encryptedPassword = passwordEncoder.encode(RandomStringUtils.random(8));
+        String encryptedPassword = passwordEncoder.encode(generateRandomAlphanumericString());
         user.setPassword(encryptedPassword);
-        user.setResetKey(RandomStringUtils.random(4));
+        user.setResetKey(generateRandomAlphanumericString());
         user.setResetDate(Instant.now());
         user.setActivated(true);
         if (userDTO.getAuthorities() != null) {
@@ -277,11 +284,16 @@ public class UserService {
         return userRepository.findAll(pageable).map(AdminUserDTO::new);
     }
 
+
+
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllPublicUsers(Pageable pageable) {
         return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDTO::new);
     }
-
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllPublicUsers( ) {
+        return userRepository.findAllByIdNotNullAndActivatedIsTrue().stream().map(UserDTO::new).collect(Collectors.toList());
+    }
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);

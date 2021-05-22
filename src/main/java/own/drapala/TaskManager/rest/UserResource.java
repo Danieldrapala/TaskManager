@@ -26,6 +26,7 @@ import own.drapala.TaskManager.security.AuthoritiesConstants;
 import own.drapala.TaskManager.service.MailService;
 import own.drapala.TaskManager.service.UserService;
 import own.drapala.TaskManager.service.dto.AdminUserDTO;
+import own.drapala.TaskManager.service.dto.UserDTO;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
@@ -144,6 +145,19 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * {@code GET /admin/users} : get all users with all the details - calling this are only allowed for the administrators.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
+     */
+    @GetMapping("/publicusers")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        log.debug("REST request to get all User for an Select");
+
+        final List<UserDTO> users = userService.getAllPublicUsers();
+        return new ResponseEntity<>(users,             HeaderUtil.createAlert(applicationName, "A user List is given with length" + users.size(),"users list")
+                , HttpStatus.OK);
+    }
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }

@@ -1,5 +1,6 @@
 package own.drapala.TaskManager.service.dto;
 
+import org.apache.commons.lang3.ObjectUtils;
 import own.drapala.TaskManager.domain.Task;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class TaskDTO {
     private boolean isCompleted;
     private Long owner;
     private Long card;
+    private Long assignedTo;
 
 
     public TaskDTO() {
@@ -25,9 +27,19 @@ public class TaskDTO {
         this.description = task.getDescription();
         this.date = task.getDate();
         this.isCompleted = task.isCompleted();
-        this.owner = task.getOwner().getId();
+        if(!ObjectUtils.isEmpty(task.getOwner()))
+         this.owner = task.getOwner().getId();
+        else
+            this.owner = 0L;
+        if(!ObjectUtils.isEmpty(task.getCard()))
+            this.card = task.getCard().getId();
+        else
+            this.card = 0L;
         this.card = task.getCard().getId();
-
+        if(!ObjectUtils.isEmpty(task.getAssignedTo()))
+            this.assignedTo = task.getAssignedTo().getId();
+        else
+            this.assignedTo = 0L;
     }
 
     public Long getId() {
@@ -85,5 +97,13 @@ public class TaskDTO {
 
     public void setCard(Long card) {
         this.card = card;
+    }
+
+    public Long getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(Long assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }

@@ -6,5 +6,5 @@ import own.drapala.TaskManager.domain.TaskCompleted;
 
 
 @Repository
-public interface TaskCompletedRespository extends JpaRepository<TaskCompleted,Long> {
+public interface TaskCompletedRepository extends JpaRepository<TaskCompleted,Long> {
 }

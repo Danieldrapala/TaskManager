@@ -25,6 +25,7 @@ export class TaskListComponent implements OnInit {
   page!: number;
   predicate!: string;
   ascending!: boolean;
+  defaultTask: Task = new Task();
 
   constructor(
     private taskService: TaskListService,
@@ -61,7 +62,12 @@ export class TaskListComponent implements OnInit {
       );
   }
   showTask(task: Task){
-    this.router.navigate(["./showtask", task.id]);
+    if(task.id!=undefined)
+    {
+      this.router.navigate(["./showtask", task.id]);
+    }
+    this.router.navigate(["./showtask",-1]);
+
   }
   transition(): void {
     this.router.navigate(['./'], {
@@ -72,6 +78,7 @@ export class TaskListComponent implements OnInit {
       },
     });
   }
+
 
   private handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {

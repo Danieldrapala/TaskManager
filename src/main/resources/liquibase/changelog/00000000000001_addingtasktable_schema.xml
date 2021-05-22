@@ -24,7 +24,13 @@
             <column name="card_id" type="bigint"/>
 
         </createTable>
-
+        <addAutoIncrement
+                columnDataType="bigint"
+                columnName="task_id"
+                incrementBy="1"
+                schemaName="taskmanager"
+                startWith="1"
+                tableName="task"/>
         <addForeignKeyConstraint baseColumnNames="owner_id"
                                  baseTableName="task"
                                  constraintName="fk_owner_id"

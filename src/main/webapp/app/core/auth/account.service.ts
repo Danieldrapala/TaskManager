@@ -7,10 +7,12 @@ import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 import { ApplicationConfigService } from '../config/application-config.service';
 import { Account } from 'app/core/auth/account.model';
+import { User } from 'app/admin/user-management/user-management.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private userIdentity: Account | null = null;
+
   private authenticationState = new ReplaySubject<Account | null>(1);
   private accountCache$?: Observable<Account | null>;
 
@@ -28,6 +30,10 @@ export class AccountService {
   authenticate(identity: Account | null): void {
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
+  }
+  getAccount(id:number){
+    return this.http.get(this.applicationConfigService.getEndpointFor('api/account'));
+
   }
 
   hasAnyAuthority(authorities: string[] | string): boolean {
@@ -69,6 +75,11 @@ export class AccountService {
     return this.userIdentity?.imageUrl ?? '';
   }
 
+  getActiveUserId(): number | undefined{
+    if(this.isAuthenticated())
+      return this.userIdentity?.id;
+    return undefined;
+  }
   private fetch(): Observable<Account> {
     return this.http.get<Account>(this.applicationConfigService.getEndpointFor('api/account'));
   }

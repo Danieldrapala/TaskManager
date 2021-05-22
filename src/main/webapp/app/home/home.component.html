@@ -2,15 +2,35 @@
   <div class="col-md-12">
     <h1 class="display-4">Welcome in TaskManager!</h1>
     <div [ngSwitch]="isAuthenticated()">
-      <span id="home-logged-message" *ngIf="account">Hi,{{ account.firstName }} {{account.lastName}}</span> <br>
+      <div *ngSwitchCase="true" ><span id="home-logged-message" *ngIf="account">Hi,{{ account.firstName }} {{account.lastName}}</span> <br>
       Application where you can manage tasks with your Team on Kanban Board.
       References
-      <ul *ngSwitchCase="true">
-        <li><span>People arranged to your team</span>  <a style = "color:darkcyan;"(click)=teammates()>Teammates</a></li>
-        <li>list of Tasks that needs to be done! <a style = "color:darkcyan;" (click)=tasks()> Tasks</a></li>
-        <li><a style = "color:darkcyan;" (click)=board()> Kanban Board</a></li>
-        <li><a style = "color:darkcyan;" (click)=charts()>Charts</a></li> 
+        <ul>
+          <li><span>People arranged to your team</span>  <a style = "color:darkcyan;"(click)=teammates()>Teammates</a></li>
+          <li>list of Tasks that needs to be done! <a style = "color:darkcyan;" (click)=tasks()> Tasks</a></li>
+          <li><a style = "color:darkcyan;" (click)=board()> Kanban Board</a></li>
+          <li><a style = "color:darkcyan;" (click)=charts()>Charts</a></li> 
+        </ul>
+      </div>
+      <div *ngSwitchCase = "false">
+      <span>Application where you can manage tasks with your Team on Kanban Board.</span> 
+      <span>What you can do with your team here?</span>
+      <ul>
+        <li><span>Create authorized accounts for every teammate with 2 possible roles: user or admin/manager</span></li>
+        <li><span>Manage your project by adding Tasks on visualised Kanban board which would be configured by your manager</span></li>
+        <li><span>Add needed tasks to project to report progress </span></li>
+        <li><span>Look up for project progress on charts created by archived data</span></li>
       </ul>
+        <div class="mt-3 alert alert-warning">
+          <a class="alert-link" routerLink="/login">Sign in</a
+          ><span
+            >, or you can create Account </span
+          >
+          <a class="alert-link" routerLink="/account/register">Here</a>
+
+        </div>
+      </div>
     </div>
+    
   </div>
 </div>

@@ -18,9 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
-    if(!this.isAuthenticated()){
-      this.router.navigate(['/login']);
-    }
+
   }
 
   isAuthenticated(): boolean {

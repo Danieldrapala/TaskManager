@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class BoardDTO {
     private Long id;
     private String name;
+    private Long defaultCard;
 
     public BoardDTO() {
         // Empty constructor needed for Jackson.
@@ -18,6 +19,7 @@ public class BoardDTO {
         this.id = board.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
         this.name = board.getName();
+        this.defaultCard = board.getDefaultCard();
     }
 
     public Long getId() {
@@ -36,5 +38,13 @@ public class BoardDTO {
         this.name = name;
     }
 
+
+    public void setDefaultCard(Long defaultCard) {
+        this.defaultCard = defaultCard;
+    }
+
+    public Long getDefaultCard() {
+        return defaultCard;
+    }
 }
 

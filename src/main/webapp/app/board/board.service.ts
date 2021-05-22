@@ -27,6 +27,11 @@ export class BoardService{
     getTasks(cardId: number|undefined){
       return this.http.get<Task[]>(`${this.resourceUrl}/card/${cardId}`)
     }
+    
+    getDefaultCard() {
+      return this.http.get<number>(`${this.resourceUrl}/defaultcard`);
+
+    }
 
     updateTaskColumn(previousIndex: string, currentIndex: string, taskId: number |undefined ) {
       return this.http.put<ITask>(`${this.resourceUrl}/draganddrop`, [previousIndex, currentIndex, taskId]);

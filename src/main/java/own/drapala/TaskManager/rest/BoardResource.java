@@ -13,6 +13,7 @@ import own.drapala.TaskManager.service.BoardService;
 import own.drapala.TaskManager.service.BoardServiceImpl;
 import own.drapala.TaskManager.service.dto.BoardDTO;
 
+import java.util.Observable;
 import java.util.Optional;
 
 @RestController
@@ -26,11 +27,9 @@ public class BoardResource {
 
     private final BoardService boardService;
 
-    private final BoardRepository boardRepository;
 
-    public BoardResource(BoardService boardService, BoardRepository boardRepository) {
+    public BoardResource(BoardService boardService) {
         this.boardService = boardService;
-        this.boardRepository = boardRepository;
     }
 
     @GetMapping("/board")
@@ -44,5 +43,14 @@ public class BoardResource {
         );
     }
 
+    @GetMapping("/board/defaultcard")
+    public ResponseEntity<Long> getDefaultCard() {
 
+        Long board= boardService.getBoard(BOARD_ID).get().getDefaultCard();
+        System.out.println(board);
+        return ResponseUtil.wrapOrNotFound(
+                Optional.of(board),
+                HeaderUtil.createAlert(applicationName, "A Board is updated with identifier ","Board")
+        );
+    }
 }

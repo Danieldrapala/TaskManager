@@ -1,5 +1,6 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Account } from "app/core/auth/account.model";
 import { ApplicationConfigService } from "app/core/config/application-config.service";
 import { createRequestOption } from "app/core/request/request-util";
 import { Pagination } from "app/core/request/request.model";
@@ -27,6 +28,7 @@ export class TaskService{
       }
     
       updateTask(task: Task): Observable<ITask> {
+        console.log(task);
         return this.http.put<ITask>(`${this.resourceUrl}`, task);
       }
   
@@ -35,6 +37,7 @@ export class TaskService{
         return this.http.get<ITask[]>(`${this.resourceUrl}/tasks`, { params: options, observe: 'response' });
       }
     
+
   
 }
 

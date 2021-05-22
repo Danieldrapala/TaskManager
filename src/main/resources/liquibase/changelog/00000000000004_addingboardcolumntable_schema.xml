@@ -7,13 +7,15 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-    <changeSet id="00000000000004" author="dd">
+    <changeSet id="00000000000005" author="dd">
         <loadData
                 file="liquibase/data/board.csv"
                 separator=";"
                 tableName="board">
             <column name="board_id" type="numeric"/>
             <column name="card" type="numeric"/>
+
+
         </loadData>
         <loadData
                 file="liquibase/data/card.csv"
@@ -22,6 +24,8 @@
             <column name="card_id" type="numeric"/>
             <column name="board" type="numeric"/>
             <column name="status" type="numeric"/>
+            <column name="completed_state" type="boolean"/>
+            <column name="default" type="boolean"/>
         </loadData>
 
         <loadData

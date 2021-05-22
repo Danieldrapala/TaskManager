@@ -67,7 +67,6 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
         String requestUri = nativeRequest != null ? nativeRequest.getRequestURI() : StringUtils.EMPTY;
         ProblemBuilder builder = Problem
             .builder()
-            .withType(Problem.DEFAULT_TYPE.equals(problem.getType()) ? ErrorConstants.DEFAULT_TYPE : problem.getType())
             .withStatus(problem.getStatus())
             .withTitle(problem.getTitle())
             .with(PATH_KEY, requestUri);
@@ -104,7 +103,6 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
 
         Problem problem = Problem
             .builder()
-            .withType(ErrorConstants.CONSTRAINT_VIOLATION_TYPE)
             .withTitle("Method argument not valid")
             .withStatus(defaultConstraintViolationStatus())
             .with(MESSAGE_KEY, ErrorConstants.ERR_VALIDATION)

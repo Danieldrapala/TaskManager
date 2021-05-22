@@ -8,6 +8,7 @@
 
 
     <changeSet id="00000000000005" author="dd">
+
         <createTable tableName="task_assignment">
             <column name="history_id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>

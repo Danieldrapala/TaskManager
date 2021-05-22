@@ -7,8 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { UserForUser } from '../../model/user.model';
 import { TeamListService } from './teamlist.service';
+import { User } from 'app/admin/user-management/user-management.model';
 
 @Component({
   selector: 'jhi-team-list',
@@ -17,7 +17,7 @@ import { TeamListService } from './teamlist.service';
 })
 export class TeamListComponent implements OnInit {
   currentAccount: Account | null = null;
-  users: UserForUser[] | null = null;
+  users: User[] | null = null;
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -40,7 +40,7 @@ export class TeamListComponent implements OnInit {
 
 
 
-  trackIdentity(index: number, item: UserForUser): number {
+  trackIdentity(index: number, item: User): number {
     return item.id!;
   }
 
@@ -54,7 +54,7 @@ export class TeamListComponent implements OnInit {
         sort: this.sort(),
       })
       .subscribe(
-        (res: HttpResponse<UserForUser[]>) => {
+        (res: HttpResponse<User[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers);
         },
@@ -91,7 +91,7 @@ export class TeamListComponent implements OnInit {
     return result;
   }
 
-  private onSuccess(users: UserForUser[] | null, headers: HttpHeaders): void {
+  private onSuccess(users: User[] | null, headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.users = users;
   }

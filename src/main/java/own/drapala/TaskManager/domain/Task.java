@@ -38,7 +38,7 @@ public class Task {
     @OneToMany(mappedBy = "taskCommented")
     private List<Comment> commentList = new ArrayList<Comment>();;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 
@@ -46,7 +46,7 @@ public class Task {
     @JoinColumn(name = "assigned_to", referencedColumnName = "id")
     private User assignedTo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "card_id")
     private Card card;
 

@@ -5,7 +5,7 @@ import { BoardService } from './board.service';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Task } from 'app/model/task.model';
 import { Card } from './card.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'board',
@@ -18,7 +18,12 @@ export class BoardComponent implements OnInit {
   taskList: any[] = [];
   board: Board =new Board(1,"",0);
   cards: Card[]= [];
-  constructor(private router: Router, private boardServiceImpl: BoardService, private bsModalService: BsModalService ) {
+  constructor(private router: Router, private boardServiceImpl: BoardService, private bsModalService: BsModalService, route:ActivatedRoute) {
+    route.params.subscribe(val => {
+      this.getBoard();
+      this.getTasks();
+    }
+    )
   }
    
   ngOnInit() {

@@ -13,8 +13,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(200)"/>
+            <column name="default_card" type="bigint"/>
         </createTable>
-
+        <addAutoIncrement
+                columnDataType="bigint"
+                columnName="board_id"
+                incrementBy="1"
+                schemaName="taskmanager"
+                startWith="1"
+                tableName="board"/>
         <createTable tableName="card">
             <column name="card_id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
@@ -24,6 +31,13 @@
             <column name="status" type="bigint"/>
             <column name="board_id" type="bigint"/>
         </createTable>
+        <addAutoIncrement
+                columnDataType="bigint"
+                columnName="card_id"
+                incrementBy="1"
+                schemaName="taskmanager"
+                startWith="1"
+                tableName="card"/>
         <addForeignKeyConstraint baseColumnNames="card_id"
                                  baseTableName="task"
                                  constraintName="fk_card_assigned_id"
