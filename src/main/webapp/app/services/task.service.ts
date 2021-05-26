@@ -36,8 +36,7 @@ export class TaskService{
         const options = createRequestOption(req);
         return this.http.get<ITask[]>(`${this.resourceUrl}/tasks`, { params: options, observe: 'response' });
       }
-    
-
+  
   
 }
 

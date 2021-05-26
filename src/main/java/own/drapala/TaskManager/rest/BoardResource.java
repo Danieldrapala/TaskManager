@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.repository.BoardRepository;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
@@ -44,9 +45,9 @@ public class BoardResource {
     }
 
     @GetMapping("/board/defaultcard")
-    public ResponseEntity<Long> getDefaultCard() {
+    public ResponseEntity<Card> getDefaultCard() {
 
-        Long board= boardService.getBoard(BOARD_ID).get().getDefaultCard();
+        Card board= boardService.getBoard(BOARD_ID).get().getDefaultCard();
         System.out.println(board);
         return ResponseUtil.wrapOrNotFound(
                 Optional.of(board),

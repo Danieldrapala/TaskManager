@@ -5,13 +5,13 @@ import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
-import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { TeamListService } from './teamlist.service';
 import { User } from 'app/admin/user-management/user-management.model';
+import { TeamListService } from 'app/services/teamlist.service';
+import { AccountService } from 'app/services/account.service';
 
 @Component({
-  selector: 'jhi-team-list',
+  selector: 'team-list',
   templateUrl: './teamlist.component.html',
   styleUrls: ['./teamlist.component.scss']
 })

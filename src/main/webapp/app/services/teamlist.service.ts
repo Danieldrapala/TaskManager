@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { Pagination } from 'app/core/request/request.model';
-import { IUserForUser } from '../../model/user.model';
 import { Account } from 'app/core/auth/account.model';
+import { IUserForUser } from 'app/model/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeamListService {

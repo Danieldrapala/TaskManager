@@ -1,11 +1,11 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
-import { Board } from './board.model';
+import { Board } from '../model/board.model';
 import { BoardService } from './board.service';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Task } from 'app/model/task.model';
-import { Card } from './card.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Card } from 'app/model/card.model';
 
 @Component({
   selector: 'board',
@@ -57,6 +57,11 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  createTask(){
+    this.router.navigate(["./showtask",-1]);
+
+  }
+  
   showTask(task: Task){
     this.router.navigate(["./showtask", task.id]);
   }

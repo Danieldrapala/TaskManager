@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { VERSION } from 'app/app.constants';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginService } from 'app/login/login.service';
+import { LoginService } from 'app/services/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { AccountService } from 'app/services/account.service';
 
 @Component({
-  selector: 'jhi-navbar',
+  selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })

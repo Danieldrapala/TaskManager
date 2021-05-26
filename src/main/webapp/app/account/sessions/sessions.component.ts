@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AccountService } from 'app/core/auth/account.service';
 import { Session } from './session.model';
 import { SessionsService } from './sessions.service';
 import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/services/account.service';
 
 @Component({
-  selector: 'jhi-sessions',
+  selector: 'sessions',
   templateUrl: './sessions.component.html',
 })
 export class SessionsComponent implements OnInit {

@@ -14,3 +14,63 @@ Main page styles
     background-size: contain;
   }
 }
+
+.flex-chlid-header{
+  font-size: 3em;
+
+  font-family: 'Roboto Mono', monospace;
+  padding-top:  30px;
+  margin-top: 30px;
+  padding-bottom:  20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.flex-chlid-subheader{
+  font-family: 'Roboto Mono', monospace;
+
+  padding-bottom:  20px;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+
+  text-align: center;
+}
+.flex-chlid{
+  width: 100% !important;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.5em;
+  padding-top: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  align-content: space-evenly;
+  text-align: center;
+  align-self: center;
+}
+.flex-chlid-unautorized{
+  width: 100% !important;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1em;
+  padding-top: 5px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  align-content: space-evenly;
+  text-align: center;
+  align-self: center;
+}
+.row {
+  margin-left: 20%;
+  margin-right: 20%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center ;
+}
+span{
+  font-family: 'Roboto Mono', monospace;
+}
+button{
+  block-size: fit-content;
+  width: fit-content !important;
+  height: fit-content !important;
+}

@@ -13,6 +13,17 @@ export class Card implements ICard{
     }
 }
 
+export class CardForTask{
+
+    id?:number;
+    name?: string;
+
+    constructor(  id?: number ,  name?: string ) {
+            this.id = id;
+            this.name = name;
+    }
+}
+
 
 export interface ICard {
     id?: number;

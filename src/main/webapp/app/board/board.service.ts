@@ -3,10 +3,10 @@ import { Injectable } from "@angular/core";
 import { ApplicationConfigService } from "app/core/config/application-config.service";
 import { createRequestOption } from "app/core/request/request-util";
 import { Pagination } from "app/core/request/request.model";
+import { ICard } from "app/model/card.model";
 import { ITask, Task } from "app/model/task.model";
 import { Observable } from "rxjs";
-import { IBoard } from "./board.model";
-import { ICard } from "./card.model";
+import { IBoard } from "../model/board.model";
 
 @Injectable({ providedIn: 'root' })
 export class BoardService{
@@ -29,7 +29,7 @@ export class BoardService{
     }
     
     getDefaultCard() {
-      return this.http.get<number>(`${this.resourceUrl}/defaultcard`);
+      return this.http.get<ICard>(`${this.resourceUrl}/defaultcard`);
 
     }
 

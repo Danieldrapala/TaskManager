@@ -1,8 +1,8 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
+import { AccountService } from 'app/services/account.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { AccountService } from 'app/core/auth/account.service';
 
 /**
  * @whatItDoes Conditionally includes an HTML element if current user has any
@@ -10,13 +10,13 @@ import { AccountService } from 'app/core/auth/account.service';
  *
  * @howToUse
  * ```
- *     <some-element *jhiHasAnyAuthority="'ROLE_ADMIN'">...</some-element>
+ *     <some-element *HasAnyAuthority="'ROLE_ADMIN'">...</some-element>
  *
- *     <some-element *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">...</some-element>
+ *     <some-element *HasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">...</some-element>
  * ```
  */
 @Directive({
-  selector: '[jhiHasAnyAuthority]',
+  selector: '[HasAnyAuthority]',
 })
 export class HasAnyAuthorityDirective implements OnDestroy {
   private authorities!: string | string[];
@@ -26,7 +26,7 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   constructor(private accountService: AccountService, private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) {}
 
   @Input()
-  set jhiHasAnyAuthority(value: string | string[]) {
+  set HasAnyAuthority(value: string | string[]) {
     this.authorities = value;
     this.updateView();
     // Get notified each time authentication state changes.

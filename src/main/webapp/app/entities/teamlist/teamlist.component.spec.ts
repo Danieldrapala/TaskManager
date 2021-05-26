@@ -7,10 +7,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
-import { AccountService } from 'app/core/auth/account.service';
 import { TeamListComponent } from './teamlist.component';
-import { TeamListService } from './teamlist.service';
 import { UserForUser } from '../../model/user.model';
+import { AccountService } from 'app/services/account.service';
+import { TeamListService } from 'app/services/teamlist.service';
 
 
 describe('Component Tests', () => {

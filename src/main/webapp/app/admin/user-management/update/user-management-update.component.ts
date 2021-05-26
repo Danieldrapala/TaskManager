@@ -6,12 +6,13 @@ import { User } from '../user-management.model';
 import { UserManagementService } from '../service/user-management.service';
 
 @Component({
-  selector: 'jhi-user-mgmt-update',
+  selector: 'user-mgmt-update',
   templateUrl: './user-management-update.component.html',
 })
 export class UserManagementUpdateComponent implements OnInit {
   user!: User;
   authorities: string[] = [];
+
   isSaving = false;
 
   editForm = this.fb.group({

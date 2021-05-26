@@ -7,7 +7,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowTaskComponent } from './show-task.component';
-import { TaskService } from './task.service';
+import { TaskService } from '../services/task.service';
 
 @NgModule({
   providers: [TaskService],

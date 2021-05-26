@@ -19,6 +19,5 @@
     <include file="liquibase/changelog/00000000000002_addingboardcolumntable_schema.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/00000000000003_add_history_tables.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/00000000000004_addingboardcolumntable_schema.xml" relativeToChangelogFile="false"/>
-<!--    <include file="liquibase/changelog/00000000000005_add_column.xml" relativeToChangelogFile="false"/>-->
 
 </databaseChangeLog>

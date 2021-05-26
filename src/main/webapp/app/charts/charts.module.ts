@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { ChartsComponent } from './charts.component';
 import { chartRoute } from './charts.route';
-import { ChartsService } from './charts.service';
+import { ChartsService } from '../services/charts.service';
 
 @NgModule({
   providers: [ChartsService, BsModalService,BsDatepickerConfig],

@@ -1,5 +1,7 @@
 import { User } from "app/admin/user-management/user-management.model";
 import { Account } from "app/core/auth/account.model";
+import { CardForTask } from "./card.model";
+import { UserForUser } from "./user.model";
 
 export interface ITask {
     id?: number;
@@ -7,9 +9,9 @@ export interface ITask {
     description?: string;
     date?: Date | null;
     isCompleted?: boolean | false;
-    owner?: number;
-    assignedTo?: number ;
-    card?:number;
+    owner?: Account;
+    assignedTo?: Account ;
+    card?:CardForTask;
   }
   
   export class Task implements ITask {
@@ -18,19 +20,19 @@ export interface ITask {
       description?: string;
       date?: Date | null;
       isCompleted?: boolean | false;
-      owner?: number;
-      assignedTo?: number ;
+      owner?: Account;
+      assignedTo?: Account ;
 
-      card?: number;
+      card?: CardForTask;
     constructor(
       id?: number,
       name?: string,
       description?: string,
       date?: Date | null,
       isCompleted?: boolean | false,
-      owner?: number,
-      assignedTo?: number ,
-      card?: number
+      owner?: Account,
+      assignedTo?: Account ,
+      card?: CardForTask
     ) {
       this.id = id;
       this.name = name;

@@ -13,9 +13,6 @@ export class TaskListService {
 
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
-  query(req?: Pagination): Observable<HttpResponse<Task[]>> {
-    const options = createRequestOption(req);
-    return this.http.get<Task[]>(this.resourceUrl, { params: options, observe: 'response' });
-  }
+
 
 }

@@ -1,11 +1,11 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'app/login/login.service';
-import { AccountService } from 'app/core/auth/account.service';
+import { AccountService } from 'app/services/account.service';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
-  selector: 'jhi-login',
+  selector: 'login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit, AfterViewInit {

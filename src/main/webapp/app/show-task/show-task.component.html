@@ -103,7 +103,7 @@
           [disabled] ="!isEditClicked()"
           name="assignedTo"
         >
-        <option *ngFor="let user of users" [ngValue] = "user.id" [selected]="user.id == task.assignedTo" >
+        <option *ngFor="let user of users" [ngValue] = "user.id" [selected]="user.id == task.assignedTo?.id" >
           {{ user.email }}
         </option>
       </select>

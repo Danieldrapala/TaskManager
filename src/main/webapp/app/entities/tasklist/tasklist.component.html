@@ -1,19 +1,21 @@
-<div>
-  <h4>List of All Tasks</h4>   
+<div class= "maincontainer">
+  
+  <div><span>List of All Tasks</span>   
+    <button class="add-task-btn btn btn-primary" style ="float: right;" (click)="createTask()"> Create Task</button></div>
+  <br>
     <span>You can create more tasks or update others on specific task information : </span>  <br>
     <br>
 
-    <button matButton (click)="showTask(defaultTask)"> Create Task</button>
     <br>
     <br>
     <div class="table-responsive" *ngIf="tasks">
       <table class="table table-striped" >
         <thead>
-          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
-            <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col" jhiSortBy="name"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
+          <tr Sort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+            <th scope="col" SortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col" SortBy="name"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
             <th scope="col"><span>Card id</span></th>
-            <th scope="col"><span>Show Task</span> </th>
+            <th scope="col"><span>Options</span> </th>
 
           </tr>
         </thead>
@@ -24,8 +26,19 @@
             </td>
             <td>{{ task.name }}</td>
             <td>{{ task.card }}</td>
-            <td><button mat-button-raised (click)="showTask(task)">Go to Task</button></td>
-
+            <td ngbDropdown>
+              <a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" >
+                  <span>options</span>
+              </a>
+              <div class="dropdown-menu" ngbDropdownMenu>
+                <button class="dropdown-item" (click)="showTask(task)">
+                  <span>Show Task</span>
+                </button>
+                <button class="dropdown-item" (click)="deleteTask(task)">
+                  <span>Delete Task</span>
+                </button>
+              </div>
+          </td>
           </tr>
         </tbody>
       </table>
@@ -33,7 +46,7 @@
   
     <div *ngIf="tasks">
       <div class="row justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        <item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></item-count>
       </div>
   
       <div class="row justify-content-center">

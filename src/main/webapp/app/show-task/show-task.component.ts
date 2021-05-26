@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardService } from 'app/board/board.service';
 import { Account } from 'app/core/auth/account.model';
-import { AccountService } from 'app/core/auth/account.service';
-import { TeamListService } from 'app/entities/teamlist/teamlist.service';
+
 import { Task } from 'app/model/task.model';
-import { TaskService } from './task.service';
+import { AccountService } from 'app/services/account.service';
+import { TeamListService } from 'app/services/teamlist.service';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'show-task',
@@ -18,7 +19,12 @@ export class ShowTaskComponent implements OnInit {
   users: Account[]= [];
   updateState: boolean = false;
   assignedTo?: Account;
-  constructor(private teamListService: TeamListService, private boardService: BoardService, private accountService: AccountService, private route: ActivatedRoute, private taskService: TaskService, private router: Router) { }
+  constructor(private teamListService: TeamListService,
+     private boardService: BoardService, 
+     private accountService: AccountService, 
+     private route: ActivatedRoute, 
+     private taskService: TaskService, 
+     private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -38,7 +44,7 @@ export class ShowTaskComponent implements OnInit {
         this.taskService.getTask(params.id).subscribe(task =>{
           this.task = task;
           this.updateState = false;
-          this.teamListService.getUser(task.assignedTo).subscribe(
+          this.teamListService.getUser(task.assignedTo?.id).subscribe(
             data=>
             {
               this.assignedTo = data;
@@ -63,7 +69,11 @@ export class ShowTaskComponent implements OnInit {
   }
 
   createTask(){
-  this.task.owner = this.accountService.getActiveUserId();
+  this.accountService.getAccount(this.accountService.getActiveUserId()!).subscribe(
+    data=>{
+      this.task.owner = data;
+    }
+  );
   this.boardService.getDefaultCard().subscribe(cardId=>{
     console.log(cardId);
     this.task.card =cardId;
@@ -79,7 +89,8 @@ export class ShowTaskComponent implements OnInit {
   assignToMe(): void{
      this.accountService.getAuthenticationState().subscribe(
        account =>{
-        this.task.assignedTo = account?.id; ;
+         if(account)
+          this.task.assignedTo = account; 
         this.taskService.updateTask(this.task).subscribe();
        }
      );

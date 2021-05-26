@@ -6,15 +6,16 @@ import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
-import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { UserForUser } from '../../model/user.model';
-import { TaskListService } from './tasklist.service';
+
 import { Task } from 'app/model/task.model';
+import { TaskService } from 'app/services/task.service';
+import { AccountService } from 'app/services/account.service';
 
 @Component({
-  selector: 'jhi-task-list',
-  templateUrl: './tasklist.component.html'
+  selector: 'task-list',
+  templateUrl: './tasklist.component.html',
+  styleUrls: ['./tasklist.component.scss']
 })
 export class TaskListComponent implements OnInit {
   currentAccount: Account | null = null;
@@ -28,7 +29,7 @@ export class TaskListComponent implements OnInit {
   defaultTask: Task = new Task();
 
   constructor(
-    private taskService: TaskListService,
+    private taskService: TaskService,
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -44,11 +45,18 @@ export class TaskListComponent implements OnInit {
     return task.id!;
   }
 
+  deleteTask(task: Task){
+    this.taskService.deleteTask(task.id!).subscribe(
+      data=>{
+        this.loadAll();
+      }
+    )
+  }
 
   loadAll(): void {
     this.isLoading = true;
     this.taskService
-      .query({
+      .getTaskList({
         page: this.page - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -61,13 +69,13 @@ export class TaskListComponent implements OnInit {
         () => (this.isLoading = false)
       );
   }
-  showTask(task: Task){
-    if(task.id!=undefined)
-    {
-      this.router.navigate(["./showtask", task.id]);
-    }
+  
+  createTask(){
     this.router.navigate(["./showtask",-1]);
+  }
 
+  showTask(task: Task){
+      this.router.navigate(["./showtask", task.id]);
   }
   transition(): void {
     this.router.navigate(['./'], {

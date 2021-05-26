@@ -18,7 +18,8 @@ public class Board {
     @Size(max = 1200, message = "{board.name.size}")
     private String name;
 
-    private Long defaultCard;
+    @OneToOne
+    private Card defaultCard;
 
     @OneToMany(mappedBy = "board")
     private List<Card> card;
@@ -58,11 +59,11 @@ public class Board {
         this.id = id;
     }
 
-    public Long getDefaultCard() {
+    public Card getDefaultCard() {
         return defaultCard;
     }
 
-    public void setDefaultCard(Long defaultCard) {
+    public void setDefaultCard(Card defaultCard) {
         this.defaultCard = defaultCard;
     }
 }
