@@ -1,14 +1,44 @@
-.showtask{
-    margin:auto;
-    width: 500px;
+.edit-form{
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center ;
+    margin-top: 5%;
+    margin-bottom: 10%;
 }
+.headerbtn{
+    margin-left:31%;
+}
+.header{
+    margin-left: 25%;
+    font-size: 2em;
+}
+.child{
+    width: 100%;
+    align-self: center;
 
+}
 .form-control{
-    align-self:  flex-start !important ;
-    width: fit-content;
-    padding-right: 10%;
-}
+    align-self:  center !important ;
+    width: 100%;
 
+}
+.form{
+    align-self: center;
+    width: 100%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+.form-group{
+    width: 100%;
+    
+    align-items: center;
+    align-self: center !important;
+}
 .checkbox{
     padding-right: 10%;
     margin-right: 20%;

@@ -42,7 +42,7 @@ public class Task {
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assigned_to", referencedColumnName = "id")
     private User assignedTo;
 

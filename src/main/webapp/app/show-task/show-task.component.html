@@ -1,7 +1,10 @@
-<div class="showtask" >
     <div  class="edit-form">
-      <h4>Task</h4>
-      <form>
+      <div class="child" style="display: block; width: 100%;">
+        <span class="header">Task</span>
+        <button mat-raised-button class="btn headerbtn" style="align-self: flex-end;" (click)="goBack()" color="warn">    
+          <fa-icon icon="arrow-left"></fa-icon> go Back        
+        </button></div>
+      <form class="form">
         <div class="form-group">
           <label for="title">Name</label>
           <input
@@ -52,19 +55,38 @@
             name="date"
           />
         </div>
+        <div class="form-group">
+          <label for="assignedTo">Assign To</label>
+          <select
+            type="select"
+            class="form-control"
+            id="assignedTo"
+            [(ngModel)] = "task.assignedTo"
+            [disabled] ="!isEditClicked()"
+            name="assignedTo"
+          >
+          <option *ngFor="let user of users" [ngValue] = "user" [selected]="user.id == task.assignedTo?.id" >
+            {{ user.email }}
+          </option>
+        </select>
+        </div>
       </form>
   
+
+      
       <div *ngIf="task.id" class="editbuttons">
-        <button mat-raised-button (click)="deleteTask()" color="warn">    
+        <button class="btn btn-primary" mat-raised-button (click)="deleteTask()" color="warn">    
            <fa-icon icon="trash-alt"></fa-icon> Delete Task 
           </button>
         <button mat-raised-button
+        class="btn btn-primary"
           (click)="updateStateTask()"
           [hidden] ="isEditClicked()"
         >
           Edit
         </button>
         <button mat-raised-button
+        class="btn btn-primary"
           type="submit"
           (click)="updateTask()"
           [hidden] ="!isEditClicked()"
@@ -72,6 +94,7 @@
           Ok
         </button>
         <button mat-raised-button
+        class="btn btn-primary"
           type="submit"
           (click)="assignToMe()"
         >
@@ -80,11 +103,8 @@
       </div>
       
       <div *ngIf="!task.id" class="addingbuttons">
-        <button mat-raised-button (click)="goBackToBoard()" color="warn">    
-            go To Board
-          </button>
  
-        <button mat-raised-button
+        <button mat-raised-button class="btn btn-primary"
           type="submit"
           (click)="createTask()"
           [hidden] ="!isEditClicked()"
@@ -93,22 +113,7 @@
         </button>
       </div>
 
-      <div class="form-group">
-        <label for="assignedTo">Assign To</label>
-        <select
-          type="select"
-          class="form-control"
-          id="assignedTo"
-          [(ngModel)] = "task.assignedTo"
-          [disabled] ="!isEditClicked()"
-          name="assignedTo"
-        >
-        <option *ngFor="let user of users" [ngValue] = "user.id" [selected]="user.id == task.assignedTo?.id" >
-          {{ user.email }}
-        </option>
-      </select>
-      </div>
+  
     </div>
   
     
-  </div>

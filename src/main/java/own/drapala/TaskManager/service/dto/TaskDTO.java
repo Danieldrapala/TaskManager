@@ -1,7 +1,9 @@
 package own.drapala.TaskManager.service.dto;
 
 import org.apache.commons.lang3.ObjectUtils;
+import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
+import own.drapala.TaskManager.domain.User;
 
 import java.time.LocalDate;
 
@@ -12,9 +14,9 @@ public class TaskDTO {
     private String description;
     private LocalDate date;
     private boolean isCompleted;
-    private Long owner;
-    private Long card;
-    private Long assignedTo;
+    private User owner;
+    private Card card;
+    private User assignedTo;
 
 
     public TaskDTO() {
@@ -27,19 +29,10 @@ public class TaskDTO {
         this.description = task.getDescription();
         this.date = task.getDate();
         this.isCompleted = task.isCompleted();
-        if(!ObjectUtils.isEmpty(task.getOwner()))
-         this.owner = task.getOwner().getId();
-        else
-            this.owner = 0L;
-        if(!ObjectUtils.isEmpty(task.getCard()))
-            this.card = task.getCard().getId();
-        else
-            this.card = 0L;
-        this.card = task.getCard().getId();
-        if(!ObjectUtils.isEmpty(task.getAssignedTo()))
-            this.assignedTo = task.getAssignedTo().getId();
-        else
-            this.assignedTo = 0L;
+        this.owner = task.getOwner();
+        this.card = task.getCard();
+        this.assignedTo = task.getAssignedTo();
+
     }
 
     public Long getId() {
@@ -83,27 +76,27 @@ public class TaskDTO {
     }
 
 
-    public Long getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 
-    public Long getCard() {
+    public Card getCard() {
         return card;
     }
 
-    public void setCard(Long card) {
+    public void setCard(Card card) {
         this.card = card;
     }
 
-    public Long getAssignedTo() {
+    public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(Long assignedTo) {
+    public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
     }
 }

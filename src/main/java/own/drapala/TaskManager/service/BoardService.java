@@ -1,5 +1,6 @@
 package own.drapala.TaskManager.service;
 
+import own.drapala.TaskManager.domain.Board;
 import own.drapala.TaskManager.service.dto.BoardDTO;
 
 import java.util.Optional;
@@ -7,4 +8,5 @@ import java.util.Optional;
 public interface BoardService {
 
     Optional<BoardDTO> getBoard(Long id);
-    }
+
+}

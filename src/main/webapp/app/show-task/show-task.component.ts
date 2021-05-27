@@ -7,6 +7,7 @@ import { Task } from 'app/model/task.model';
 import { AccountService } from 'app/services/account.service';
 import { TeamListService } from 'app/services/teamlist.service';
 import { TaskService } from '../services/task.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'show-task',
@@ -19,7 +20,8 @@ export class ShowTaskComponent implements OnInit {
   users: Account[]= [];
   updateState: boolean = false;
   assignedTo?: Account;
-  constructor(private teamListService: TeamListService,
+  constructor(private location: Location,
+    private teamListService: TeamListService,
      private boardService: BoardService, 
      private accountService: AccountService, 
      private route: ActivatedRoute, 
@@ -64,8 +66,8 @@ export class ShowTaskComponent implements OnInit {
     this.updateState = true;
   }
 
-  goBackToBoard(){
-    this.router.navigate(['./board']);
+  goBack(){
+    this.location.back()
   }
 
   createTask(){

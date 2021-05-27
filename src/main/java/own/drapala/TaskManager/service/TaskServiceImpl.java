@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
@@ -15,6 +16,7 @@ import own.drapala.TaskManager.service.dto.TaskDTO;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
@@ -36,8 +38,8 @@ public class TaskServiceImpl implements TaskService {
         newTask.setDescription(taskDTO.getDescription());
         newTask.setDate(taskDTO.getDate());
         newTask.setCompleted(false);
-        newTask.setOwner(userRepository.findById(taskDTO.getOwner()).get());
-        newTask.setCard(cardRepository.findById(taskDTO.getCard()).get());
+        newTask.setOwner(userRepository.findById(taskDTO.getOwner().getId()).get());
+        newTask.setCard(cardRepository.findById(taskDTO.getCard().getId()).get());
         taskRepository.save(newTask);
         return newTask;
     }
@@ -54,13 +56,12 @@ public class TaskServiceImpl implements TaskService {
                     task.setName(updatedTaskDTO.getName());
                     task.setCompleted(updatedTaskDTO.isCompleted());
                     task.setDate(updatedTaskDTO.getDate());
-                    task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner()));
-                    task.setCard(cardRepository.getOne(updatedTaskDTO.getCard()));
-                    task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo()));
-                    taskRepository.save(task);
-                    return task;
-                }
-                )
+                    task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo().getId()));
+                    task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner().getId()));
+                    task.setCard(cardRepository.getOne(updatedTaskDTO.getCard().getId()));
+
+                            return task;
+                })
                 .map(TaskDTO::new);
     }
 
@@ -106,13 +107,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void assignTaskToUser(Task task, User user) {
-        task.setOwner(user);
+        task.setAssignedTo(user);
         taskRepository.save(task);
     }
 
     @Override
     public void unassignTask(Task task) {
-        task.setOwner(null);
+        task.setAssignedTo(null);
         taskRepository.save(task);
     }
 

@@ -1,7 +1,8 @@
 <div class= "maincontainer">
   
-  <div><span>List of All Tasks</span>   
-    <button class="add-task-btn btn btn-primary" style ="float: right;" (click)="createTask()"> Create Task</button></div>
+  <div><h3>List of All Tasks</h3>   
+    <button class="add-task-btn btn btn-primary" style ="float: right;" (click)="createTask()"> Create Task</button>
+  </div>
   <br>
     <span>You can create more tasks or update others on specific task information : </span>  <br>
     <br>
@@ -13,8 +14,9 @@
         <thead>
           <tr Sort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
             <th scope="col" SortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col" SortBy="name"><span>Login</span> <fa-icon icon="sort"></fa-icon></th>
-            <th scope="col"><span>Card id</span></th>
+            <th scope="col" SortBy="name"><span>Task Name</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span>Status</span></th>
+            <th scope="col"><span>Assigned To</span></th>
             <th scope="col"><span>Options</span> </th>
 
           </tr>
@@ -25,7 +27,9 @@
               <a [routerLink]="['./', task.id, 'view']">{{ task.id }}</a>
             </td>
             <td>{{ task.name }}</td>
-            <td>{{ task.card }}</td>
+            <td>{{ task.card?.name }}</td>
+            <td>{{ task?.assignedTo?.firstName || "nobody"}} {{task?.assignedTo?.lastName}}</td>
+
             <td ngbDropdown>
               <a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" >
                   <span>options</span>
