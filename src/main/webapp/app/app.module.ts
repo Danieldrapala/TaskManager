@@ -7,7 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import * as dayjs from 'dayjs';
-import { NgbDateAdapter, NgbDatepickerConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SERVER_API_URL } from './app.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -15,7 +15,6 @@ import './config/dayjs';
 import { SharedModule } from 'app/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { EntityRoutingModule } from './entities/entity-routing.module';
-import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { MainComponent } from './layouts/main/main.component';
@@ -26,8 +25,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { BoardModule } from './board/board.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ChartsComponent } from './charts/charts.component';
-import { ChartsModule } from './charts/charts.module';
+import { StatisticModule } from './statistics/statistic.module';
 import { FormsModule } from '@angular/forms';
 import { ShowTaskModule } from './show-task/showtask.module';
 
@@ -38,7 +36,7 @@ import { ShowTaskModule } from './show-task/showtask.module';
     BrowserModule,
     SharedModule,
     EntityRoutingModule,
-    ChartsModule,
+    StatisticModule,
     BoardModule,
     ShowTaskModule,
     AppRoutingModule,

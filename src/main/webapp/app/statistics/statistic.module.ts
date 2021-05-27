@@ -13,12 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { ChartsComponent } from './charts.component';
-import { chartRoute } from './charts.route';
+import { statisticRoute } from './statistic.route';
 import { ChartsService } from '../services/charts.service';
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
+import { LineChartComponent } from './charts/line-chart.component';
+import { StatisticComponent } from './statistic.component';
 
 @NgModule({
-  providers: [ChartsService, BsModalService,BsDatepickerConfig],
+  providers: [ ChartsService, BsModalService, BsDatepickerConfig],
   imports: [
     BsDatepickerModule.forRoot(),
     MatInputModule,
@@ -29,13 +31,15 @@ import { ChartsService } from '../services/charts.service';
     MatNativeDateModule,
     MatDatepickerModule,
     SharedModule, 
-    RouterModule.forChild(chartRoute), 
+    RouterModule.forChild(statisticRoute), 
     DragDropModule,
     BrowserModule,
     ReactiveFormsModule,
+    ChartsModule,
+    WavesModule,
     ModalModule.forRoot()
   ],
   declarations: [
-    ChartsComponent
+    StatisticComponent, LineChartComponent
   ]})
-export class ChartsModule {}
+export class StatisticModule {}
