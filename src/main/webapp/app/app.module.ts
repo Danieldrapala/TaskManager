@@ -28,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StatisticModule } from './statistics/statistic.module';
 import { FormsModule } from '@angular/forms';
 import { ShowTaskModule } from './show-task/showtask.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   imports: [
@@ -44,7 +45,9 @@ import { ShowTaskModule } from './show-task/showtask.module';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     FormsModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModule.forRoot()
+
     ],
   providers: [
     Title,
