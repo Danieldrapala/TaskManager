@@ -23,17 +23,19 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { BoardModule } from './board/board.module';
-import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {  MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule, MatDateSelectionModel } from '@angular/material/datepicker';
 import { StatisticModule } from './statistics/statistic.module';
 import { FormsModule } from '@angular/forms';
 import { ShowTaskModule } from './show-task/showtask.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BoardManagmentComponent } from './admin/board-managment/board-managment.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
     MatInputModule,
+    MatSelectModule,
     MatDatepickerModule,
     BrowserModule,
     SharedModule,

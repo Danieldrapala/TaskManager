@@ -1,5 +1,6 @@
 name;status;board_id;completed_state;default
-admin;1;1;false;true
-user;1;1;false;false
-test;1;1;false;false
-ideas;1;1;true;false
+Free Tasks;1;1;false;true
+Work in Progress;1;1;false;false
+Need To Restock;1;1;false;false
+Emergency Issues;1;1;false;false
+Closed Tasks;1;1;true;false

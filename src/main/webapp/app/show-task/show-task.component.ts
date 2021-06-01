@@ -8,6 +8,7 @@ import { AccountService } from 'app/services/account.service';
 import { TeamListService } from 'app/services/teamlist.service';
 import { TaskService } from '../services/task.service';
 import { Location } from '@angular/common'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'show-task',
@@ -16,21 +17,32 @@ import { Location } from '@angular/common'
 })
 export class ShowTaskComponent implements OnInit {
 
-  task: Task =new Task();
+  isSaving = false;
+
+  taskForm =  this.fb.group({
+    id: [],
+    name: [ '', [Validators.required, ], ],
+    description: ['', [Validators.required, Validators.maxLength(50)] ],
+    isCompleted: ['', ],
+    owner: [],
+    assignedTo: [],
+    card: [],  
+    date: []
+  });
+  task!: Task;
   users: Account[]= [];
   updateState: boolean = false;
-  assignedTo?: Account;
+  assignedTo!: Account;
   constructor(private location: Location,
     private teamListService: TeamListService,
      private boardService: BoardService, 
      private accountService: AccountService, 
      private route: ActivatedRoute, 
      private taskService: TaskService, 
-     private router: Router) { }
+     private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log(params)
       this.teamListService.getAllUsers().subscribe(
         data=>{
           this.users = data
@@ -38,7 +50,6 @@ export class ShowTaskComponent implements OnInit {
       )
       if(params.id == -1)
       {
-          this.task = new Task();
           this.updateState = true;
 
       }
@@ -46,13 +57,20 @@ export class ShowTaskComponent implements OnInit {
         this.taskService.getTask(params.id).subscribe(task =>{
           this.task = task;
           this.updateState = false;
-          this.teamListService.getUser(task.assignedTo?.login).subscribe(
+          if(task.assignedTo){
+            this.teamListService.getUser(task.assignedTo?.login).subscribe(
             data=>
             {
+              console.log("XD"+ data.login)
               this.assignedTo = data;
-            }
-          );
-        });
+              console.log('kappa');
+              this.taskForm.get('assignedTo')?.setValue(this.assignedTo.id);
+            });
+          }
+  
+
+        this.updateForm(task);
+      });
       }
       
     });
@@ -70,40 +88,93 @@ export class ShowTaskComponent implements OnInit {
     this.location.back()
   }
 
-  createTask(){
-  this.accountService.getAccount(this.accountService.getActiveUserId()!).subscribe(
-    data=>{
-      this.task.owner = data;
-    }
-  );
-  this.boardService.getDefaultCard().subscribe(cardId=>{
-    console.log(cardId);
-    this.task.card =cardId;
-    this.taskService.addTask(this.task).subscribe();
-  });
-  this.router.navigate(['./board']);
-  }
 
-  updateTask(): void {
-    this.updateState = false;
-    this.taskService.updateTask(this.task).subscribe();
-  }
   assignToMe(): void{
      this.accountService.getAuthenticationState().subscribe(
        account =>{
-         if(account)
-          this.task.assignedTo = account; 
-        this.taskService.updateTask(this.task).subscribe();
-       }
+        if(account)
+       {   
+         this.task.assignedTo = account; 
+         this.taskService.updateTask(this.task).subscribe();
+         this.updateForm(this.task);
+         this.taskForm.get('assignedTo')?.setValue(account.id);
+        }
+      }
      );
+     
+
   }
+
   deleteTask(): void {
     if(this.task.id)
     this.taskService.deleteTask(this.task.id).subscribe(
       data =>
       {
-        this.router.navigate(['/tasks']);
+        this.goBack();
       }
     )
+  }
+
+  private updateForm(task: Task): void {
+
+    this.taskForm.patchValue({
+      id: task.id,
+      name: task.name,
+      description: task.description,
+      assignedTo: task.assignedTo,
+      card: task.card,
+      isCompleted: task.isCompleted,
+      owner: task.owner,
+      date: task.date,
+    });
+  }
+
+  private updateTask(task: Task): void {
+    console.log("XD"+ this.taskForm.get(['assignedTo'])!.value)
+
+    task.date = this.taskForm.get(['date'])!.value;
+    task.owner = this.taskForm.get(['owner'])!.value;
+    task.isCompleted = this.taskForm.get(['isCompleted'])!.value;
+    if(this.taskForm.get(['assignedTo'])!.value)
+    task.assignedTo = this.users.find(x => x.id == this.taskForm.get(['assignedTo'])!.value)
+    
+    task.description = this.taskForm.get(['description'])!.value;
+    task.name = this.taskForm.get(['name'])!.value;
+  }
+
+
+  private onSaveSuccess(): void {
+    this.isSaving = false;
+    this.goBack();
+  }
+
+  private onSaveError(): void {
+    this.isSaving = false;
+  }
+
+  save(): void {
+    this.updateState = false;
+    this.isSaving = true;
+    this.updateTask(this.task);
+    if (this.task.id !== undefined) {
+      this.taskService.updateTask(this.task).subscribe(
+        () => this.onSaveSuccess(),
+        () => this.onSaveError()
+      );
+    } else {
+      this.accountService.getAccount(this.accountService.getActiveUserId()!).subscribe(
+        data=>{
+          this.task.owner = data;
+        }
+      );
+      this.boardService.getDefaultCard().subscribe(cardId=>{
+        this.task.card =cardId;
+        this.taskService.addTask(this.task).subscribe();
+      });
+      this.taskService.addTask(this.task).subscribe(
+        () => this.onSaveSuccess(),
+        () => this.onSaveError()
+      );
+    }
   }
 }

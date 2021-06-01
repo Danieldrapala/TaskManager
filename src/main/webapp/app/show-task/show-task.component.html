@@ -4,116 +4,76 @@
         <button mat-raised-button class="btn headerbtn" style="align-self: flex-end;" (click)="goBack()" color="warn">    
           <fa-icon icon="arrow-left"></fa-icon> go Back        
         </button></div>
-      <form class="form">
-        <div class="form-group">
-          <label for="title">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            [disabled] ="!isEditClicked()"
 
-            [(ngModel)]="task.name"
-            name="title"
-          />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [disabled] ="!isEditClicked()"
-            [(ngModel)] = "task.description"
-            name="description"
-          />
-        </div>
-
-        <!-- <div class="form-group">
-          <label><strong>Status:</strong></label>
-            <input
-            class="checkbox"
-            type="checkbox"
-            class="form-control"
-            id="isCompleted"
-            [disabled] ="!isEditClicked()"
-            [(ngModel)] = "task.isCompleted"
-            name="isCompleted"
-            checked ="task.isCompleted ? 'checked' : ''"
-          />
-          <span>{{task.isCompleted ? 'Task Completed' : 'Task in Progress'}}</span>
-        </div> -->
+        <form class= "formStyles" name="taskForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="taskForm">
+          <div>
+            <alert-error></alert-error>
     
-        <div class="form-group">
-          <label><strong>Deadline date:</strong></label>
-          <input
-            type="date"
-            class="form-control"
-            id="date"
-            [disabled] ="!isEditClicked()"
-            [(ngModel)] = "task.date"
-            name="date"
-          />
-        </div>
-        <div class="form-group">
-          <label for="assignedTo">Assign To</label>
-          <select
-            type="select"
-            class="form-control"
-            id="assignedTo"
-            [(ngModel)] = "task.assignedTo"
-            [disabled] ="!isEditClicked()"
-            name="assignedTo"
-          >
-          <option *ngFor="let user of users" [ngValue] = "user" [selected]="user.id===task.assignedTo?.id ?user: ''" >
-            {{ user.email }}
-          </option>
-        </select>
-        </div>
-      </form>
-  
-
-      
-      <div *ngIf="task.id" class="editbuttons">
-        <button class="btn btn-primary" mat-raised-button (click)="deleteTask()" color="warn">    
-           <fa-icon icon="trash-alt"></fa-icon> Delete Task 
-          </button>
-        <button mat-raised-button
-        class="btn btn-primary"
-          (click)="updateStateTask()"
-          [hidden] ="isEditClicked()"
-        >
-          Edit
-        </button>
-        <button mat-raised-button
-        class="btn btn-primary"
-          type="submit"
-          (click)="updateTask()"
-          [hidden] ="!isEditClicked()"
-        >
-          Ok
-        </button>
-        <button mat-raised-button
-        class="btn btn-primary"
-          type="submit"
-          (click)="assignToMe()"
-        >
-          Assign to me
-        </button>
-      </div>
-      
-      <div *ngIf="!task.id" class="addingbuttons">
- 
-        <button mat-raised-button class="btn btn-primary"
-          type="submit"
-          (click)="createTask()"
-          [hidden] ="!isEditClicked()"
-        >
-          Create New Task
-        </button>
-      </div>
-
-  
+            <div class="form-group" [hidden]="!task.id">
+              <label>ID</label>
+              <input type="text" class="form-control" name="id" formControlName="id" readonly />
+            </div>
+    
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <input type="text" class="form-control" name="name" formControlName="name" />
+    
+              <div *ngIf="taskForm.get('name')!.invalid && (taskForm.get('name')!.dirty || taskForm.get('name')!.touched)">
+                <small class="form-text text-danger" *ngIf="taskForm.get('name')?.errors?.required"> This field is required. </small>
+                <small class="form-text text-danger" *ngIf="taskForm.get('name')?.errors?.maxlength">
+                  This field cannot be longer than 50 characters.
+                </small>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <label class="form-control-label">Description</label>
+              <input type="text" class="form-control" name="description" formControlName="description" />
+    
+              <div *ngIf="taskForm.get('description')!.invalid && (taskForm.get('description')!.dirty || taskForm.get('description')!.touched)">
+                <small class="form-text text-danger" *ngIf="taskForm.get('description')?.errors?.maxlength">
+                  This field cannot be longer than 50 characters.
+                </small>
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <label>Deadline Date</label>
+              <input type="date" class="form-control" name="date" formControlName="date" />
+            </div>
+    
+          
+            <div class="form-group" >
+              <label for="assignedTo" >Assign To</label>
+              <div style="display: block;">
+                <mat-select style="width: 70%; margin-right: 5%;" type= "select" formControlName="assignedTo" id="assignedTo" name="assignedTo" >
+                <mat-option *ngFor="let user of users"  [value]="user.id" >
+                  {{ user.email }}
+                </mat-option>
+              </mat-select>
+            <button  class="btn btn-primary" type="button" (click)="assignToMe()">
+              Assign to me
+            </button>
+          </div>
+              
+          </div>
+            <button type="button" class="btn btn-secondary" (click)="goBack()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+            </button>
+    
+            <button type="submit" [disabled]="taskForm.invalid || isSaving" class="btn btn-primary">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+            </button>
+          </div>
+        </form>
     </div>
   
-    
+
+
+   
+
+
+
+
+      
+  

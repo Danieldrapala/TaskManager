@@ -36,7 +36,7 @@
         padding: 0px 15px;
         display: block;
         .board-name {
-            margin-left: 10%;
+            margin-left: 2%;
             align-self: center;
             font-size: 30px;
             font-weight: bold;
@@ -58,11 +58,13 @@
         overflow-x: auto;
 
         .board-columns {
+
             display: flex;
             flex-grow: 1;
             background: cadetblue;
             min-height: 500px;
             .board-column {
+                
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
@@ -81,7 +83,9 @@
                 }
 
                 .column-title {
-                    font-size: 20px;
+                    height: 8%;
+
+                    font-size: 18px;
                     font-weight: 800;
                     font-family: 'Lato', sans-serif;
                     text-transform: uppercase;

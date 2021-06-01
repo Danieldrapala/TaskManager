@@ -19,20 +19,21 @@ export class TaskService{
 
         return this.http.get<ITask>(`${this.resourceUrl}/${id}`);
       }
+
     deleteTask(id: number): Observable<{}> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
       }
 
-      addTask(task: Task): Observable<ITask> {
+    addTask(task: Task): Observable<ITask> {
         return this.http.post<ITask>(`${this.resourceUrl}`, task);
       }
     
-      updateTask(task: Task): Observable<ITask> {
+    updateTask(task: Task): Observable<ITask> {
         console.log(task);
         return this.http.put<ITask>(`${this.resourceUrl}`, task);
       }
   
-      getTaskList(req?: Pagination): Observable<HttpResponse<ITask[]>> {
+    getTaskList(req?: Pagination): Observable<HttpResponse<ITask[]>> {
         const options = createRequestOption(req);
         return this.http.get<ITask[]>(`${this.resourceUrl}/tasks`, { params: options, observe: 'response' });
       }

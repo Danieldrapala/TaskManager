@@ -8,6 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowTaskComponent } from './show-task.component';
 import { TaskService } from '../services/task.service';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   providers: [TaskService],
@@ -16,6 +18,8 @@ import { TaskService } from '../services/task.service';
     SharedModule, 
     DragDropModule,
     BrowserModule,
+    MatInputModule,
+    MatSelectModule,
     ReactiveFormsModule,
     ModalModule.forRoot()
   ],
