@@ -9,14 +9,21 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import own.drapala.TaskManager.config.Constants;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
+import own.drapala.TaskManager.rest.utils.ResponseUtil;
+import own.drapala.TaskManager.security.AuthoritiesConstants;
 import own.drapala.TaskManager.service.UserService;
+import own.drapala.TaskManager.service.dto.AdminUserDTO;
 import own.drapala.TaskManager.service.dto.UserDTO;
 
+import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -66,5 +73,20 @@ public class PublicUserResource {
     @GetMapping("/authorities")
     public List<String> getAuthorities() {
         return userService.getAuthorities();
+    }
+
+    /**
+     * {@code GET /admin/users/:login} : get the "login" user.
+     *
+     * @param login the login of the user to find.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login" user, or with status {@code 404 (Not Found)}.
+     */
+
+
+    @GetMapping("/publicuser/{login}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
+        log.debug("REST request to get User : {}", login);
+        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
     }
 }

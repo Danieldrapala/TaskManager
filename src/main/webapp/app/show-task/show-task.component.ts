@@ -46,7 +46,7 @@ export class ShowTaskComponent implements OnInit {
         this.taskService.getTask(params.id).subscribe(task =>{
           this.task = task;
           this.updateState = false;
-          this.teamListService.getUser(task.assignedTo?.id).subscribe(
+          this.teamListService.getUser(task.assignedTo?.login).subscribe(
             data=>
             {
               this.assignedTo = data;

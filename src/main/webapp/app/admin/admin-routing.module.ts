@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BoardManagmentComponent } from './board-managment/board-managment.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,13 @@ import { RouterModule } from '@angular/router';
         path: 'docs',
         loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule),
       },
+      {
+        path: 'board-managment',
+        loadChildren: () => import('./board-managment/board-managment.module').then(m => m.BoardManagementModule),
+        data: {
+          pageTitle: 'Board',
+        },
+      }
     ]),
   ],
 })

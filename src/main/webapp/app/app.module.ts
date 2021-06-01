@@ -29,6 +29,7 @@ import { StatisticModule } from './statistics/statistic.module';
 import { FormsModule } from '@angular/forms';
 import { ShowTaskModule } from './show-task/showtask.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BoardManagmentComponent } from './admin/board-managment/board-managment.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     { provide: LOCALE_ID, useValue: 'pl' },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, BoardManagmentComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

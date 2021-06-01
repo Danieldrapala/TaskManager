@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <h2 id="myUserLabel">Edit a Board</h2>
+  
+        <div *ngIf="board">
+          <alert-error></alert-error>
+  
+          <div class="form-group" [hidden]="!board.id">
+            <label>ID</label>
+            <input type="text" class="form-control" name="id" formControlName="id" readonly />
+          </div>
+  
+          <div class="form-group">
+            <label class="form-control-label">Name</label>
+            <input type="text" class="form-control" name="name" formControlName="name" />
+  
+            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+  
+              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.maxlength">
+                This field cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label class="form-control-label">Default Column</label>
+            <input type="text" class="form-control" name="defaultCard" formControlName="defaultCard" />
+          </div>
+  
+          <div class="form-group">
+            <label>Column for task closing (last in project cycle)</label>
+            <input type="select" class="form-control" name="closingCard" formControlName="closingCard" />
+          </div>
+        </div>
+
+
+        <div *ngIf="board">
+          <button type="button" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+          </button>
+  
+          <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+            <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

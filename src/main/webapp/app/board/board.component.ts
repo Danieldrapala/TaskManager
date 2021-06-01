@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
   
   bsModalRef: BsModalRef | undefined;
   taskList: any[] = [];
-  board: Board =new Board(1,"",0);
+  board: Board =new Board(1,"",0, 1, 4);
   cards: Card[]= [];
   constructor(private router: Router, private boardServiceImpl: BoardService, private bsModalService: BsModalService, route:ActivatedRoute) {
     route.params.subscribe(val => {

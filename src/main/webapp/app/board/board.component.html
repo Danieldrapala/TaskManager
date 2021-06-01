@@ -18,7 +18,14 @@
                          [cdkDropListData]="column.tasks"
                          (cdkDropListDropped)="drop($event)">
                         <div class="task" id="{{task.id}}" *ngFor="let task of column.tasks" (click)="showTask(task)" cdkDrag>
-                             {{task.name}}
+                             <span class="task-child" >{{task.name}}</span>
+                             <div class="verticalLine">
+                               assigned To:
+                               <span *ngIf=task.assignedTo class="assignedTo" >
+                                {{task.assignedTo.email}}
+                            </span>
+                              </div>
+                             
                         </div>
                     </div>
                 </div>
