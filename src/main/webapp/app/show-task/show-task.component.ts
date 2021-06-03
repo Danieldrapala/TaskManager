@@ -9,6 +9,10 @@ import { TeamListService } from 'app/services/teamlist.service';
 import { TaskService } from '../services/task.service';
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Comment } from 'app/model/comment.model';
+import { CommentService } from 'app/services/comment.service';
+import { ignoreElements } from 'rxjs/operators';
+import { CommaExpr, ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'show-task',
@@ -33,13 +37,16 @@ export class ShowTaskComponent implements OnInit {
   users: Account[]= [];
   updateState: boolean = false;
   assignedTo!: Account;
+  comments: Comment[] = [];
+
   constructor(private location: Location,
     private teamListService: TeamListService,
      private boardService: BoardService, 
      private accountService: AccountService, 
      private route: ActivatedRoute, 
      private taskService: TaskService, 
-     private fb: FormBuilder) { }
+     private fb: FormBuilder,
+     private commentService: CommentService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -56,6 +63,7 @@ export class ShowTaskComponent implements OnInit {
       else{
         this.taskService.getTask(params.id).subscribe(task =>{
           this.task = task;
+          this.getAllComments(task);
           this.updateState = false;
           if(task.assignedTo){
             this.teamListService.getUser(task.assignedTo?.login).subscribe(
@@ -76,6 +84,18 @@ export class ShowTaskComponent implements OnInit {
     });
   }
 
+  getAllComments(task:Task){
+    if(task.id!= undefined)
+          {
+            this.commentService.getComments(task.id).subscribe(
+              data=>{
+                this.comments = data
+              }
+            );
+
+          }
+          
+  }
 
   isEditClicked(){
     return this.updateState;
@@ -127,6 +147,26 @@ export class ShowTaskComponent implements OnInit {
       owner: task.owner,
       date: task.date,
     });
+  }
+  addComment(description:string){
+    let comment = new Comment();  
+    this.accountService.getAuthenticationState().subscribe(
+      user =>{
+        if(user)
+        comment.createdBy =  user;
+        comment.description = description;
+        comment.taskId = this.task.id;
+    
+        this.commentService.addComment(comment).subscribe(
+          data=> {console.log("xd")
+          this.getAllComments(this.task);
+        }
+        );
+        console.log("XD");
+      }
+      );
+    
+
   }
 
   private updateTask(task: Task): void {

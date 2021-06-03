@@ -9,6 +9,7 @@ import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
 import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.CardRepository;
+import own.drapala.TaskManager.repository.CommentRepository;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.repository.UserRepository;
 import own.drapala.TaskManager.service.dto.TaskDTO;
@@ -20,15 +21,17 @@ import java.util.Optional;
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
+    private CommentRepository commentRepository;
+
     private UserRepository userRepository;
     private CardRepository cardRepository;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CardRepository cardRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CardRepository cardRepository, CommentRepository commentRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.cardRepository = cardRepository;
-
+        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -67,6 +70,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(Long id) {
+
+        commentRepository.deleteByTaskId(id);
         taskRepository.deleteById(id);
     }
 

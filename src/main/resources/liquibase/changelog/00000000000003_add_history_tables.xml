@@ -122,5 +122,12 @@
                                  constraintName="fk_commented_by_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user"/>
+        <addAutoIncrement
+                columnDataType="bigint"
+                columnName="comment_id"
+                incrementBy="1"
+                schemaName="taskmanager"
+                startWith="1"
+                tableName="comment"/>
     </changeSet>
 </databaseChangeLog>

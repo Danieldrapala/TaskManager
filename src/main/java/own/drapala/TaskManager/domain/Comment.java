@@ -13,7 +13,9 @@ public class Comment {
     @Column(name = "comment_id")
     private Long id;
 
-    @Column(name = "created_by")
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
     private User createdBy;
 
 
