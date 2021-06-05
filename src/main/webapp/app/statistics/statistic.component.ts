@@ -12,4 +12,17 @@ export class StatisticComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getColumnsAndTaskCount()
+  {}
+  
+  getTaskStatus()
+  {
+
+  }
+
+  getTaskUserStatus(){
+
+  }
+  getInfoAboutTaskCompletness(){}
+  getInfoAboutTaskDragAndDropHistory(){}
 }

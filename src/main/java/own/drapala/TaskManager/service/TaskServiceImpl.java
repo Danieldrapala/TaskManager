@@ -20,11 +20,11 @@ import java.util.Optional;
 @Transactional
 @Service
 public class TaskServiceImpl implements TaskService {
-    private TaskRepository taskRepository;
-    private CommentRepository commentRepository;
 
-    private UserRepository userRepository;
-    private CardRepository cardRepository;
+    private final TaskRepository taskRepository;
+    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
+    private final CardRepository cardRepository;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CardRepository cardRepository, CommentRepository commentRepository) {
@@ -41,8 +41,9 @@ public class TaskServiceImpl implements TaskService {
         newTask.setDescription(taskDTO.getDescription());
         newTask.setDate(taskDTO.getDate());
         newTask.setCompleted(false);
-        newTask.setOwner(userRepository.findById(taskDTO.getOwner().getId()).get());
-        newTask.setCard(cardRepository.findById(taskDTO.getCard().getId()).get());
+        newTask.setOwner(userRepository.getOne(taskDTO.getOwner().getId()));
+        newTask.setCard(cardRepository.getOne(taskDTO.getCard().getId()));
+        newTask.setAssignedTo(userRepository.getOne(taskDTO.getAssignedTo().getId()));
         taskRepository.save(newTask);
         return newTask;
     }
@@ -62,8 +63,7 @@ public class TaskServiceImpl implements TaskService {
                     task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo().getId()));
                     task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner().getId()));
                     task.setCard(cardRepository.getOne(updatedTaskDTO.getCard().getId()));
-
-                            return task;
+                    return task;
                 })
                 .map(TaskDTO::new);
     }

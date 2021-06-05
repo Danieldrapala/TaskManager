@@ -16,8 +16,11 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { statisticRoute } from './statistic.route';
 import { ChartsService } from '../services/charts.service';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
-import { LineChartComponent } from './charts/line-chart.component';
+import { LineChartComponent } from './linechart/line-chart.component';
 import { StatisticComponent } from './statistic.component';
+import { PieChartComponent } from './piechartStatus/pie-chart.component';
+import { PieChartColumnComponent } from './piechartColumns/pie-chart.component';
+import { PieChartUsersComponent } from './piechartUsers/pie-chart.component';
 
 @NgModule({
   providers: [ ChartsService, BsModalService, BsDatepickerConfig],
@@ -40,6 +43,6 @@ import { StatisticComponent } from './statistic.component';
     ModalModule.forRoot()
   ],
   declarations: [
-    StatisticComponent, LineChartComponent
+    StatisticComponent, LineChartComponent, PieChartComponent,PieChartColumnComponent, PieChartUsersComponent
   ]})
 export class StatisticModule {}

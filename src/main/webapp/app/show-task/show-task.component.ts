@@ -38,7 +38,7 @@ export class ShowTaskComponent implements OnInit {
   updateState: boolean = false;
   assignedTo!: Account;
   comments: Comment[] = [];
-
+  params!: number;
   constructor(private location: Location,
     private teamListService: TeamListService,
      private boardService: BoardService, 
@@ -50,6 +50,7 @@ export class ShowTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.params = params.id;
       this.teamListService.getAllUsers().subscribe(
         data=>{
           this.users = data
@@ -57,25 +58,22 @@ export class ShowTaskComponent implements OnInit {
       )
       if(params.id == -1)
       {
-          this.updateState = true;
+        this.task = new Task();
+        this.updateForm(this.task);
 
       }
       else{
         this.taskService.getTask(params.id).subscribe(task =>{
           this.task = task;
           this.getAllComments(task);
-          this.updateState = false;
           if(task.assignedTo){
             this.teamListService.getUser(task.assignedTo?.login).subscribe(
             data=>
             {
-              console.log("XD"+ data.login)
               this.assignedTo = data;
-              console.log('kappa');
               this.taskForm.get('assignedTo')?.setValue(this.assignedTo.id);
             });
           }
-  
 
         this.updateForm(task);
       });
@@ -110,12 +108,17 @@ export class ShowTaskComponent implements OnInit {
 
 
   assignToMe(): void{
+    
      this.accountService.getAuthenticationState().subscribe(
        account =>{
         if(account)
        {   
-         this.task.assignedTo = account; 
-         this.taskService.updateTask(this.task).subscribe();
+        this.task.assignedTo = account; 
+
+         if(this.params != -1)
+         {
+          this.taskService.updateTask(this.task).subscribe();
+         }
          this.updateForm(this.task);
          this.taskForm.get('assignedTo')?.setValue(account.id);
         }
@@ -158,11 +161,10 @@ export class ShowTaskComponent implements OnInit {
         comment.taskId = this.task.id;
     
         this.commentService.addComment(comment).subscribe(
-          data=> {console.log("xd")
+          data=> {
           this.getAllComments(this.task);
         }
         );
-        console.log("XD");
       }
       );
     
@@ -170,14 +172,14 @@ export class ShowTaskComponent implements OnInit {
   }
 
   private updateTask(task: Task): void {
-    console.log("XD"+ this.taskForm.get(['assignedTo'])!.value)
 
     task.date = this.taskForm.get(['date'])!.value;
     task.owner = this.taskForm.get(['owner'])!.value;
     task.isCompleted = this.taskForm.get(['isCompleted'])!.value;
     if(this.taskForm.get(['assignedTo'])!.value)
-    task.assignedTo = this.users.find(x => x.id == this.taskForm.get(['assignedTo'])!.value)
-    
+    {
+      task.assignedTo = this.users.find(x => x.id == this.taskForm.get(['assignedTo'])!.value)
+    }
     task.description = this.taskForm.get(['description'])!.value;
     task.name = this.taskForm.get(['name'])!.value;
   }
@@ -205,16 +207,17 @@ export class ShowTaskComponent implements OnInit {
       this.accountService.getAccount(this.accountService.getActiveUserId()!).subscribe(
         data=>{
           this.task.owner = data;
+          this.boardService.getDefaultCard().subscribe(cardId=>{
+            this.task.card =cardId;
+            this.taskService.addTask(this.task).subscribe(
+              () => this.onSaveSuccess(),
+              () => this.onSaveError()
+            );
+          });
         }
       );
-      this.boardService.getDefaultCard().subscribe(cardId=>{
-        this.task.card =cardId;
-        this.taskService.addTask(this.task).subscribe();
-      });
-      this.taskService.addTask(this.task).subscribe(
-        () => this.onSaveSuccess(),
-        () => this.onSaveError()
-      );
+      
+     
     }
   }
 }
