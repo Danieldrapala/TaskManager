@@ -20,4 +20,10 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "join Card c on t.card = c.id\n" +
             "WHERE c.id = :id")
     Optional<List<Task>> findByColumnId(Long id);
+
+
+    @Query("SELECT count(*) FROM Task t \n" +
+            "WHERE t.card.id = :id \n" +
+            "ORDER BY t.card.id ")
+    Optional<Integer> findCount(Long id);
 }

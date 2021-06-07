@@ -2,7 +2,7 @@
     <div class="board">
 
         <div class="board-bar">
-            <span class="board-name"> {{ board.name }}</span>
+            <span class="board-name" > {{ board?.name }}</span>
         
             <button class="btn btn-primary" style ="float: right; margin-right: 10%;" (click)="createTask()">Create Task</button>
         </div>
@@ -17,15 +17,15 @@
                          id = "{{column.id}}"
                          [cdkDropListData]="column.tasks"
                          (cdkDropListDropped)="drop($event)">
-                        <div class="task" id="{{task.id}}" *ngFor="let task of column.tasks" (click)="showTask(task)" cdkDrag>
+                        <div class="task" id="{{task.id}}" [ngStyle]="{'background-color': task.isCompleted ? '#90EE90 ': 'white'}" *ngFor="let task of column.tasks" (click)="showTask(task)" cdkDrag>
                              <span class="task-child" >{{task.name}}</span>
                              <div class="verticalLine">
                                assigned To:
-                               <span *ngIf=task.assignedTo class="assignedTo" >
-                                {{task.assignedTo.email}}
-                            </span>
+                               <span *ngIf=task.assignedTo class="assignedTo" [ngStyle]="{'color': task.assignedTo.email === this.user.email ? 'red ': 'black'}" >
+                                {{task.assignedTo.email}}</span>
+                                <span *ngIf="task.assignedTo?.email === this.user.email">Task Assigned To You!</span>
+                            <span *ngIf="task.isCompleted"  style="margin-left:20%; color: cadetblue;"><fa-icon icon="check"></fa-icon>  Task Completed</span>
                               </div>
-                             
                         </div>
                     </div>
                 </div>
@@ -33,3 +33,12 @@
         </div>
     </div>
 </div>
+
+
+ 
+
+
+
+
+    
+

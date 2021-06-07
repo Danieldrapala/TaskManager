@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BoardService } from 'app/board/board.service';
+import { BoardService } from 'app/services/board.service';
 import { Board } from 'app/model/board.model';
 
 @Component({
@@ -29,10 +29,11 @@ export class BoardManagmentComponent implements OnInit {
    this.boardService.getBoard().subscribe(
      board =>
      {
-       this.board = board;
-       this.updateForm(this.board);
-      console.log(board.id);
-     }
+       if(board.body){
+        this.board = board.body;
+        this.updateForm(this.board);
+       }
+            }
    )
   }
 

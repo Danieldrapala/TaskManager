@@ -18,7 +18,11 @@ public class Board {
     @Size(max = 1200, message = "{board.name.size}")
     private String name;
 
+    @Column(name = "default_card")
     private Long defaultCard;
+
+    @Column(name = "closing_card")
+    private Long closingCard;
 
     @OneToMany(mappedBy = "board")
     private List<Card> card;
@@ -64,5 +68,13 @@ public class Board {
 
     public void setDefaultCard(Long defaultCard) {
         this.defaultCard = defaultCard;
+    }
+
+    public Long getClosingCard() {
+        return closingCard;
+    }
+
+    public void setClosingCard(Long closingCard) {
+        this.closingCard = closingCard;
     }
 }

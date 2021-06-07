@@ -1,11 +1,20 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
-import { Board } from '../model/board.model';
-import { BoardService } from './board.service';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Task } from 'app/model/task.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from 'app/model/card.model';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
+import { HttpResponse } from '@angular/common/http';
+import { stat } from 'node:fs';
+import { Console } from 'node:console';
+import { BoardService } from 'app/services/board.service';
+import { Board, IBoard } from 'app/model/board.model';
+import { AccountService } from 'app/services/account.service';
+import { AccessorDeclaration } from 'typescript';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'board',
@@ -14,22 +23,42 @@ import { Card } from 'app/model/card.model';
 })
 export class BoardComponent implements OnInit {
   
-  bsModalRef: BsModalRef | undefined;
+  
+
   taskList: any[] = [];
-  board: Board =new Board(1,"",0, 1, 4);
+  board?: Board;
   cards: Card[]= [];
-  constructor(private router: Router, private boardServiceImpl: BoardService, private bsModalService: BsModalService, route:ActivatedRoute) {
+  status!: HttpResponse<IBoard>;
+  user!: Account;
+
+  constructor(
+    private router: Router, 
+    private boardServiceImpl: BoardService, 
+    private accountService: AccountService,
+    private route:ActivatedRoute, 
+    private fb:FormBuilder) {
     route.params.subscribe(val => {
-      this.getBoard();
+      accountService.getAuthenticationState().subscribe(
+        (data)=> {
+          if(data)
+          this.user = data;}
+      )
+      this.getBoard();      
       this.getTasks();
-    }
-    )
+      });
+  
   }
    
   ngOnInit() {
+
     this.getBoard();
-    this.getTasks();
+    if(this.board)
+    {
+      this.getTasks();
+    }
+ 
   }
+
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -43,8 +72,19 @@ export class BoardComponent implements OnInit {
   }
   getBoard(){
     this.boardServiceImpl.getBoard().subscribe( data =>{
-      this.board =data
-    });
+        if(data.body)
+        {
+          console.log(data.body);
+          this.board =data.body;
+        }
+    },
+    (status) => {
+      if(status.status === 404)
+      this.router.navigate(["./addboard"]);
+
+    }
+    
+    );
   }
   getTasks() {
     this.boardServiceImpl.getCards().subscribe( cards =>{
@@ -65,4 +105,5 @@ export class BoardComponent implements OnInit {
   showTask(task: Task){
     this.router.navigate(["./showtask", task.id]);
   }
+  
 }

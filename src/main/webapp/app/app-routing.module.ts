@@ -27,11 +27,11 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'teammates',
-          loadChildren: () => import('./entities/teamlist/teamlist.module').then(m => m.TeamListModule),
+          loadChildren: () => import('./user-view/entities/teamlist/teamlist.module').then(m => m.TeamListModule),
         },
         {
           path: 'login',
-          loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+          loadChildren: () => import('./account/login/login.module').then(m => m.LoginModule),
         },
         ...LAYOUT_ROUTES,
       ],

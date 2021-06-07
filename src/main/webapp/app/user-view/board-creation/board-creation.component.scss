@@ -1,0 +1,33 @@
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+//   .double-column {
+//     display: flex;
+//     flex-direction: column;
+//     flex-basis: 100%;
+//     flex: 2;
+//   }
+
+
+.edit-form{
+    height: 100%;
+    width: 80%;
+    margin-left: 20%;
+    padding-right: 40%;
+    margin-right: 20%;
+}
+
+.header{
+    font-size: 2em;
+}

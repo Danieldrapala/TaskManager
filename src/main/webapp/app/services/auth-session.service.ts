@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Login } from 'app/login/login.model';
+import { Login } from 'app/account/login/login.model';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 
 @Injectable({ providedIn: 'root' })

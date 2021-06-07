@@ -18,6 +18,8 @@ public interface TaskService {
 
     void deleteTask(Long id);
 
+    Optional<List<TaskDTO>> findAll();
+
     Page<TaskDTO> findAll(Pageable pageable);
 
     Page<TaskDTO> findByOwnerOrderByDateDesc(User user, Pageable pageable);
@@ -37,4 +39,6 @@ public interface TaskService {
     Optional<List<Task>> getTasksForCardId(Long l);
 
     Optional<TaskDTO> updateTasksCard(Card cardId, Long taskId);
+
+    Optional<Integer> getTaskCountForCardId(Long id);
 }

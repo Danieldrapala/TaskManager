@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { TeamListComponent } from './teamlist.component';
-import { UserForUser } from '../../model/user.model';
+import { UserForUser } from '../../../model/user.model';
 import { AccountService } from 'app/services/account.service';
 import { TeamListService } from 'app/services/teamlist.service';
 

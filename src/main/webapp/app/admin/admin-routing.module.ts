@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BoardManagmentComponent } from './board-managment/board-managment.component';
+import { BoardManagmentComponent } from '../user-view/board-managment/board-managment.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { BoardManagmentComponent } from './board-managment/board-managment.compo
       },
       {
         path: 'board-managment',
-        loadChildren: () => import('./board-managment/board-managment.module').then(m => m.BoardManagementModule),
+        loadChildren: () => import('../user-view/board-managment/board-managment.module').then(m => m.BoardManagementModule),
         data: {
           pageTitle: 'Board',
         },

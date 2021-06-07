@@ -3,9 +3,10 @@ jest.mock('@angular/router');
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { AccountService } from 'app/services/account.service';
 import { of } from 'rxjs';
 
-import { AccountService } from 'app/core/auth/account.service';
+
 
 import { HomeComponent } from './home.component';
 

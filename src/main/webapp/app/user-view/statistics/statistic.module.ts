@@ -13,14 +13,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { statisticRoute } from './statistic.route';
-import { ChartsService } from '../services/charts.service';
+import { statisticRoute } from '../../user-view/statistics/statistic.route';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
 import { LineChartComponent } from './linechart/line-chart.component';
 import { StatisticComponent } from './statistic.component';
 import { PieChartComponent } from './piechartStatus/pie-chart.component';
 import { PieChartColumnComponent } from './piechartColumns/pie-chart.component';
 import { PieChartUsersComponent } from './piechartUsers/pie-chart.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ChartsService } from 'app/services/charts.service';
 
 @NgModule({
   providers: [ ChartsService, BsModalService, BsDatepickerConfig],
@@ -38,6 +39,7 @@ import { PieChartUsersComponent } from './piechartUsers/pie-chart.component';
     DragDropModule,
     BrowserModule,
     ReactiveFormsModule,
+    MatSelectModule,
     ChartsModule,
     WavesModule,
     ModalModule.forRoot()

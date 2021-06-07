@@ -16,6 +16,7 @@ import own.drapala.TaskManager.service.dto.TaskDTO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -76,6 +77,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Optional<List<TaskDTO>> findAll()
+    {
+        return Optional.of(taskRepository.findAll().stream().map(TaskDTO::new).collect(Collectors.toList()));
+
+    }
+
+    @Override
     public Page<TaskDTO> findAll(Pageable pageable) {
         return taskRepository.findAll(pageable).map(TaskDTO::new);
     }
@@ -128,11 +136,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Optional<TaskDTO> updateTasksCard(Card card, Long taskId) {
+    public Optional<TaskDTO> updateTasksCard(Card card, Long taskId){
         Task task = taskRepository.getOne(taskId);
         task.setCard(card);
         return  Optional.of(taskRepository.save(task)).map(TaskDTO::new);
-
     }
+
+    @Override
+    public Optional<Integer> getTaskCountForCardId(Long id){
+        return taskRepository.findCount(id);
+    }
+
 
 }

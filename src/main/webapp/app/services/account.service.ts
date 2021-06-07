@@ -32,6 +32,7 @@ export class AccountService {
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
   }
+  
   getAccount(id:number): Observable<Account>{
     return this.http.get<Account>(this.applicationConfigService.getEndpointFor('api/account'));
 

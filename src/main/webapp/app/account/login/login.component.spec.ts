@@ -5,11 +5,11 @@ jest.mock('app/login/login.service');
 import { ComponentFixture, TestBed, waitForAsync, inject, fakeAsync, tick } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccountService } from 'app/services/account.service';
 import { of } from 'rxjs';
 
-import { AccountService } from 'app/core/auth/account.service';
 
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { LoginComponent } from './login.component';
 
 describe('Component Tests', () => {

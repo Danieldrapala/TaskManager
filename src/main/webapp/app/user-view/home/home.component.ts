@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/services/account.service';
+import { BoardService } from 'app/services/board.service';
 
 @Component({
   selector: 'home',
@@ -11,10 +12,11 @@ import { AccountService } from 'app/services/account.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  [x: string]: any;
   account: Account | null = null;
   authSubscription?: Subscription;
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router ) {}
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));

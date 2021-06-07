@@ -6,9 +6,9 @@ public class CardDTO {
 
     private Long id;
     private String name;
-    private Long status;
-    private Boolean defaultState;
-    private Boolean completedState;
+    private Long priority;
+    private Long board;
+
 
     public CardDTO() {
         // Empty constructor needed for Jackson.
@@ -18,9 +18,8 @@ public class CardDTO {
         this.id = card.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
         this.name = card.getName();
-        this.status = card.getStatus();
-        this.defaultState = card.isDefaultState();
-        this.completedState = card.isCompletedState();
+        this.priority = card.getPriority();
+        this.board = card.getBoard().getId();
 
     }
 
@@ -40,27 +39,20 @@ public class CardDTO {
         this.name = name;
     }
 
-    public Long getStatus() {
-        return status;
+    public Long getPriority() {
+        return priority;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setPriority(Long priority) {
+        this.priority = priority;
     }
 
-    public Boolean getDefaultState() {
-        return defaultState;
+
+    public Long getBoard() {
+        return board;
     }
 
-    public void setDefaultState(Boolean defaultState) {
-        this.defaultState = defaultState;
-    }
-
-    public Boolean getCompletedState() {
-        return completedState;
-    }
-
-    public void setCompletedState(Boolean completedState) {
-        this.completedState = completedState;
+    public void setBoard(Long board) {
+        this.board = board;
     }
 }

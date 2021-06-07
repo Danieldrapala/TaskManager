@@ -5,7 +5,7 @@ import { mergeMap } from 'rxjs/operators';
 import { Account } from 'app/core/auth/account.model';
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import { Login } from '../login/login.model';
+import { Login } from '../account/login/login.model';
 import { AccountService } from './account.service';
 import { AuthServerProvider } from './auth-session.service';
 

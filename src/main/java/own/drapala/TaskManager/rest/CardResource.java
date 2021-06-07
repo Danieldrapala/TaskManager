@@ -5,17 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
-import own.drapala.TaskManager.domain.TaskMovement;
-import own.drapala.TaskManager.repository.TaskMovementRepository;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
 import own.drapala.TaskManager.service.CardService;
 import own.drapala.TaskManager.service.TaskMovementService;
 import own.drapala.TaskManager.service.TaskService;
+import own.drapala.TaskManager.service.dto.CardDTO;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +37,19 @@ public class CardResource {
         this.taskMovementService = taskMovementService;
     }
 
+    @PostMapping("/card")
+    public ResponseEntity<Card> addCard(@RequestBody CardDTO cardDto) throws URISyntaxException {
+
+        Card card= cardService.createColumn(cardDto);
+
+        return ResponseEntity
+                .created(new URI("/api/board/" + card.getId()))
+                .headers(
+                        HeaderUtil.createAlert(applicationName, "A Column is created with identifier " + card.getId(), card.getName())
+                )
+                .body(card);
+    }
+
     @GetMapping("/card")
     public ResponseEntity<List<Card>> getCardForBoardId() {
 
@@ -54,6 +66,15 @@ public class CardResource {
         return ResponseUtil.wrapOrNotFound(
                 task,
                 HeaderUtil.createAlert(applicationName, "A Task list for column "+ id ,"Task")
+        );
+    }
+    @GetMapping("/card/count/{id}")
+    public ResponseEntity<Integer> getTasksCountForCardId(@PathVariable Long id) {
+
+        Optional<Integer> count = taskService.getTaskCountForCardId(id);
+        return ResponseUtil.wrapOrNotFound(
+                count,
+                HeaderUtil.createAlert(applicationName, "A task count for column " + id ,"Task")
         );
     }
 

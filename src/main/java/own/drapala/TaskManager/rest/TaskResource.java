@@ -103,6 +103,17 @@ public class TaskResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/task/alltasks")
+    public ResponseEntity<List<TaskDTO>> getAllTasks() {
+        log.info("REST request to get all tasks for an user");
+        final Optional<List<TaskDTO>> tasks = taskService.findAll();
+        return ResponseUtil.wrapOrNotFound(
+                tasks,
+                HeaderUtil.createAlert(applicationName, "A Task List size" + tasks.get().size(), "tasks List")
+        );
+    }
+
+
     /**
      * {@code DELETE /api/task/:id} : delete the  Task.
      *

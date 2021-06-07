@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { ApplicationConfigService } from "app/core/config/application-config.service";
 import { createRequestOption } from "app/core/request/request-util";
 import { Pagination } from "app/core/request/request.model";
-import { ICard } from "app/model/card.model";
+import { Card, ICard } from "app/model/card.model";
 import { ITask, Task } from "app/model/task.model";
 import { Observable } from "rxjs";
 import { IBoard } from "../model/board.model";
@@ -15,8 +15,25 @@ export class BoardService{
     
     constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {
     }
-    getBoard():Observable<IBoard> {
-      return this.http.get<IBoard>(`${this.resourceUrl}`);
+
+    getBoard():Observable<HttpResponse<IBoard>> {
+
+      return this.http.get<IBoard>(`${this.resourceUrl}`, {observe: 'response' });
+    }
+
+    addBoard(board: IBoard):Observable<IBoard> {
+
+      return this.http.post<IBoard>(`${this.resourceUrl}`, board);
+    }
+
+    updateBoard(board: IBoard):Observable<IBoard> {
+
+      return this.http.put<IBoard>(`${this.resourceUrl}`, board);
+    }
+
+    addCard(card: Card):Observable<ICard> {
+
+      return this.http.post<ICard>(`${this.resourceUrl}/card`, card);
     }
 
     getCards() :Observable<ICard[]>{
@@ -24,12 +41,16 @@ export class BoardService{
       return cards;
     }
 
-    getTasks(cardId: number|undefined){
+    getTasks(cardId: number | undefined){
       return this.http.get<Task[]>(`${this.resourceUrl}/card/${cardId}`)
     }
     
-    getDefaultCard() {
-      return this.http.get<ICard>(`${this.resourceUrl}/defaultcard`);
+    getTasksCount(cardId: number | undefined){
+      return this.http.get<number>(`${this.resourceUrl}/card/count/${cardId}`)
+    }
+    
+    getCard(cardId: number|undefined) {
+      return this.http.get<ICard>(`${this.resourceUrl}/defaultcard/${cardId}`);
 
     }
 

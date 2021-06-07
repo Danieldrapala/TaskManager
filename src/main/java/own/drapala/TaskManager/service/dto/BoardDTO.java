@@ -1,16 +1,12 @@
 package own.drapala.TaskManager.service.dto;
 
 import own.drapala.TaskManager.domain.Board;
-import own.drapala.TaskManager.domain.Card;
-import own.drapala.TaskManager.domain.Task;
-import own.drapala.TaskManager.domain.User;
-
-import java.time.LocalDate;
 
 public class BoardDTO {
     private Long id;
     private String name;
     private Long defaultCard;
+    private Long closingCard;
 
     public BoardDTO() {
         // Empty constructor needed for Jackson.
@@ -20,7 +16,7 @@ public class BoardDTO {
         this.id = board.getId();
         // Customize it here if you need, or not, firstName/lastName/etc
         this.name = board.getName();
-
+        this.closingCard = board.getClosingCard();
         this.defaultCard = board.getDefaultCard();
     }
 
@@ -47,6 +43,14 @@ public class BoardDTO {
 
     public Long getDefaultCard() {
         return defaultCard;
+    }
+
+    public Long getClosingCard() {
+        return closingCard;
+    }
+
+    public void setClosingCard(Long closingCard) {
+        this.closingCard = closingCard;
     }
 }
 

@@ -3,43 +3,40 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-
+        xsi:schemaLocation="
+                        http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet id="00000000000005" author="dd">
-        <loadData
-                file="liquibase/data/board.csv"
-                separator=";"
-                tableName="board">
-            <column name="board_id" type="numeric"/>
-            <column name="card" type="numeric"/>
+<!--        <loadData-->
+<!--                file="liquibase/data/board.csv"-->
+<!--                separator=";"-->
+<!--                tableName="board">-->
+<!--            <column name="board_id" type="numeric"/>-->
+<!--            <column name="card" type="numeric"/>-->
+<!--        </loadData>-->
+<!--        <loadData-->
+<!--                file="liquibase/data/card.csv"-->
+<!--                separator=";"-->
+<!--                tableName="card">-->
+<!--            <column name="card_id" type="numeric"/>-->
+<!--            <column name="board" type="numeric"/>-->
+<!--            <column name="status" type="numeric"/>-->
+<!--            <column name="completed_state" type="boolean"/>-->
+<!--            <column name="default" type="boolean"/>-->
+<!--        </loadData>-->
 
-
-        </loadData>
-        <loadData
-                file="liquibase/data/card.csv"
-                separator=";"
-                tableName="card">
-            <column name="card_id" type="numeric"/>
-            <column name="board" type="numeric"/>
-            <column name="status" type="numeric"/>
-            <column name="completed_state" type="boolean"/>
-            <column name="default" type="boolean"/>
-        </loadData>
-
-        <loadData
-                file="liquibase/data/task.csv"
-                separator=";"
-                tableName="task">
-            <column name="date" type="timestamp"/>
-            <column name="task_id" type="numeric"/>
-            <column name="owner_id" type="numeric"/>
-            <column name="card_id" type="numeric"/>
-            <column name="name" type="string"/>
-            <column name="is_completed" type="boolean"/>
-
-        </loadData>
-
+<!--        <loadData-->
+<!--                file="liquibase/data/task.csv"-->
+<!--                separator=";"-->
+<!--                tableName="task">-->
+<!--            <column name="date" type="timestamp"/>-->
+<!--            <column name="task_id" type="numeric"/>-->
+<!--            <column name="owner_id" type="numeric"/>-->
+<!--            <column name="card_id" type="numeric"/>-->
+<!--            <column name="name" type="string"/>-->
+<!--            <column name="is_completed" type="boolean"/>-->
+<!--        </loadData>-->
     </changeSet>
 </databaseChangeLog>

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardService } from 'app/board/board.service';
+import { BoardService } from 'app/services/board.service';
 import { Account } from 'app/core/auth/account.model';
 
 import { Task } from 'app/model/task.model';
 import { AccountService } from 'app/services/account.service';
 import { TeamListService } from 'app/services/teamlist.service';
-import { TaskService } from '../services/task.service';
+import { TaskService } from '../../services/task.service';
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from 'app/model/comment.model';
 import { CommentService } from 'app/services/comment.service';
 import { ignoreElements } from 'rxjs/operators';
 import { CommaExpr, ThrowStmt } from '@angular/compiler';
+import { Board } from 'app/model/board.model';
 
 @Component({
   selector: 'show-task',
@@ -39,6 +40,7 @@ export class ShowTaskComponent implements OnInit {
   assignedTo!: Account;
   comments: Comment[] = [];
   params!: number;
+  board!: Board;
   constructor(private location: Location,
     private teamListService: TeamListService,
      private boardService: BoardService, 
@@ -50,6 +52,12 @@ export class ShowTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+      this.boardService.getBoard().subscribe(
+        data => {
+          if(data.body)
+          this.board = data.body;
+        }
+      )
       this.params = params.id;
       this.teamListService.getAllUsers().subscribe(
         data=>{
@@ -90,21 +98,9 @@ export class ShowTaskComponent implements OnInit {
                 this.comments = data
               }
             );
-
           }
-          
   }
 
-  isEditClicked(){
-    return this.updateState;
-  }
-  updateStateTask(){
-    this.updateState = true;
-  }
-
-  goBack(){
-    this.location.back()
-  }
 
 
   assignToMe(): void{
@@ -128,29 +124,7 @@ export class ShowTaskComponent implements OnInit {
 
   }
 
-  deleteTask(): void {
-    if(this.task.id)
-    this.taskService.deleteTask(this.task.id).subscribe(
-      data =>
-      {
-        this.goBack();
-      }
-    )
-  }
 
-  private updateForm(task: Task): void {
-
-    this.taskForm.patchValue({
-      id: task.id,
-      name: task.name,
-      description: task.description,
-      assignedTo: task.assignedTo,
-      card: task.card,
-      isCompleted: task.isCompleted,
-      owner: task.owner,
-      date: task.date,
-    });
-  }
   addComment(description:string){
     let comment = new Comment();  
     this.accountService.getAuthenticationState().subscribe(
@@ -169,6 +143,21 @@ export class ShowTaskComponent implements OnInit {
       );
     
 
+  }
+
+
+  private updateForm(task: Task): void {
+
+    this.taskForm.patchValue({
+      id: task.id,
+      name: task.name,
+      description: task.description,
+      assignedTo: task.assignedTo,
+      card: task.card,
+      isCompleted: task.isCompleted,
+      owner: task.owner,
+      date: task.date,
+    });
   }
 
   private updateTask(task: Task): void {
@@ -207,7 +196,7 @@ export class ShowTaskComponent implements OnInit {
       this.accountService.getAccount(this.accountService.getActiveUserId()!).subscribe(
         data=>{
           this.task.owner = data;
-          this.boardService.getDefaultCard().subscribe(cardId=>{
+          this.boardService.getCard(this.board.defaultCard).subscribe(cardId=>{
             this.task.card =cardId;
             this.taskService.addTask(this.task).subscribe(
               () => this.onSaveSuccess(),
@@ -220,4 +209,20 @@ export class ShowTaskComponent implements OnInit {
      
     }
   }
+
+  
+  goBack(){
+    this.location.back()
+  }
+
+  deleteTask(): void {
+    if(this.task.id)
+    this.taskService.deleteTask(this.task.id).subscribe(
+      data =>
+      {
+        this.goBack();
+      }
+    )
+  }
+
 }

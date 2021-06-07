@@ -14,6 +14,8 @@
             </column>
             <column name="name" type="varchar(200)"/>
             <column name="default_card" type="bigint"/>
+            <column name="closing_card" type="bigint"/>
+
         </createTable>
         <addAutoIncrement
                 columnDataType="bigint"
@@ -28,7 +30,7 @@
             </column>
             <column name="name" type="varchar(30)">
             </column>
-            <column name="status" type="bigint"/>
+            <column name="priority" type="bigint"/>
             <column name="board_id" type="bigint"/>
         </createTable>
         <addAutoIncrement

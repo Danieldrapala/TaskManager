@@ -16,7 +16,10 @@
     flex-basis: 100%;
     flex: 1;
   }
-
+  .wrap-padding-column{
+    padding: 5%;
+  }
+  
   .wider-column {
     display: flex;
     flex-direction: column;

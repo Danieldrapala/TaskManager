@@ -14,7 +14,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import './config/dayjs';
 import { SharedModule } from 'app/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { EntityRoutingModule } from './entities/entity-routing.module';
+import { EntityRoutingModule } from './user-view/entities/entity-routing.module';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { MainComponent } from './layouts/main/main.component';
@@ -22,15 +22,16 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
-import { BoardModule } from './board/board.module';
 import {  MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule, MatDateSelectionModel } from '@angular/material/datepicker';
-import { StatisticModule } from './statistics/statistic.module';
 import { FormsModule } from '@angular/forms';
-import { ShowTaskModule } from './show-task/showtask.module';
+import { ShowTaskModule } from './user-view/show-task/showtask.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { BoardManagmentComponent } from './admin/board-managment/board-managment.component';
+import { BoardManagmentComponent } from './user-view/board-managment/board-managment.component';
 import { MatInputModule } from '@angular/material/input';
+import { StatisticModule } from './user-view/statistics/statistic.module';
+import { BoardModule } from './user-view/board/board.module';
+
 
 @NgModule({
   imports: [

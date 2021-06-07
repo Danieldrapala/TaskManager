@@ -18,15 +18,7 @@ public class Card {
     @Column(length = 1200)
     @Size(max = 1200, message = "{card.name.size}")
     private String name;
-    @NotEmpty(message = "{card.status.not.empty}")
-    private Long status;
-
-    @NotEmpty(message = "{card.default.not.empty}")
-    @Column(name = "default")
-    private Boolean defaultState;
-
-    @Column(name = "completed_state")
-    private Boolean completedState;
+    private Long priority;
 
     @JoinColumn(name ="board_id", referencedColumnName = "board_id")
     @ManyToOne
@@ -39,8 +31,8 @@ public class Card {
         return id;
     }
 
-    public Long getStatus() {
-        return status;
+    public Long getPriority() {
+        return priority;
     }
 
     public String getName() {
@@ -55,19 +47,18 @@ public class Card {
         this.name = name;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setPriority(Long priority) {
+        this.priority = priority;
     }
 
     public Card() {
     }
 
     public Card(@NotEmpty String name,
-                Long status, @NotEmpty(message = "{card.default.not.empty}") boolean defaultState, boolean completedState) {
+                Long priority) {
         this.name = name;
-        this.status = status;
-        this.defaultState = defaultState;
-        this.completedState = completedState;
+        this.priority = priority;
+
     }
 
     public Board getBoard() {
@@ -85,19 +76,4 @@ public class Card {
         this.tasks = tasks;
     }
 
-    public Boolean isCompletedState() {
-        return completedState;
-    }
-
-    public void setCompletedState(Boolean completedState) {
-        this.completedState = completedState;
-    }
-
-    public Boolean isDefaultState() {
-        return defaultState;
-    }
-
-    public void setDefaultState(Boolean defaultState) {
-        this.defaultState = defaultState;
-    }
 }

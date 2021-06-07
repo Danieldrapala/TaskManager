@@ -38,6 +38,9 @@ export class TaskService{
         return this.http.get<ITask[]>(`${this.resourceUrl}/tasks`, { params: options, observe: 'response' });
       }
   
+    getTasks(): Observable<ITask[]> {
+      return this.http.get<ITask[]>(`${this.resourceUrl}/alltasks`);
+    }
   
 }
 

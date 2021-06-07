@@ -1,0 +1,57 @@
+<div   class="edit-form">
+  <div class="row">
+    <div class="column">
+      <div class="child" >
+        <span class="header">Board</span>
+      </div>
+      <form class= "formStyles" name="boardForm" role="form" novalidate (ngSubmit)="saveBoard()" [formGroup]="boardForm">
+            <alert-error></alert-error>
+    
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <input type="text" class="form-control" name="name" formControlName="name" />
+            </div>
+            <div class="form-group"  formArrayName="cardsName">
+              <span style="font-size: large;">Columns</span> 
+              <button type="button" class="btn-primary"  (click)="addCard()">Add Column</button>                
+              <div style="padding-top: 2%;" *ngFor="let column of cardsName.controls; let i=index">
+                <label>
+                  Column name:
+                  <input type="text" class="form-control" [formControlName]="i">
+                </label>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <label class="form-control-label">Default Column</label>
+              <mat-select  style="background-color: #f7f7f9;     background-clip: padding-box; padding: 12px;" 
+              class="defaultCard" 
+              formControlName="defaultCard"
+              type= "select" 
+              >
+                  <mat-option *ngFor="let column of boardForm.get('cardsName')?.value"  [value]="column" >
+                      {{ column }}
+                  </mat-option>            
+              </mat-select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Closing Column</label>
+              <mat-select style="background-color: #f7f7f9;    background-clip: padding-box;  padding: 12px;" 
+              class="closingCard" 
+              formControlName="closingCard"
+              type= "select" 
+              >
+                  <mat-option *ngFor="let column of boardForm.get('cardsName')?.value"  [value]="column" >
+                      {{ column }}
+                  </mat-option>            
+              </mat-select>
+            </div>
+            
+
+            <button type="submit" [disabled]="boardForm.invalid || isSaving" class="btn btn-primary">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+            </button>
+      </form>
+</div>
+  </div>
+</div>
