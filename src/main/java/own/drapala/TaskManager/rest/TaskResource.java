@@ -11,15 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import own.drapala.TaskManager.domain.Task;
+import own.drapala.TaskManager.domain.TaskAssignment;
 import own.drapala.TaskManager.repository.CardRepository;
 import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
+import own.drapala.TaskManager.service.TaskAssignmentService;
 import own.drapala.TaskManager.service.TaskService;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -38,9 +41,11 @@ public class TaskResource {
 
     private final TaskService taskService;
 
+    private final TaskAssignmentService taskAssignmentService;
 
-    public TaskResource(TaskService taskService) {
+    public TaskResource(TaskService taskService, TaskAssignmentService taskAssignmentService) {
         this.taskService = taskService;
+        this.taskAssignmentService = taskAssignmentService;
 
     }
 
@@ -62,6 +67,9 @@ public class TaskResource {
             throw new BadRequestAlertException("A new task cannot already have an ID", "task", "idexists");
         } else {
             Task task = taskService.createTask(taskDTO);
+            if(task.getAssignedTo() != null) {
+                this.taskAssignmentService.rememberAssingmentChange(task.getId(), task.getAssignedTo().getId());
+            }
             return ResponseEntity
                     .created(new URI("/api/task/" + task.getId()))
                     .headers(
@@ -140,6 +148,17 @@ public class TaskResource {
     public ResponseEntity<TaskDTO> getTask(@PathVariable Long id) {
         log.debug("REST request to get Task : {}", id);
         return ResponseUtil.wrapOrNotFound(taskService.getTaskById(id));
+    }
+
+    @PutMapping("/task/complete")
+    public ResponseEntity<TaskDTO> completeTask( @RequestBody Long[] ids) {
+
+        Optional<TaskDTO> taskDTO = taskService.setTaskCompleted(ids[0], ids[1]);
+
+        return ResponseUtil.wrapOrNotFound(
+                taskDTO,
+                HeaderUtil.createAlert(applicationName, "A Task is completed with identifier " + taskDTO.get().getId(), taskDTO.get().getName())
+        );
     }
 
 }

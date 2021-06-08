@@ -33,7 +33,8 @@ public class Task {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    private boolean is_completed;
+    @Column(name = "is_completed")
+    private boolean completed;
 
     @OneToMany(mappedBy = "taskCommented")
     private List<Comment> commentList = new ArrayList<Comment>();;
@@ -60,24 +61,24 @@ public class Task {
     public Task(@NotEmpty String name,
                 @NotEmpty @Size(max = 1200) String description,
                 @NotNull LocalDate date,
-                boolean is_completed) {
+                boolean completed) {
         this.name = name;
         this.description = description;
         this.date = date;
-        this.is_completed = is_completed;
+        this.completed = completed;
     }
 
     public Task(@NotEmpty String name,
                 @NotEmpty @Size(max = 1200) String description,
                 @NotNull LocalDate date,
-                boolean is_completed,
+                boolean completed,
                 User owner,
                 User assignedTo,
                 Card card) {
         this.name = name;
         this.description = description;
         this.date = date;
-        this.is_completed = is_completed;
+        this.completed = completed;
         this.assignedTo = assignedTo;
         this.owner = owner;
         this.card = card;
@@ -115,12 +116,12 @@ public class Task {
         this.date = date;
     }
 
-    public boolean isCompleted() {
-        return is_completed;
+    public boolean getCompleted() {
+        return completed;
     }
 
-    public void setCompleted(boolean is_completed) {
-        is_completed = is_completed;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public User getOwner() {
@@ -136,7 +137,7 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return is_completed == task.is_completed &&
+        return completed == task.completed &&
                 Objects.equals(id, task.id) &&
                 name.equals(task.name) &&
                 description.equals(task.description) &&
@@ -146,7 +147,7 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, date, is_completed, owner);
+        return Objects.hash(id, name, description, date, completed, owner);
     }
 
     public Card getCard() {

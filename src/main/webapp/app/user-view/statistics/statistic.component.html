@@ -28,14 +28,22 @@
         <div class='wrap-padding-column'>
             Task life Cycle 
             pick a task stats you want to see
-            <mat-select type= "select" style="background-color: #f7f7f9;    background-clip: padding-box;  padding: 12px;"  multiple>
-              <mat-label>Tasks</mat-label>
+            <mat-form-field>
 
-              <mat-option *ngFor="let task of tasks"  >
-                {{task.id}}. {{ task.name }}
-              </mat-option>
-            </mat-select>
-            <line-chart class="xd"></line-chart>
+              <mat-select type= "select"        
+              [formControl]="checkedTasks"        
+              placeholder="Select tasks"
+              multiple>
+
+                <mat-option *ngFor="let task of tasks"  [value]="task" >
+                  {{task.id}}. {{ task.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngFor="let task of checkedTasks.value">
+            <span>{{task.id}}. {{ task.name }}</span>              
+            <line-chart-task class="xd"> </line-chart-task>
+            </div>          
           </div>
       </div>
       <div class='column'>
@@ -43,15 +51,22 @@
 
           Choose user to see his performance
           Assigned line chart
-          Completed line chart in a year <br>
-          <mat-select type= "select" style="background-color: #f7f7f9;    background-clip: padding-box;  padding: 12px;"   multiple>
-            <mat-label>Users</mat-label>
+          Completed line chart  <br>
+          <mat-form-field>
 
-            <mat-option *ngFor="let user of users"   >
+          <mat-select               
+           type= "select"  placeholder="Select users" [formControl]="checkedUsers"   multiple>
+
+            <mat-option *ngFor="let user of users"  [value]="user" >
               {{ user.firstName }} {{ user.lastName}}
             </mat-option>
           </mat-select>
-          <line-chart class="xd"> </line-chart>
+        </mat-form-field>
+          <div *ngFor="let user of this.checkedUsers.value">
+            <span>               {{ user.firstName }} {{ user.lastName}}</span>
+            <line-chart-user class="xd" [userId]= "user.id"> </line-chart-user>
+
+          </div>
         </div>
       </div>
     </div>

@@ -24,9 +24,7 @@ public interface TaskService {
 
     Page<TaskDTO> findByOwnerOrderByDateDesc(User user, Pageable pageable);
 
-    void setTaskCompleted(Long id);
-
-    void setTaskNotCompleted(Long id);
+    Optional<TaskDTO> setTaskCompleted(Long id, Long completedBy);
 
     Page<TaskDTO> findFreeTasks(Pageable pageable);
 

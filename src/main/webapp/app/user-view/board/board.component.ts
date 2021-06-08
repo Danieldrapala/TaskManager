@@ -15,6 +15,7 @@ import { Board, IBoard } from 'app/model/board.model';
 import { AccountService } from 'app/services/account.service';
 import { AccessorDeclaration } from 'typescript';
 import { Account } from 'app/core/auth/account.model';
+import { TaskService } from 'app/services/task.service';
 
 @Component({
   selector: 'board',
@@ -36,7 +37,8 @@ export class BoardComponent implements OnInit {
     private boardServiceImpl: BoardService, 
     private accountService: AccountService,
     private route:ActivatedRoute, 
-    private fb:FormBuilder) {
+    private fb:FormBuilder,
+    private taskService: TaskService) {
     route.params.subscribe(val => {
       accountService.getAuthenticationState().subscribe(
         (data)=> {
@@ -59,6 +61,9 @@ export class BoardComponent implements OnInit {
  
   }
 
+  noMethod(){
+
+  }
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -67,14 +72,21 @@ export class BoardComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      this.boardServiceImpl.updateTaskColumn(event.previousContainer.id, event.container.id, event.container.data[event.currentIndex]['id']).subscribe();
-      }
+      this.boardServiceImpl.updateTaskColumn(event.previousContainer.id, event.container.id, event.container.data[event.currentIndex]['id']).subscribe(
+        data =>{
+          if(event.container.id == this.board?.closingCard?.toString()){
+          this.taskService.completeTask(event.container.data[event.currentIndex]['id']!, this.user.id).subscribe()
+          }
+          this.getTasks();
+
+         });
+        }
   }
+
   getBoard(){
     this.boardServiceImpl.getBoard().subscribe( data =>{
         if(data.body)
         {
-          console.log(data.body);
           this.board =data.body;
         }
     },

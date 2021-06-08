@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Account } from 'app/core/auth/account.model';
 import { Board } from 'app/model/board.model';
 import { Task } from 'app/model/task.model';
@@ -17,7 +18,8 @@ export class StatisticComponent implements OnInit {
 
   board!: Board;
   cardsAndCount = new Map();
-  taskCheckedList!: Task[];
+  checkedTasks = new FormControl();
+  checkedUsers= new FormControl();
 
   tasks!: Task[];
   users!: Account[];
@@ -32,6 +34,7 @@ export class StatisticComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
 
   getTasks() {
     this.taskService.getTaskList().subscribe(

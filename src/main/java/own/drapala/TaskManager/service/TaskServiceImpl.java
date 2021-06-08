@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import own.drapala.TaskManager.domain.Card;
 import own.drapala.TaskManager.domain.Task;
+import own.drapala.TaskManager.domain.TaskCompleted;
 import own.drapala.TaskManager.domain.User;
 import own.drapala.TaskManager.repository.CardRepository;
 import own.drapala.TaskManager.repository.CommentRepository;
@@ -26,13 +27,17 @@ public class TaskServiceImpl implements TaskService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final CardRepository cardRepository;
+    private final TaskAssignmentService taskAssignmentService;
+    private TaskCompletedService taskCompletedService;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CardRepository cardRepository, CommentRepository commentRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, TaskCompletedService taskCompletedService,  UserRepository userRepository, CardRepository cardRepository, CommentRepository commentRepository, TaskAssignmentService taskAssignmentService) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.cardRepository = cardRepository;
         this.commentRepository = commentRepository;
+        this.taskAssignmentService = taskAssignmentService;
+        this.taskCompletedService = taskCompletedService;
     }
 
     @Override
@@ -44,7 +49,9 @@ public class TaskServiceImpl implements TaskService {
         newTask.setCompleted(false);
         newTask.setOwner(userRepository.getOne(taskDTO.getOwner().getId()));
         newTask.setCard(cardRepository.getOne(taskDTO.getCard().getId()));
+        if(taskDTO.getAssignedTo().getId()!=null)
         newTask.setAssignedTo(userRepository.getOne(taskDTO.getAssignedTo().getId()));
+
         taskRepository.save(newTask);
         return newTask;
     }
@@ -57,13 +64,17 @@ public class TaskServiceImpl implements TaskService {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(task -> {
+
                     task.setDescription(updatedTaskDTO.getDescription());
                     task.setName(updatedTaskDTO.getName());
-                    task.setCompleted(updatedTaskDTO.isCompleted());
                     task.setDate(updatedTaskDTO.getDate());
-                    task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo().getId()));
+                    if(updatedTaskDTO.getAssignedTo().getId()!=null) {
+                        task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo().getId()));
+                        this.taskAssignmentService.rememberAssingmentChange(updatedTaskDTO.getId(), updatedTaskDTO.getAssignedTo().getId());
+                    }
                     task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner().getId()));
                     task.setCard(cardRepository.getOne(updatedTaskDTO.getCard().getId()));
+
                     return task;
                 })
                 .map(TaskDTO::new);
@@ -94,18 +105,20 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void setTaskCompleted(Long id) {
-        Task task = taskRepository.getOne(id);
-        task.setCompleted(true);
-        taskRepository.save(task);
+    public Optional<TaskDTO> setTaskCompleted(Long id, Long completedBy) {
+
+        return Optional
+                .of(taskRepository.findById(id))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(task -> {
+                    task.setCompleted(true);
+                    this.taskCompletedService.rememberCompletedTask(task.getId(), completedBy);
+                    return task;
+                        }
+                        ).map(TaskDTO::new);
     }
 
-    @Override
-    public void setTaskNotCompleted(Long id) {
-        Task task = taskRepository.getOne(id);
-        task.setCompleted(false);
-        taskRepository.save(task);
-    }
 
     @Override
     public Page<TaskDTO> findFreeTasks(Pageable pageable) {

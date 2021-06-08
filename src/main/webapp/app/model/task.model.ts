@@ -8,7 +8,7 @@ export interface ITask {
     name?: string;
     description?: string;
     date?: Date | null;
-    isCompleted?: boolean | false;
+    completed?: boolean;
     owner?: Account;
     assignedTo?: Account ;
     card?:CardForTask;
@@ -19,7 +19,7 @@ export interface ITask {
       name?: string;
       description?: string;
       date?: Date | null;
-      isCompleted?: boolean | false;
+      completed?: boolean;
       owner?: Account;
       assignedTo?: Account ;
 
@@ -29,7 +29,7 @@ export interface ITask {
       name?: string,
       description?: string,
       date?: Date | null,
-      isCompleted?: boolean | false,
+      completed?: boolean,
       owner?: Account,
       assignedTo?: Account ,
       card?: CardForTask
@@ -38,7 +38,7 @@ export interface ITask {
       this.name = name;
       this.date = date;
       this.description = description;
-      this.isCompleted = isCompleted;
+      this.completed = completed;
       this.owner = owner;
       this.card =  card;
       this.assignedTo = assignedTo;

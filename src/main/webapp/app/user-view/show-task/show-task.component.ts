@@ -28,7 +28,7 @@ export class ShowTaskComponent implements OnInit {
     id: [],
     name: [ '', [Validators.required, ], ],
     description: ['', [Validators.required, Validators.maxLength(50)] ],
-    isCompleted: ['', ],
+    completed: ['', ],
     owner: [],
     assignedTo: [],
     card: [],  
@@ -154,7 +154,7 @@ export class ShowTaskComponent implements OnInit {
       description: task.description,
       assignedTo: task.assignedTo,
       card: task.card,
-      isCompleted: task.isCompleted,
+      completed: task.completed,
       owner: task.owner,
       date: task.date,
     });
@@ -164,7 +164,7 @@ export class ShowTaskComponent implements OnInit {
 
     task.date = this.taskForm.get(['date'])!.value;
     task.owner = this.taskForm.get(['owner'])!.value;
-    task.isCompleted = this.taskForm.get(['isCompleted'])!.value;
+    task.completed = this.taskForm.get(['completed'])!.value;
     if(this.taskForm.get(['assignedTo'])!.value)
     {
       task.assignedTo = this.users.find(x => x.id == this.taskForm.get(['assignedTo'])!.value)

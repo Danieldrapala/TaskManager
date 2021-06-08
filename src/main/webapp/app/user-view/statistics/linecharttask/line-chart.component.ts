@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'line-chart',
+  selector: 'line-chart-task',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })

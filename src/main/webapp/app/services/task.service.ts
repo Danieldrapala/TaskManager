@@ -42,5 +42,8 @@ export class TaskService{
       return this.http.get<ITask[]>(`${this.resourceUrl}/alltasks`);
     }
   
+    completeTask(id: number, completedBy: number){
+      return this.http.put<ITask>(`${this.resourceUrl}/complete`,[id, completedBy]);
+    }
 }
 

@@ -28,12 +28,14 @@ public class TaskDTO {
         this.name = task.getName();
         this.description = task.getDescription();
         this.date = task.getDate();
-        this.isCompleted = task.isCompleted();
+        this.isCompleted = task.getCompleted();
         this.owner = task.getOwner();
         this.card = task.getCard();
         this.assignedTo = task.getAssignedTo();
 
     }
+
+
 
     public Long getId() {
         return id;

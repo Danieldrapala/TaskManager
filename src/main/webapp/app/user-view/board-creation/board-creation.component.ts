@@ -70,6 +70,7 @@ export class BoardCreationComponent implements OnInit {
 
   private onSaveSuccess(): void {
     this.isSaving = false;
+    this.router.navigate(['./board']);
   }
 
   private onSaveError(): void {
@@ -96,7 +97,6 @@ export class BoardCreationComponent implements OnInit {
         this.board.id = resultBoard.id;
           this.cardsName.controls.forEach(
             (element: AbstractControl) => {
-              console.log(element.status)
               let card = new Card([],undefined, +this.getControlName(element)! ,resultBoard.id, element.value)
               this.boardServiceImpl.addCard(card).subscribe(
                 card => {

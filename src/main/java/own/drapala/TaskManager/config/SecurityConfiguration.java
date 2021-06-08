@@ -120,6 +120,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .authorizeRequests()
                 .antMatchers("/api/board").permitAll()
+                .antMatchers("/api/task/complete").permitAll()
+
                 .antMatchers("/api/task/comment").permitAll()
                 .antMatchers("/api/board/card").permitAll()
                 .antMatchers("/api/board/task").permitAll()

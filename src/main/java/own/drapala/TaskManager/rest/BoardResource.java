@@ -29,10 +29,8 @@ public class BoardResource {
 
     @Value("${clientApp.name}")
     private String applicationName;
-
     private final BoardService boardService;
     private final CardService cardService;
-
 
     public BoardResource(BoardService boardService, CardService cardService) {
         this.boardService = boardService;
@@ -43,7 +41,6 @@ public class BoardResource {
     public ResponseEntity<BoardDTO> getBoardInfo() {
 
         Optional<BoardDTO> board= boardService.getBoard(BOARD_ID);
-
         return ResponseUtil.wrapOrNotFound(
                 board,
                 HeaderUtil.createAlert(applicationName, "A Board is updated with identifier ","Board")
@@ -54,7 +51,6 @@ public class BoardResource {
     public ResponseEntity<Board> addBoard(@RequestBody BoardDTO boardDTO) throws URISyntaxException {
 
         Board board= boardService.createBoard(boardDTO);
-
         return ResponseEntity
                 .created(new URI("/api/board/" + board.getId()))
                 .headers(
@@ -65,7 +61,10 @@ public class BoardResource {
 
     @PutMapping("/board")
     public ResponseEntity<BoardDTO> updateBoard(@Valid @RequestBody BoardDTO boardDTO) {
-        Optional<BoardDTO> updateBoard= boardService.updateBoard(boardDTO);
+
+        Optional<BoardDTO> updateBoard;
+
+        updateBoard= boardService.updateBoard(boardDTO);
 
         return ResponseUtil.wrapOrNotFound(
                 updateBoard,
