@@ -1,0 +1,49 @@
+\chapter{Analiza problemu}
+\thispagestyle{chapterBeginStyle}
+
+W tym rozdziale omówiony został problem zarządzania zadaniami w zespole, przygotowane zostały również pojęcia, które pomogą w dalszych częściach opisywania systemu. 
+\section{Problem zarządzania zadaniami}
+
+Projekt, jest to przygotowany zbiór aktywności zależnych w jakiś sposób od siebie, zmierzają do wykonania pewnego celu. Może to być naprzykład duże wydarzenie, aplikacja, ulepszenie istniejących systemów czy też sama praca inżynierska. Zazwyczaj taki plan obejmuje duży zakres pracy, rozciągniety w planowanym okresie czasu przez okresloną liczbe osób nazywanych zespołem. Grupa ludzi dostając informacje na temat stanu końcowego, w większosci przypadków nie będą w stanie wyobrazić sobie ukończenia projektu, dlatego potrzebujemy odpowiedniego zarządzania zadaniami. Złożony problem w tym stylu dzielimy na różnego rodzaju polecenia, od skomplikowanych, trwających tygodnie, po krótkie, obejmujące przykładowo tylko konsultację w celu potwierdzenia informacji od innego członka drużyny. Jeśli zespół nie posiada wspólnej przestrzeni, wspólne wykonywanie kolejnych zadań staje się coraz bardziej problematyczne. Niektóre zadania wymagają ukończenia poprzednich, znowu niekiedy zdarzy się też tak, że któregoś z poleceń wykonać się nie da. Następuje w takim wypadku wielki problem organizacyjny. Albowiem, pracownicy zabierają się za zadania, dobierają je z wielkiej listy do zrobienia. Początkowo może się wydawać, że wszystko działa sprawnie. Niestety, w tego typu pracy potrzebna jest wzajemna komunikacja, więc zespół organizuje codziennie dwie godziny gdzie opowiadają co udało im się zrobić. Jest to swego rodzaju rozwiązanie, ale ma sporo wad. Cały zespół traci dwie godziny, wszyscy uczestniczą i słuchają o postępach innych, niekiedy nawet osób, których zadania nie zależą od siebie. Musi to być również w pewien sposób udokumentowane, co zostało zrobione, co jest do zrobienia, czego udało się dowiedzieć. Osoba, odpowiedzialna za zarządzanie zadaniami potrzebuje odpowiednich narzędzi do:
+\begin{itemize}
+    	\item  komunikacji w zespole
+	\item  dodawania, usuwania, aktualizacji zadań w projekcie
+	\item  przechowywania informacji na temat aktualnych poleceń jak i tych archiwalnych wykonanych, czy też zablokowanych
+	\item każdy członek zespołu powinien mieć do takiich narzędzi dostęp i mieć możliwosć dodawania swoich opinii
+\end{itemize}
+\section{Podejście Kanban}
+\indent Podejście Kanban to jedna z metodyk wspomagająca zarządzanie zadaniami. Głównym celem danej metodyki  jest zarządzanie produkcją i redukcja jej kosztów za pomocą wizualnego sterowania. Zgodnie z systemem najpierw należy określić materiał i jego ilość potrzebną do procesu A. Informacja wraz z niezbędnymi surowcami zostaje wysłana do procesu B, tak aby produkcja mogła wystartować. Zostaje wyprodukowana konkretna ilość towaru, a po zakończeniu procesu narzędzia, pojemniki wraz z informacją  wraca do pierwotnego procesu A. Rozpoczyna  się kolejny cykl pracy. W konsekwencji produkcja jest w stanie dostosować się do zapotrzebowania klientów oraz zminimalizować ewentualną nadprodukcję, a tym samym koszty. System pozwala na koordynację pomiędzy zapotrzebowaniem a wielkością produkcji. 
+
+\indent Metoda Kanban pochodzi z Japonii. Słowo kanban w języku japońskim oznacza szyld, tablicę informacyjną, kartę lub znak.  Kluczowym elementem metody jest karta Kanban, która przekazuje informację dotyczącą przeniesienia materiału wewnątrz zakładu lub od zewnętrznego dostawcy. Istnieje przekonanie, że systemy kierowane popytem prowadzą do mniejszej ilości zapasów oraz dynamicznych zmian w produkcji, dzięki czemu wspomagają konkurencyjność firmy. Obecnie informacje mogą być wysyłane drogą elektroniczną, co zmniejsza wykorzystanie kart. Elektroniczne podejście umożliwia eliminację błędów ręcznych czy przypadkowe zagubienie. Co ciekawe system e-kanban można zintegrować z innymi systemami, dzięki czemu otrzymujemy szersze pole danych do optymalizacji produkcji. 
+
+\section{Aplikacja internetowa}
+
+Aplikacja internetowa do zarządzania zadaniami jest w stanie zapewnić każdy z wypełnionych wymogów, dostarczając niezbędnych informacji na temat postępów i pozostając przyjazna dla użytkownika. Zamysł aplikacji opiera się na stworzeniu wspólnej tablicy, ktorej celem jest w przejrzysty sposob przedstawic zadania i ich statusy. Zakładając, że pula zadań jest bardzo duża, nie jest ona w stanie zmiescic się na tablicy, lecz zadania, którymi ktos się aktualnie zajmuje, czy też można im nadać jakis status, będą w stanie wywietlać się na tablicy w postaci bloków, które można przesuwać po tablicy. Jest to proste zobrazowanie postępu prac nad daną grupą zadań, osoba zarządzająca może zobaczyć podgląd postępów w projekcie, a pracownik, który zrobił postęp w jakims zadaniu, z łatwoscią jest w stanie go udokumentować, wyswietlając go również dla całego zespołu.
+
+\section{Porównanie istniejących aplikacji}
+\indent Istnieje szereg aplikacji o zbliżonej funkcjonalności. Opisane zostaną obie aplikacjie, Trello i LeanKit, ponieważ będą one odzwierciedlać  podobieństwa i różnice pomiędzy aplikacją zaproponowaną w pracy. 
+
+\indent  Zaczynając od Trello, jest to aplikacja bazująca głównie na swej prostocie. Tablicę zadań udostępnioną za pomocą wiadomości e-mail z zaproszeniem, czy też współdzielonego hiperłącza  utworzyć można zaledwie w pięć minut. Zadania na tablicy wyglądają na proste, składające się jedynie z opisu, lecz każde zadanie ma swoją stronę gdzie opis staje się bardziej zaawansowany, można dodać między innymi:
+\begin{itemize}
+	\item pliki, 
+	\item listę podzadań,
+	\item termin ostatecznego zakończenia zadania,
+	\item etykiety kategoryzujące poszczególne grupy zadań,
+	\item osoby wykonujące zadanie,
+	\item komentarze,
+\end{itemize}
+Użytkownicy mogą posiadać dwie role,  admina i zwykłego użytkownika. Różnią się one jedynie tym, że admin może usuwać i dodawać użytkowników i zmieniać ustawienia główne tablicy. Wiele funkcji takich jak przedstawianie zadań na kalendarzu, osie czasu, dodanie lokalizacji do zadań istnieją w wersji płatnej rozszerzonej.
+Wiele aplikacji, służących do tworzenia tablicy Kanban wzoruje się na tej aplikacji i jest ona jak dotąd jedną z najlepszych rozwiązań, sama aplikacja mocno spopularyzowała metodykę zarządzania zadaniami poprzez tablicę Kanban.
+
+
+\indent  Kolejną aplikacją jest LeanKit, wybrana została jaka druga aplikacja do porównania, ponieważ tej tablicy nie charakteryzuje prostota. Wręcz przeciwnie, jej atutem są złożone funkcje tworzenia tablicy. Najbardziej charakterystyczną opcją jest skomplikowanie tworzenie karty na tablicy. Kiedy poprzednia aplikacja pozwalała  na tablicy utworzyć karty z krótkim tytułem przetrzymujące zadania, które można przenosić z jednej karty na drugą, ta aplikacja oferuje Tworzenie Karty, podkart karty, podkart podkart, i tak dalej, przez co bardziej skomplikowane do zkategoryzowania zadania użytkownik jest w stanie opisać w jednym miejscu. Zadania posiadają podobne atrybuty do Trello, oprócz tego posiadają jeszcze dziedziczenie zadań, to znaczy, że każde zadanie ma listę zadań rodziców i listę zadań dzieci. Są to listy przetrzymujące odnośniki do zadań, z wyniku których powstało dane zadanie (rodzice), lub zadania, które zostały utworzone przez dane zadanie (dzieci). 
+Poza skomplikowaną reprezentacją tablicy Kanban, LeanKit posiada wiele funkcji po wizualizacje zadań w kalendarzu, możliwość wertykalnej i horyzontalnej tablicy ( jak i wertykalno horyzontalnej), raporty w postach czystych danych lub wykresów czy też tworzenia zależności pomiędzy wieloma innymi projektami i tablicami.
+Jest to aplikacja posiadająca bardzo kompleksowe konfiguracje, użytkownik korzystający z programu po raz pierwszy najprawdopodobniej potrzebował by specjalistycznego szkolenia w celu wykorzystania wszystkich możliwości.
+
+
+\indent Opisane zostały obie aplikacje, aby ostatecznie wyróżnić funkcje aplikacji opisywanej w pracy. TaskManager również charakteryzuje się prostotą, lecz dopiero podczas korzystania przez zwykłego użytkownika. Proces inicjalizacji tablicy, projektów jest dłuższy, aby potem aplikacja mogła służyć uczestnikom projektu.
+Pierwszą różnicą jest podział na trzy role, ADMIN, USER, MANAGER. Dodana została rola prowadzącego projekt, która udostępnia, oprócz Tablicy Kanban, tablicę w stylu kokpitu, na którym osoba zarządzająca projektem może wyświetlać najpotrzebniejsze rzeczy związane z aplikacją, od aktywności na tablicym poprzez statystyki przedstawione na wykresach, aby wspomagać prawidłowe funkcjonowanie zespołu. 
+
+
+
+

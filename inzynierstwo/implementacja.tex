@@ -1,0 +1,17 @@
+\chapter{Implementacja systemu}
+\thispagestyle{chapterBeginStyle}
+W tym rozdziale opisane zostały aspekty implementacyjne takie jak wzorzec architektoniczny aplikacji, narzędzia użyte do stworzenia aplikacji  i ciekawe problemy napotkane podczas tworzenia serwisu.
+\section{Implementacja  wzorca  MVC}
+Opis implementacji wzorca projektowego MVC podzielony został na przedstawienie modelu, widoku i kontrolera.
+\subsection{Model}
+Model reprezentowany jest przez model w bazie danych oraz serwisy tabel  na serwerze.
+Serwer aktualizuje odpowiednie dane za pomocą specjalnych komponentów zwanych serwisami. Każda tabela posiada swój serwis, który odpowiedzialny jest za odpowiednie wprowadzanie i wyciąganie potrzebnych informacji z tabeli, którą reprezentują.
+\subsection{View - Widok}
+Widok zaimplementowany jest przy pomocy frameworku Angular korzystającego z HTML oraz TypeScript. Podstawowym obiektem w framweroku jest component,  na który składa się również skryptowy plik html i css lub scss. Komponent jest definicją jednego z wielu widoków w aplikacji, które Angular przedstawia na głównej stronie 
+\subsection{Controller - Kontroler}
+Kontroler zaimplementowany jest głównie po stronie serwera, lecz komponenty odpowiedzialne za widok posiadają w sobie wstępne modyfikacje na danych otrzymanych od użytkownika takie jak przykładowo walidacja tych danych. Zaletą podejścia, aby funkcje kontrolera spełnianie były praktycznie po otrzymaniu jakichkolwiek danych jest to, że informacje, które przychodzą do serwera, aby przeszły przez główną logikę serwera są danymi nie podatynymi na błędy, więc serwer odpowiedzialny za logikę, nie będzie musiał skupiać się na odsyłaniu błędnych danych z powrotem do widoku, a o wiele częściej będzie otrzymywać już poprawne dane. Wadą takiego podejścia jest większe skomplikowanie w kodzie, ponieważ walidacja odbywa się wtedy zarówno na serwerze jak i po stronie klienta. Aplikacja odpowiedzialna za widoku musi również posiadać wiedzę na temat modelu bazy danych i poszczególne cechy różnych danych, aby odpowiednia logika mogła zostać zastosowana.
+
+\section{Użyte technologie}
+W języku programowania Java taką pomocniczą technologią jest framework Spring boot, który  jak wynika z jego dokumentacji stworzony został, po to, żeby tworzenie projektów w języku Java było prostsze, napisany kod był bardziej przejrzysty, [spring cytat]  szkielet ten jest jednym z najpopularniejszych dla języka Java. Wspomaga on w budowaniu wielopoziomowych aplikacji. 
+\section{Narzędzia pomocnicze i srodowisko programistyczne }
+\section{Opis ciekawych implementacji}

@@ -1,0 +1,35 @@
+\BOOKMARK [0][-]{chapter.1}{Wstep}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Wprowadzenie}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Zakres pracy}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Podzia\233 pracy}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Analiza problemu}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Problem zarzadzania zadaniami}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Podejscie Kanban}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Aplikacja internetowa}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.4}{Por\363wnanie istniejacych aplikacji}{chapter.2}% 9
+\BOOKMARK [0][-]{chapter.3}{Projekt}{}% 10
+\BOOKMARK [1][-]{section.3.1}{Opis systemu}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.2}{Wzorzec Architektoniczny Model-View-Controller}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.3}{Wymagania funkcjonalne i niefunkcjonalne}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.4}{Diagram pakiet\363w}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.5}{Projekt bazy danych}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.6}{Przypadki uzycia}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{Interfejs uzytkownika}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Widok Logowania}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Widok Listy Zadan}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.3}{Widok Admina}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.4}{Widok Statystyk}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.5}{Widok Tablicy}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.6}{Widok Szczeg\363\233\363w Zadania}{chapter.4}% 23
+\BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 24
+\BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 25
+\BOOKMARK [2][-]{subsection.5.1.1}{Model}{section.5.1}% 26
+\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.4}{Opis ciekawych implementacji}{chapter.5}% 29
+\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 30
+\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 31
+\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 32
+\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 33
+\BOOKMARK [0][-]{chapter*.14}{Bibliografia}{}% 34
+\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 35
