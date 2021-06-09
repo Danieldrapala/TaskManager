@@ -75,12 +75,11 @@ export class BoardComponent implements OnInit {
       this.boardServiceImpl.updateTaskColumn(event.previousContainer.id, event.container.id, event.container.data[event.currentIndex]['id']).subscribe(
         data =>{
           if(event.container.id == this.board?.closingCard?.toString()){
-          this.taskService.completeTask(event.container.data[event.currentIndex]['id']!, this.user.id).subscribe()
-          }
-          this.getTasks();
-
-         });
-        }
+            this.taskService.completeTask(event.container.data[event.currentIndex]['id']!, this.user.id).subscribe(
+                        ()=> this.getTasks())
+          } 
+        });
+      }
   }
 
   getBoard(){

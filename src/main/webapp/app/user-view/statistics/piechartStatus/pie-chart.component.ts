@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StatisitcService } from 'app/services/statistics.service';
 
 @Component({
   selector: 'pie-chart',
@@ -8,9 +9,13 @@ import { Component } from '@angular/core';
 export class PieChartComponent {
   public chartType: string = 'pie';
 
-  public chartDatasets: Array<any> = [
-    { data: [300, 50, 100], label: 'Tasks Assigment Status' }
-  ];
+
+  public constructor(private statsService: StatisitcService){
+  }
+  ngOnInit(): void {
+    this.getTasksStatus();
+
+  }
 
   public chartLabels: Array<any> = ['Free Tasks', 'Assigned Tasks', 'Completed Tasks'];
 
@@ -22,9 +27,30 @@ export class PieChartComponent {
     }
   ];
 
+
+
+  id!: number;
+  dataSet: any =[];
+
+  public chartDatasets: Array<any> = [
+    { data: this.dataSet, label: 'Tasks assignment Status' }
+  ];
+  
+  
+
+  getTasksStatus(){
+    this.statsService.getTaskCount().subscribe(
+      (data:number[])=>{ 
+        this.chartDatasets = [
+          { data: data, label: 'Tasks assignment Status' }];
+    });
+  }
+ 
   public chartOptions: any = {
     responsive: true
   };
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
+
 }

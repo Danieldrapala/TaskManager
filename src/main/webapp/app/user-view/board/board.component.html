@@ -23,10 +23,10 @@
                         [cdkDragDisabled]="task.completed" cdkDrag>
                              <span class="task-child" >{{task.name}}</span>
                              <div class="verticalLine">
-                               assigned To:
+                               Assigned to
+                               <span *ngIf="task.assignedTo?.email === this.user.email"> you</span>:
                                <span *ngIf=task.assignedTo class="assignedTo" [ngStyle]="{'color': task.assignedTo.email === this.user.email ? 'red ': 'black'}" >
                                 {{task.assignedTo.email}}</span>
-                                <span *ngIf="task.assignedTo?.email === this.user.email">Task Assigned To You!</span> <br>
                             <span *ngIf="task.completed"  style="margin-left:1%; color: cadetblue; "><fa-icon icon="check"></fa-icon>  Task Completed</span>
                               </div>
                         </div>

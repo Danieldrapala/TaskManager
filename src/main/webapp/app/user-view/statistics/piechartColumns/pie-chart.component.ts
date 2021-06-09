@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BoardService } from 'app/services/board.service';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { sys } from 'typescript';
 
 @Component({
   selector: 'pie-chart-column',
@@ -6,24 +10,63 @@ import { Component } from '@angular/core';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartColumnComponent {
+
+
+
+  cards: string[] =[];
+  counts: number[] = [];
+  public constructor(private boardService: BoardService){
+    
+  }
+   ngOnInit(): void{
+    this.getColumnsAndTaskCount();
+
+  }
+
+  
+  getColumnsAndTaskCount(): void {
+    this.cards =[];
+    this.counts = [];
+    this.boardService.getCards().subscribe(
+      data => {
+        data.forEach(
+          card=>{ 
+            this.boardService.getTasksCount(card.id).subscribe(
+              count=> { 
+              if(card.name) {
+                this.cards.push(card.name);
+                this.counts.push(count);
+              }
+              console.log(this.cards);
+              if(this.counts.length > 3){
+               
+                this.chartLabels = this.cards;
+                this.chartDatasets =  [{ data: this.counts, label: 'Tasks singlechart Status' }];
+              }
+            });
+          });
+        });
+  }
   public chartType: string = 'pie';
 
-  public chartDatasets: Array<any> = [
-    { data: [300, 50, 100], label: 'Tasks Column Status' }
-  ];
 
-  public chartLabels: Array<any> = ['Board1', 'Board2', 'Board3'];
 
+  public chartLabels: Array<any> = this.cards;
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C'],
-      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870'],
+      backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#FDCCFC'],
+      hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#FDCCFC'],
       borderWidth: 2,
     }
   ];
 
+  public chartDatasets: Array<any> = [
+    { data: this.counts, label: 'Tasks singlechart Status' }
+  ];
+  
+
   public chartOptions: any = {
-    responsive: true
+    responsive: true 
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }

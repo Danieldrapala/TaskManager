@@ -21,4 +21,17 @@ public interface TaskAssignmentRepository extends JpaRepository<TaskAssignment,L
                     "order by ta.user, ta.task "
     )
     Long getAssignedToCount(Long id, Integer month, Integer year );
+
+
+    @Query(
+            "SELECT " +
+                    "    count(*) " +
+                    "FROM " +
+                    "    TaskAssignment ta " +
+                    "WHERE " +
+                    "MONTH(ta.status) = :month AND YEAR(ta.status) = :year " +
+                    "AND ta.task = :task_id " +
+                    "order by ta.task "
+    )
+    Long getAssignmentCount(Long task_id, Integer month, Integer year );
 }

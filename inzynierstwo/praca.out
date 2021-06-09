@@ -24,12 +24,14 @@
 \BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 24
 \BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 25
 \BOOKMARK [2][-]{subsection.5.1.1}{Model}{section.5.1}% 26
-\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 27
-\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 28
-\BOOKMARK [1][-]{section.5.4}{Opis ciekawych implementacji}{chapter.5}% 29
-\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 30
-\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 31
-\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 32
-\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 33
-\BOOKMARK [0][-]{chapter*.14}{Bibliografia}{}% 34
-\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 35
+\BOOKMARK [2][-]{subsection.5.1.2}{View - Widok}{section.5.1}% 27
+\BOOKMARK [2][-]{subsection.5.1.3}{Controller - Kontroler}{section.5.1}% 28
+\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.4}{Opis ciekawych implementacji}{chapter.5}% 31
+\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 32
+\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 33
+\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 34
+\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 35
+\BOOKMARK [0][-]{chapter*.15}{Bibliografia}{}% 36
+\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 37

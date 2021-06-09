@@ -3,13 +3,18 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 1%;
+    margin-right: 1%;
     margin-bottom: 5%;
     width: 100%;
 
   }
-  
+  .chart-column{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 2;
+  }
   .column {
     display: flex;
     flex-direction: column;
@@ -28,11 +33,9 @@
   }
 
 
-  .doublchart{
-      width: 30%;
-  }
+
   .some-page-wrapper {
-    margin: 5%;
+    margin: 3%;
   }
   
 

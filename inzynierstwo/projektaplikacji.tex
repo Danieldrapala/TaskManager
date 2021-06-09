@@ -8,12 +8,12 @@ Tworzenie aplikacji internetowej to skomplikowany proces, który może przysporz
 \section{Wzorzec Architektoniczny Model-View-Controller}
 System zbudowany został w oparciu o model MVC, czyli Model-View-Controller.
 Jest to podejście architektoniczne, które dzieli aplikacje na trzy główne komponenty.
-Model, odpowiedzialny za dostęp i przechowywanie danych. View, czyli widok odpowiada za interfejs użytkownika, jak dane są przedstawiane i odbierane. Controller zajmuje się logiką biznesową komunikując się z modelem i widokiem. Widok dostarcza informacje od klienta, które obsługiwane są przez Controller i odpowiednie zmiany wprowadzane są do modelu. 
+Model, odpowiedzialny za dostęp i przechowywanie danych. View, czyli widok odpowiada za interfejs użytkownika, jak dane są przedstawiane i odbierane. Controller zajmuje się logiką biznesową komunikując się z modelem i widokiem. Widok dostarcza informacje od klienta, które obsługiwane są przez Controller i odpowiednie zmiany wprowadzane są do modelu. \cite{6827095}
 
 \begin{figure}[h]
 
 	\centering
-		\includegraphics[width=1.00\textwidth]{mvc-diagram}		
+		\includegraphics[width=0.90\textwidth]{mvc-diagram}		
 		\caption{Komunikacja pomiędzy komponentami we wzorcu MVC }
 \end{figure}
 
@@ -21,7 +21,7 @@ Zalety korzystania z wzorca MVC to lepsza przejrzystość kodu, skalowalność i
 momencie wystąpienia błędu, może zostać obarczona odpowiedzialnością jedna z trzech części
 systemu, więc optymalizuje to znacząco proces szukania miejsca, w którym dany błąd
 występuje.  
-
+\clearpage
 \section{Wymagania funkcjonalne i niefunkcjonalne}
 \paragraph{Wymagania funkcjonalne}
 \begin{enumerate}
@@ -76,9 +76,14 @@ Sekcja ta w pełni skupiona jest na budowie bazy danych. Najpierw zdefiniowane z
 Pierwszym rodzajem danych jest Tablica (tabela board), która przetrzymuje informacje o tablicy, z ilu  składa się kolumn, która kolumna jest kolumną domyslna, a która zamykającą zadania.
 Kolejnym typem potrzebnym do przechowywania będzie wyżej wspomniana kolumna, która przechowuje status nazwę, kolejnosć wyswietlania na tablicy. Kolejnym typem jest Użytkownik, to jedna z najbardziej skomplikowanych tabel w całej bazie, ponieważ jest ona w relacji z zadaniami, które stworzył (mapowane poprzez pole ownedBy), w relacji z zadaniami do których jest aktualnie przypisany (pole assignedTo). Tabela z użytkownikami przetrzmuje informacje dotyczące korzystania z aplikacji i te  pozwalające autoryzować sesję po stronie klienta. Posiada również relacje z tabelą authority, która znowu odpowiedzialna jest za nadawnianie odpowiednich uprawnień do korzystania z aplikacji. Ostatnim z ważniejszych typów danych jest Zadanie i Komentarz. Zadanie jest to typ opisujący jak tylko może zadanie, przechowuje status w zależnosci od kolumny w której zadanie się znajduje, użytkowników powiązanych z utworzeniem zadania/ pracą nad zadaniem, a ostatnim typem będzie komentarz czyli tabela przetrzymująca komentarze odnoszące się do różnych zadań.
 
-Jako serwer bazy danych wykorzystany został MySql serwer jako że jest to ....
+Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
 W celu kontroli wersji projektu bazy danych do serwera podpięta jest biblioteka zwana Liquibase, która przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w formacie XML. Liquibase pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
+\begin{figure}[h]
 
+	\centering
+	\includegraphics[width=0.90\textwidth]{liquibase}		
+	\caption{Lista plików tworzących bazę danych }
+\end{figure}
 \section{Przypadki użycia}
 
 W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplikacji.

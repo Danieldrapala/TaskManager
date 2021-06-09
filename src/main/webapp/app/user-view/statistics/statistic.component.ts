@@ -18,6 +18,9 @@ export class StatisticComponent implements OnInit {
 
   board!: Board;
   cardsAndCount = new Map();
+  cards: string[] =[];
+  counts: number[] = [];
+
   checkedTasks = new FormControl();
   checkedUsers= new FormControl();
 
@@ -25,16 +28,16 @@ export class StatisticComponent implements OnInit {
   users!: Account[];
 
   constructor(private boardService: BoardService, private taskService: TaskService, private teamListService: TeamListService ) {
+    
+    
+   }
+
+  ngOnInit(): void {
     this.getBoardInfo();
     this.getColumnsAndTaskCount();
     this.getUsers();
     this.getTasks();
-   }
-
-  ngOnInit(): void {
-
   }
-
 
   getTasks() {
     this.taskService.getTaskList().subscribe(
@@ -64,33 +67,23 @@ export class StatisticComponent implements OnInit {
   }
 
   getColumnsAndTaskCount(): void {
+    this.cards =[];
+    this.counts = [];
     this.boardService.getCards().subscribe(
       data => {
         data.forEach(
           card=>{ 
             this.boardService.getTasksCount(card.id).subscribe(
               count=> { 
-              if(card.name) 
+              if(card.name) {
+                this.cards?.push(card.name);
+                this.counts?.push(count);
                 this.cardsAndCount.set(card.name,count);
+              }
             });
           });
         });
   }
   
-  getTaskStatus()
-  {
 
-  }
-
-  getTaskUserStatus(){
-
-  }
-
-  getInfoAboutTaskCompletness(){
-
-  }
-  
-  getInfoAboutTaskDragAndDropHistory(){
-
-  }
 }

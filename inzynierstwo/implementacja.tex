@@ -4,8 +4,8 @@ W tym rozdziale opisane zostały aspekty implementacyjne takie jak wzorzec archi
 \section{Implementacja  wzorca  MVC}
 Opis implementacji wzorca projektowego MVC podzielony został na przedstawienie modelu, widoku i kontrolera.
 \subsection{Model}
-Model reprezentowany jest przez model w bazie danych oraz serwisy tabel  na serwerze.
-Serwer aktualizuje odpowiednie dane za pomocą specjalnych komponentów zwanych serwisami. Każda tabela posiada swój serwis, który odpowiedzialny jest za odpowiednie wprowadzanie i wyciąganie potrzebnych informacji z tabeli, którą reprezentują.
+Model reprezentowany jest przez model w bazie danych oraz przez serwisy na serwerze. 
+ Każda tabela posiada swój serwis. Jest to komponent który odpowiedzialny jest za odpowiednie wprowadzanie i wyciąganie potrzebnych informacji z tabeli, którą reprezentują. Model został opisany wraz z przedstawieniem projektu bazy danych 
 \subsection{View - Widok}
 Widok zaimplementowany jest przy pomocy frameworku Angular korzystającego z HTML oraz TypeScript. Podstawowym obiektem w framweroku jest component,  na który składa się również skryptowy plik html i css lub scss. Komponent jest definicją jednego z wielu widoków w aplikacji, które Angular przedstawia na głównej stronie 
 \subsection{Controller - Kontroler}
@@ -14,4 +14,8 @@ Kontroler zaimplementowany jest głównie po stronie serwera, lecz komponenty od
 \section{Użyte technologie}
 W języku programowania Java taką pomocniczą technologią jest framework Spring boot, który  jak wynika z jego dokumentacji stworzony został, po to, żeby tworzenie projektów w języku Java było prostsze, napisany kod był bardziej przejrzysty, [spring cytat]  szkielet ten jest jednym z najpopularniejszych dla języka Java. Wspomaga on w budowaniu wielopoziomowych aplikacji. 
 \section{Narzędzia pomocnicze i srodowisko programistyczne }
+POSTMAN
+GITHUB
+LIGUIBASE
+	
 \section{Opis ciekawych implementacji}

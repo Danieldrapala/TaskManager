@@ -70,6 +70,10 @@ public class TaskResource {
             if(task.getAssignedTo() != null) {
                 this.taskAssignmentService.rememberAssingmentChange(task.getId(), task.getAssignedTo().getId());
             }
+            else{
+                this.taskAssignmentService.rememberAssingmentChange(task.getId(), 0L);
+
+            }
             return ResponseEntity
                     .created(new URI("/api/task/" + task.getId()))
                     .headers(

@@ -9,4 +9,9 @@ public interface StatisticsService {
 
     Optional<List<Long>> getCompletedTasksCountOnUser(Long id);
 
+    Optional<List<Long>> getTasksCount();
+
+    Optional<List<Long>>  getAssignmentForTask(Long id);
+
+    Optional<List<Long>>  getDragAndDropEvents(Long id);
 }

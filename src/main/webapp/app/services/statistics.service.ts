@@ -11,11 +11,24 @@ export class StatisitcService {
 
   
   public getTasksAssignedTo(id: number) {
-        return this.http.get<number[]>(`${this.resourceUrl}/assignedtasks/${id}`);
-    }
+    return this.http.get<number[]>(`${this.resourceUrl}/assignedtasks/${id}`);
+  }
 
 
   public getTasksCompletedCountByUser(id: number) {
         return this.http.get<number[]>(`${this.resourceUrl}/completedtasks/${id}`);
     }
-}
+
+  public  getTaskCount() {
+      return this.http.get<number[]>(`${this.resourceUrl}/generalcount`);
+    }
+    
+  public   getAssigmentForTask(id: number) {
+      return this.http.get<number[]>(`${this.resourceUrl}/assignmentCount/${id}`);
+    }
+
+  public  getDragAndDropCount(id: number) {
+      return this.http.get<number[]>(`${this.resourceUrl}/dragndropevent/${id}`);
+    }
+   
+  }

@@ -15,11 +15,10 @@ import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { statisticRoute } from '../../user-view/statistics/statistic.route';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
-import { LineChartComponent } from './linecharttask/line-chart.component';
+import {  LineChartTaskComponent } from './linecharttask/line-chart.component';
 import { StatisticComponent } from './statistic.component';
 import { PieChartComponent } from './piechartStatus/pie-chart.component';
 import { PieChartColumnComponent } from './piechartColumns/pie-chart.component';
-import { PieChartUsersComponent } from './piechartUsers/pie-chart.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ChartsService } from 'app/services/charts.service';
 import { LineChartUserComponent } from './linechartusers/line-chart-user.component';
@@ -46,6 +45,6 @@ import { LineChartUserComponent } from './linechartusers/line-chart-user.compone
     ModalModule.forRoot()
   ],
   declarations: [
-    StatisticComponent, LineChartComponent, PieChartComponent,PieChartColumnComponent, PieChartUsersComponent, LineChartUserComponent
+    StatisticComponent, LineChartTaskComponent, PieChartComponent,PieChartColumnComponent, LineChartUserComponent
   ]})
 export class StatisticModule {}

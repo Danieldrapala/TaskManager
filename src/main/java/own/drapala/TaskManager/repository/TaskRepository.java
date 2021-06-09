@@ -26,4 +26,19 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "WHERE t.card.id = :id \n" +
             "ORDER BY t.card.id ")
     Optional<Integer> findCount(Long id);
+
+    @Query("SELECT count(*) FROM Task t \n" +
+            "WHERE t.assignedTo IS NOT NULL \n" +
+            "ORDER BY t.id ")
+    Long getAssignedTasksCount();
+
+    @Query("SELECT count(*) FROM Task t \n" +
+            "WHERE t.assignedTo IS NULL \n" +
+            "ORDER BY t.id ")
+    Long getFreeTasksCount();
+
+    @Query("SELECT count(*) FROM Task t \n" +
+            "WHERE t.completed= true \n" +
+            "ORDER BY t.id ")
+    Long getCompletedTasksCount();
 }

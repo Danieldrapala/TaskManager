@@ -20,7 +20,7 @@ export class TeamListService {
   }
   getAllUsers(): Observable<Account[]>  {
 
-    return this.http.get<Account[]>(`${this.resourceUrl}`+'/publicusers');
+    return this.http.get<Account[]>('api/publicusers');
   }
   getUser(id:string|undefined): Observable<Account>  {
 

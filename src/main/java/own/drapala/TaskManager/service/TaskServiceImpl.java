@@ -49,8 +49,9 @@ public class TaskServiceImpl implements TaskService {
         newTask.setCompleted(false);
         newTask.setOwner(userRepository.getOne(taskDTO.getOwner().getId()));
         newTask.setCard(cardRepository.getOne(taskDTO.getCard().getId()));
-        if(taskDTO.getAssignedTo().getId()!=null)
-        newTask.setAssignedTo(userRepository.getOne(taskDTO.getAssignedTo().getId()));
+        if(taskDTO.getAssignedTo()!=null) {
+            newTask.setAssignedTo(userRepository.getOne(taskDTO.getAssignedTo().getId()));
+        }
 
         taskRepository.save(newTask);
         return newTask;
@@ -68,9 +69,13 @@ public class TaskServiceImpl implements TaskService {
                     task.setDescription(updatedTaskDTO.getDescription());
                     task.setName(updatedTaskDTO.getName());
                     task.setDate(updatedTaskDTO.getDate());
-                    if(updatedTaskDTO.getAssignedTo().getId()!=null) {
+                    if(updatedTaskDTO.getAssignedTo()!=null) {
                         task.setAssignedTo(userRepository.getOne(updatedTaskDTO.getAssignedTo().getId()));
                         this.taskAssignmentService.rememberAssingmentChange(updatedTaskDTO.getId(), updatedTaskDTO.getAssignedTo().getId());
+                    }
+                    else{
+                        this.taskAssignmentService.rememberAssingmentChange(updatedTaskDTO.getId(), 0L);
+
                     }
                     task.setOwner(userRepository.getOne(updatedTaskDTO.getOwner().getId()));
                     task.setCard(cardRepository.getOne(updatedTaskDTO.getCard().getId()));

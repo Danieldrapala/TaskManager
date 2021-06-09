@@ -3,6 +3,7 @@ package own.drapala.TaskManager.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import own.drapala.TaskManager.config.Constants;
+import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
 import own.drapala.TaskManager.security.AuthoritiesConstants;
@@ -36,6 +38,8 @@ public class PublicUserResource {
         Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
     );
 
+    @Value("${clientApp.name}")
+    private String applicationName;
     private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
 
     private final UserService userService;
@@ -87,5 +91,19 @@ public class PublicUserResource {
     public ResponseEntity<AdminUserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
+    }
+
+    /**
+     * {@code GET /admin/users} : get all users with all the details - calling this are only allowed for the administrators.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
+     */
+    @GetMapping("/publicusers")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        log.debug("REST request to get all User for an Select");
+
+        final List<UserDTO> users = userService.getAllPublicUsers();
+        return new ResponseEntity<>(users,             HeaderUtil.createAlert(applicationName, "A user List is given with length" + users.size(),"users list")
+                , HttpStatus.OK);
     }
 }

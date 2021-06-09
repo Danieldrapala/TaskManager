@@ -24,16 +24,31 @@ public class StatisticsResource {
     private final StatisticsService statisticService;
 
     public StatisticsResource(StatisticsService statisticService) {
-
         this.statisticService = statisticService;
-
     }
+
     @GetMapping("/assignedtasks/{id}")
     public ResponseEntity<List<Long>> getAssignedToCount(@PathVariable Long id) {
         return ResponseUtil.wrapOrNotFound(statisticService.getAssignedToCountOnUser(id));
     }
+
     @GetMapping("/completedtasks/{id}")
     public ResponseEntity<List<Long>> getCompletedTasks(@PathVariable Long id) {
         return ResponseUtil.wrapOrNotFound(statisticService.getCompletedTasksCountOnUser(id));
+    }
+
+    @GetMapping("/generalcount")
+    public ResponseEntity<List<Long>> getGeneralCount() {
+        return ResponseUtil.wrapOrNotFound(statisticService.getTasksCount());
+    }
+
+    @GetMapping("/assignmentCount/{id}")
+    public ResponseEntity<List<Long>> getAssigmentForTask(@PathVariable Long id) {
+        return ResponseUtil.wrapOrNotFound(statisticService.getAssignmentForTask(id));
+    }
+
+    @GetMapping("/dragndropevent/{id}")
+    public ResponseEntity<List<Long>> getDragAndDropCount(@PathVariable Long id) {
+        return ResponseUtil.wrapOrNotFound(statisticService.getDragAndDropEvents(id));
     }
 }
