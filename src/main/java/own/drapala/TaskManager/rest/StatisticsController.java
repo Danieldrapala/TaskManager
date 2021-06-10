@@ -16,14 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/stats")
-public class StatisticsResource {
+public class StatisticsController {
 
     @Value("${clientApp.name}")
     private String applicationName;
 
     private final StatisticsService statisticService;
 
-    public StatisticsResource(StatisticsService statisticService) {
+    public StatisticsController(StatisticsService statisticService) {
         this.statisticService = statisticService;
     }
 

@@ -15,10 +15,10 @@ public class TaskMovement {
     @Column(name = "task_id")
     private Long task;
 
-    @Column(name = "previous_card_id")
+    @Column(name = "previous_column_id")
     private Long previousCard;
 
-    @Column(name = "current_card_id")
+    @Column(name = "current_column_id")
     private Long currentCard;
 
     @Column(name = "timestamp")

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RequestMapping("/api/board")
 @RestController
-public class CardResource {
+public class CardController {
 
     @Value("${clientApp.name}")
     private String applicationName;
@@ -29,7 +29,7 @@ public class CardResource {
     private final TaskService taskService;
     private final TaskMovementService taskMovementService;
 
-    public CardResource(CardService cardService, TaskService taskService, TaskMovementService taskMovementService) {
+    public CardController(CardService cardService, TaskService taskService, TaskMovementService taskMovementService) {
 
         this.cardService = cardService;
         this.taskService = taskService;

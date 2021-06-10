@@ -18,10 +18,10 @@ public class Board {
     @Size(max = 1200, message = "{board.name.size}")
     private String name;
 
-    @Column(name = "default_card")
+    @Column(name = "default_column")
     private Long defaultCard;
 
-    @Column(name = "closing_card")
+    @Column(name = "closing_column")
     private Long closingCard;
 
     @OneToMany(mappedBy = "board")

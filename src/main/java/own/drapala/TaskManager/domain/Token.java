@@ -40,7 +40,6 @@ public class Token implements Serializable {
     private String ipAddress;
 
     @Column(name = "user_agent")
-    @Max(255)
     private String userAgent;
 
     @JsonIgnore

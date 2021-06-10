@@ -11,9 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import own.drapala.TaskManager.domain.Task;
-import own.drapala.TaskManager.domain.TaskAssignment;
-import own.drapala.TaskManager.repository.CardRepository;
-import own.drapala.TaskManager.repository.TaskRepository;
 import own.drapala.TaskManager.rest.errors.BadRequestAlertException;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
@@ -22,7 +19,6 @@ import own.drapala.TaskManager.service.TaskAssignmentService;
 import own.drapala.TaskManager.service.TaskService;
 import own.drapala.TaskManager.service.dto.TaskDTO;
 
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,10 +27,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class TaskResource {
+public class TaskController {
 
 
-    private final Logger log = LoggerFactory.getLogger(UserResource.class);
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Value("${clientApp.name}")
     private String applicationName;
@@ -43,14 +39,14 @@ public class TaskResource {
 
     private final TaskAssignmentService taskAssignmentService;
 
-    public TaskResource(TaskService taskService, TaskAssignmentService taskAssignmentService) {
+    public TaskController(TaskService taskService, TaskAssignmentService taskAssignmentService) {
         this.taskService = taskService;
         this.taskAssignmentService = taskAssignmentService;
 
     }
 
     /**
-     * {@code POST  /api/task}  : Creates a new task.
+     * {@code POST  /task}  : Creates a new task.
      * <p>
      * Creates a new task
      * The user needs to be activated on creation.

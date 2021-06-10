@@ -1,3 +1,4 @@
+
 \chapter{Analiza problemu}
 \thispagestyle{chapterBeginStyle}
 
@@ -15,6 +16,13 @@ Projekt, jest to przygotowany zbiór aktywności zależnych w jakiś sposób od 
 
 \indent 
 Podejście Kanban to jedna z metodyk wspomagająca zarządzanie zadaniami. Polega ona na zebraniu wszystkich zadań potrzebnych do osiągnięcia pewnego celu i zobrazowanie ich na tablicy, która podzielona jest na różne działy. Jest to jeden z popularniejszy sposobów zarządzania zadaniami, wiele zespołów posiada tablicę Kanban w biurze, zbudowaną z białej tablicy i kolorowych karteczek samoprzylepnych. Tablica jest podzielona na dwie części “do zrobienia” i “zrobione”.
+\begin{figure}[h]
+	
+	\centering
+	\includegraphics[width=0.90\textwidth]{tablica_kanban}		
+	 \caption{Prosta tablica Kanban \newline Źródło: $https://agilecommander.com/wp-content/uploads/2018/03/doc\_pl\_prosta\_tablica\_kanban.png $}
+\end{figure}
+
 
 Pierwotnym celem systemu Kanban było zarządzanie produkcją i redukcja jej kosztów za pomocą wizualnego sterowania. Zgodnie z systemem najpierw należy określić materiał i jego ilość potrzebną do procesu A. Informacja wraz z niezbędnymi surowcami zostaje wysłana do procesu B, tak aby produkcja mogła wystartować. Zostaje wyprodukowana konkretna ilość towaru, a po zakończeniu procesu narzędzia, pojemniki wraz z informacją  wraca do pierwotnego procesu A. Rozpoczyna  się kolejny cykl pracy. W konsekwencji produkcja jest w stanie dostosować się do zapotrzebowania klientów oraz zminimalizować ewentualną nadprodukcję, a tym samym koszty. System pozwala na koordynację pomiędzy zapotrzebowaniem a wielkością produkcji. Taka była geneza powstania metody Kanban.
 
@@ -29,12 +37,13 @@ Porównując do innych metod zarządzania, metoda Kanban jest prosta w implement
 
 \section{Aplikacja internetowa}
 
-Aplikacja internetowa do zarządzania zadaniami jest w stanie zapewnić każdy z wypełnionych wymogów, dostarczając niezbędnych informacji na temat postępów i pozostając przyjazną dla użytkownika. Zamysł aplikacji opiera się na stworzeniu wspólnej tablicy, ktorej celem jest w przejrzysty sposob przedstawić zadania i ich statusy. Zakładając, że pula zadań jest bardzo duża, nie jest ona w stanie zmieścić się na tablicy. Zadania, którymi ktoś się aktualnie zajmuje, czy też można im nadać jakiś status, będą w stanie wyswietlać się na tablicy w postaci bloków, które można przesuwać między kolumnami. Jest to proste zobrazowanie postępu prac nad daną grupą zadań, osoba zarządzająca może zobaczyć podgląd postępów w projekcie, a pracownik, który zrobił postęp w jakimś zadaniu, z łatwością jest w stanie go udokumentować, wyświetlając go również dla całego zespołu.
+Aplikacja internetowa do zarządzania zadaniami jest w stanie zapewnić każdy z wypełnionych wymogów, dostarczając niezbędnych informacji na temat postępów i pozostając przyjazna dla użytkownika. Zamysł aplikacji opiera się na stworzeniu wspólnej tablicy, której celem jest przedstawić w przejrzysty sposób zadania i ich statusy. Zakładając, że pula zadań jest bardzo duża i nie jest w stanie zmieścić się na tablicy, to zadania, nad którymi aktualnie się pracuje, czy też z nadanymi statusami, będą w stanie wyświetlać się na tablicy w postaci bloków. Bloki można przesuwać po tablicy. Jest to proste zobrazowanie postępu prac nad daną grupą zadań, osoba zarządzająca może zobaczyć podgląd postępów w projekcie, a pracownik, który zrobił postęp w wybranym zadaniu, z łatwością jest w stanie go udokumentować, wyświetlając go również dla całego zespołu. 
 
 \section{Porównanie istniejących aplikacji}
-\indent Istnieje szereg aplikacji o zbliżonej funkcjonalności. Opisane zostaną obie aplikacjie, Trello i LeanKit, ponieważ będą one odzwierciedlać  podobieństwa i różnice pomiędzy aplikacją zaproponowaną w pracy. 
+Istnieje szereg aplikacji o zbliżonej funkcjonalności. Opisane zostaną dwie aplikację: Trello i LeanKit,  ponieważ odzwierciedlają one podobieństwa i różnice pomiędzy aplikacją zaproponowaną w niniejszej pracy inżynierskiej.
 
-\indent  Zaczynając od Trello, jest to aplikacja bazująca głównie na swej prostocie. Tablicę zadań udostępnioną za pomocą wiadomości e-mail z zaproszeniem, czy też współdzielonego hiperłącza  utworzyć można zaledwie w pięć minut. Zadania na tablicy wyglądają na proste, składające się jedynie z opisu, lecz każde zadanie ma swoją stronę gdzie opis staje się bardziej zaawansowany, można dodać między innymi:
+
+Zaczynając od Trello, jest to aplikacja bazująca głównie na swej prostocie. Tablicę zadań udostępnioną za pomocą wiadomości e-mail z zaproszeniem, czy też współdzielonego hiperłącza utworzyć można zaledwie w pięć minut. Zadania na tablicy wyglądają na proste, składające się jedynie z opisu, lecz każde zadanie ma swoją stronę gdzie opis staje się bardziej zaawansowany, można dodać między innymi:
 \begin{itemize}
 	\item pliki, 
 	\item listę podzadań,
@@ -43,17 +52,24 @@ Aplikacja internetowa do zarządzania zadaniami jest w stanie zapewnić każdy z
 	\item osoby wykonujące zadanie,
 	\item komentarze,
 \end{itemize}
-Użytkownicy mogą posiadać dwie role,  admina i zwykłego użytkownika. Różnią się one jedynie tym, że admin może usuwać i dodawać użytkowników i zmieniać ustawienia główne tablicy. Wiele funkcji takich jak przedstawianie zadań na kalendarzu, osie czasu, dodanie lokalizacji do zadań istnieją w wersji płatnej rozszerzonej.
-Wiele aplikacji, służących do tworzenia tablicy Kanban wzoruje się na tej aplikacji i jest ona jak dotąd jedną z najlepszych rozwiązań, sama aplikacja mocno spopularyzowała metodykę zarządzania zadaniami poprzez tablicę Kanban.
+Użytkownicy mogą posiadać dwie role, admina i zwykłego użytkownika. Różnią się one jedynie tym, że admin może usuwać i dodawać użytkowników i zmieniać ustawienia główne tablicy. Wiele funkcji takich jak przedstawianie zadań na kalendarzu, osie czasu, dodanie lokalizacji do zadań istnieją w wersji płatnej rozszerzonej. Wiele aplikacji, służących do tworzenia tablicy Kanban wzoruje się na tej aplikacji i jest ona jak dotąd jedną z najlepszych rozwiązań. Omawiana aplikacja mocno spopularyzowała metodykę zarządzania zadaniami poprzez tablicę Kanban.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.90\textwidth]{tablica-operacyjna}		
+	\caption{Przykładowa tablica Kanban w aplikacji Trello \newline Źródło: $https://zerobs.pl/wp-content/uploads/2019/11/tablica-operacyjna.jpg $}
+\end{figure}
 
 \indent  Kolejną aplikacją jest LeanKit, wybrana została jaka druga aplikacja do porównania, ponieważ tej tablicy nie charakteryzuje prostota. Wręcz przeciwnie, jej atutem są złożone funkcje tworzenia tablicy. Najbardziej charakterystyczną opcją jest skomplikowanie tworzenie karty na tablicy. Kiedy poprzednia aplikacja pozwalała  na tablicy utworzyć karty z krótkim tytułem przetrzymujące zadania, które można przenosić z jednej karty na drugą, ta aplikacja oferuje Tworzenie Karty, podkart karty, podkart podkart, i tak dalej, przez co bardziej skomplikowane do zkategoryzowania zadania użytkownik jest w stanie opisać w jednym miejscu. Zadania posiadają podobne atrybuty do Trello, oprócz tego posiadają jeszcze dziedziczenie zadań, to znaczy, że każde zadanie ma listę zadań rodziców i listę zadań dzieci. Są to listy przetrzymujące odnośniki do zadań, z wyniku których powstało dane zadanie (rodzice), lub zadania, które zostały utworzone przez dane zadanie (dzieci). 
 Poza skomplikowaną reprezentacją tablicy Kanban, LeanKit posiada wiele funkcji po wizualizacje zadań w kalendarzu, możliwość wertykalnej i horyzontalnej tablicy (jak i wertykalno horyzontalnej), raporty w postach czystych danych lub wykresów czy też tworzenia zależności pomiędzy wieloma innymi projektami i tablicami.
 Jest to aplikacja posiadająca bardzo kompleksowe konfiguracje, użytkownik korzystający z programu po raz pierwszy najprawdopodobniej potrzebowałby specjalistycznego szkolenia w celu wykorzystania wszystkich możliwości.
 
 
-\indent Opisane zostały obie aplikacje, aby ostatecznie wyróżnić funkcje aplikacji opisywanej w pracy. TaskManager również charakteryzuje się prostotą, lecz dopiero podczas korzystania przez zwykłego użytkownika. Proces inicjalizacji tablicy, projektów jest dłuższy, aby potem aplikacja mogła służyć uczestnikom projektu.
-Pierwszą różnicą jest podział na dwie role, ADMIN, USER. Rola prowadzącego projekt, czyli ADMIN która posiada pełną kontrole nad dodawaniem użytkowników i zadań.
+\indent Obie aplikacje opisane zostały, aby ostatecznie wyróżnić różnice w opisywanej w pracy aplikacji. TaskManager również charakteryzuje się prostotą, lecz dopiero podczas korzystania przez zwykłego użytkownika. Proces inicjalizacji tablicy, projektów jest dłuższy, aby potem aplikacja mogła służyć uczestnikom projektu.
+Pierwszą różnicą jest podział na dwie role, ADMIN, USER. Rola administratora projekt, czyli ADMIN, która posiada pełną kontrole nad dodawaniem użytkowników i zadań, jak i konfiguracji użytkowników, zadań i tablicy.
+Drugą cechą jest zakładka statystyk, gdzie zobaczyć można ogólne informacje na temat całego projektu, wyników poszczególnych użytkowników, jak i zadań w przeciągu ostatnich sześciu miesięcy.
+Ostatnią cechą, która może ostatecznie przekonać klienta na aplikację TaskManagaer to utworzenie wewnętrznego projektu niezależnego od innych aplikacji, dlatego wraz z wzrastającymi oczekiwaniami, klient może zlecić rozszerzenie aplikacji na swój sposób, czy to przez podłączenie do kanału komunikacyjnego lub kalendarzu z grafikiem pracowniczym.
+
 
 
 

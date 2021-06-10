@@ -10,29 +10,25 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import own.drapala.TaskManager.config.Constants;
 import own.drapala.TaskManager.rest.utils.HeaderUtil;
 import own.drapala.TaskManager.rest.utils.PaginationUtil;
 import own.drapala.TaskManager.rest.utils.ResponseUtil;
-import own.drapala.TaskManager.security.AuthoritiesConstants;
 import own.drapala.TaskManager.service.UserService;
 import own.drapala.TaskManager.service.dto.AdminUserDTO;
 import own.drapala.TaskManager.service.dto.UserDTO;
 
-import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class PublicUserResource {
+public class PublicUserController {
 
     private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
         Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
@@ -40,11 +36,11 @@ public class PublicUserResource {
 
     @Value("${clientApp.name}")
     private String applicationName;
-    private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
+    private final Logger log = LoggerFactory.getLogger(PublicUserController.class);
 
     private final UserService userService;
 
-    public PublicUserResource(UserService userService) {
+    public PublicUserController(UserService userService) {
         this.userService = userService;
     }
 

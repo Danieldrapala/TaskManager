@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-public class BoardResource {
+public class BoardController {
 
     private static final Long BOARD_ID = 1L;
 
@@ -32,7 +32,7 @@ public class BoardResource {
     private final BoardService boardService;
     private final CardService cardService;
 
-    public BoardResource(BoardService boardService, CardService cardService) {
+    public BoardController(BoardService boardService, CardService cardService) {
         this.boardService = boardService;
         this.cardService = cardService;
     }

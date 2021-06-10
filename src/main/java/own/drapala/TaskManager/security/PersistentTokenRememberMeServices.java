@@ -102,6 +102,7 @@ public class PersistentTokenRememberMeServices extends AbstractRememberMeService
                 token.setTokenDate(LocalDate.now());
                 token.setTokenValue(RandomUtil.generateRandomAlphanumericString());
                 token.setIpAddress(request.getRemoteAddr());
+                log.debug(request.getHeader("User-Agent"));
                 token.setUserAgent(request.getHeader("User-Agent"));
                 try {
                     tokenRepository.saveAndFlush(token);

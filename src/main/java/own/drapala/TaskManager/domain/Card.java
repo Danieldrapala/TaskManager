@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "card")
+@Table(name = "column")
 public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_id")
+    @Column(name = "column_id")
     private Long id;
-    @NotEmpty(message = "{card.name.not.empty}")
+    @NotEmpty(message = "{column.name.not.empty}")
     @Column(length = 1200)
-    @Size(max = 1200, message = "{card.name.size}")
+    @Size(max = 1200, message = "{column.name.size}")
     private String name;
     private Long priority;
 

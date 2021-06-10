@@ -56,34 +56,79 @@ występuje.
 		\end{enumerate}
 
 \end{enumerate}
+
 \paragraph{Wymagania niefunkcjonalne}
 \begin{enumerate}
 	\item możliwość użytkowania systemu po godzinnym szkoleniu
-	\item komunikacja z bazą dancyh nie dłuższa niż 200ms na każde zapytanie 
-	\item aplikacja responsywna, aby nie było problemu wykonywać wszystkie założenia funkcjonalne na urządzeniu mobilnym
+	\item komunikacja z bazą dancyh nie dłuższa niż 100ms na każde zapytanie 
+	\item aplikacja responsywna, wymagania funkcjonalne możliwe były do wykonania na urządzeniu mobilnym
 \end{enumerate}
 
-
+\clearpage
 \section{Diagram pakietów}
 
 
+\begin{figure}[h]
+	
+	\centering
+	\includegraphics[width=0.90\textwidth]{pakiety}		
+	\caption{Diagram pakietów z których złożona jest cała aplikacja }
+	\label{pakiet}
+\end{figure}
 
+Pakiety podzielone są na elementy serwera i aplikacji webowej, przedstawione zostały na diagramie ~\ref{pakiet}.
+\paragraph{Serwer }
+\paragraph{Repository}
+ posiada charakterystyczne dla wzorca architektonicznego Spring Data klasy z annotacją @Repository. Są to klasy, które udostępniają gotowe metody do
+wyciągania potrzebnych danych z bazy
 
+\paragraph{domain}
+
+ definiuje model danych. Są to Tabele i ich wszystkie atrybuty przepisane na klasę z której korzystają klasy z pakietu repository
+\paragraph{config}
+ jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwera poczynając od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
+\paragraph{service}  to grupa klas z annotacją @Service odpowiedzialnych za wykonywanie logiki związanej z modyfikacją i odpowiednim zapisywaniem danych. Korzysta z pakietu repository, a sam wykorzystywany jest w pakiecie rest.
+\paragraph{rest}  jest odpowiedzialny za transfer danych sposobem REST, czyli udostępnia  metody korzystające z serwisów na podane URI. Przykładowo aplikacja webowa wysyła na serwer zapytanie HTTP POST na URI
+\textit{www.taskManager.com/task}. Serwer odczytuje zapytanie i przygotowywuje odpowiedź, w tym celu odpowiednia klasa z pakietu rest mapuje podane zapytanie do odpowiedniej metody, która wykonuje akurat w tym przykładzie zapisanie zadania do bazy danych i zwraca zwrotną wiadomość. Zobacz przykład ~\ref{przykładowa metoda controllera}.
+
+\paragraph{security} zawiera klasy odpowiedzialne za autentykację połączenia, zanim jakiekolwiek zapytanie trafi do metod z pakietu rest, najpierw serwer oczekuje na odpowiedź ze strony klienta odnośnie sukcesu autoryzacji i pozwoleń jakie zalogowany użytkownik posiada.
+
+\begin{lstlisting} [ caption=Przykładowa metoda controllera z pakietu rest, captionpos=b, label={przykładowa metoda controllera}]
+
+@PostMapping("/task")
+public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO){
+	log.debug("REST request to save Task : {}", taskDTO);
+	if (taskDTO.getId() != null) {
+		(...)
+		}
+	return ResponseEntity
+	.created(new URI("/task/" + task.getId()))
+	.headers(HeaderUtil.createAlert(applicationName))
+	.body(task);
+	}
+
+\end{lstlisting}
+
+\paragraph{aplikacja webowa}
+\paragraph{config, model i service} to pakiety o tych samych właściwościach co w serwerze. Warto zauważyć, że model zapisany po stronie klienta może być ograniczony do atrybutów potrzebych jedynie do odpowiedniego wyświetlenia interfejsu dla użytkownika. 
+\paragraph{user-view} posiada wszystkie komponenty widoków dostępne dla użytkownika i administratora, są to główne widoki aplikacji, takie jak tablica, statystyki, lista zadań i tym podobne.
+\paragraph{admin} posiada komponenty dostępne tylko dla administratora i wszelką logikę związaną z konfiguracją nowych użytkowników.
+\paragraph{shared} jest to pakiet, na który składają się wszystkie wspólne dla wszystkich innych klas komponenty, czyli bloki wyświetlające błędy, responsywna lista, nagłówek strony, stopka strony. 
 
 \section{Projekt bazy danych}
 
-Sekcja ta w pełni skupiona jest na budowie bazy danych. Najpierw zdefiniowane zostały dane potrzebne do przechowywania.
-Pierwszym rodzajem danych jest Tablica (tabela board), która przetrzymuje informacje o tablicy, z ilu  składa się kolumn, która kolumna jest kolumną domyslna, a która zamykającą zadania.
-Kolejnym typem potrzebnym do przechowywania będzie wyżej wspomniana kolumna, która przechowuje status nazwę, kolejnosć wyswietlania na tablicy. Kolejnym typem jest Użytkownik, to jedna z najbardziej skomplikowanych tabel w całej bazie, ponieważ jest ona w relacji z zadaniami, które stworzył (mapowane poprzez pole ownedBy), w relacji z zadaniami do których jest aktualnie przypisany (pole assignedTo). Tabela z użytkownikami przetrzmuje informacje dotyczące korzystania z aplikacji i te  pozwalające autoryzować sesję po stronie klienta. Posiada również relacje z tabelą authority, która znowu odpowiedzialna jest za nadawnianie odpowiednich uprawnień do korzystania z aplikacji. Ostatnim z ważniejszych typów danych jest Zadanie i Komentarz. Zadanie jest to typ opisujący jak tylko może zadanie, przechowuje status w zależnosci od kolumny w której zadanie się znajduje, użytkowników powiązanych z utworzeniem zadania/ pracą nad zadaniem, a ostatnim typem będzie komentarz czyli tabela przetrzymująca komentarze odnoszące się do różnych zadań.
-
-Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
+Sekcja ta w pełni skupiona jest na budowie bazy danych. Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
 W celu kontroli wersji projektu bazy danych do serwera podpięta jest biblioteka zwana Liquibase, która przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w formacie XML. Liquibase pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
 \begin{figure}[h]
-
 	\centering
-	\includegraphics[width=0.90\textwidth]{liquibase}		
+	\includegraphics[width=0.90\textwidth]{liqubase}		
 	\caption{Lista plików tworzących bazę danych }
 \end{figure}
+
+
+Pierwszym rodzajem danych jest Tablica (tabela board), która przetrzymuje informacje o tablicy, z ilu  składa się kolumn, która kolumna jest kolumną domyslna, a która zamykającą zadania.
+Kolejnym typem potrzebnym do przechowywania będzie wyżej wspomniana Kolumna (), która przechowuje status nazwę, kolejnosć wyswietlania na tablicy. Kolejnym typem jest Użytkownik, to jedna z najbardziej skomplikowanych tabel w całej bazie, ponieważ jest ona w relacji z zadaniami, które stworzył (mapowane poprzez pole ownedBy), w relacji z zadaniami do których jest aktualnie przypisany (pole assignedTo). Tabela z użytkownikami przetrzmuje informacje dotyczące korzystania z aplikacji i te  pozwalające autoryzować sesję po stronie klienta. Posiada również relacje z tabelą authority, która znowu odpowiedzialna jest za nadawnianie odpowiednich uprawnień do korzystania z aplikacji. Ostatnim z ważniejszych typów danych jest Zadanie i Komentarz. Zadanie jest to typ opisujący jak tylko może zadanie, przechowuje status w zależnosci od kolumny w której zadanie się znajduje, użytkowników powiązanych z utworzeniem zadania, pracą nad zadaniem, a ostatnim typem będzie komentarz czyli tabela przetrzymująca komentarze odnoszące się do różnych zadań.
+
 \section{Przypadki użycia}
 
 W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplikacji.
@@ -143,7 +188,7 @@ Warunki wstępne: & sesja klienta nie jest autoryzowana, klient posiada aktywne 
 		\begin{enumerate}
 			\item system sprawdza czy istnieje użytkownik o podanych informacjach kwalifikujących
 			\item system autoryzacyjny odnajduje w bazie użytkownika,
-			\item system wysyła do systemu prezentującego wiadomość o poprawnym procesie weryfikacji, więc użytkownik zostaje przekierowany do widoku głównego po udanym logowaniu i przyznawane są prawa do przeglądania stron odpowiednich dla roli użytkownika, czyli ROLE\_ADMIN lub ROLE\_USER
+			\item system wysyła do systemu prezentującego wiadomość o poprawnym procesie weryfikacji, więc użytkownik zostaje przekierowany do widoku głównego po udanym logowaniu i przyznawane są prawa do przeglądania stron odpowiednich dla roli użytkownika, czyli ROLE ADMIN lub ROLE\_USER
 		\end{enumerate}
 		\item klient wprowadza prawidłowe dane,  zaznacza pole 'remember me'	
 		\begin{enumerate}

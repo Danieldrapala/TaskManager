@@ -2,6 +2,18 @@
 Main page styles
 ========================================================================== */
 
+.header {
+  .logo-img {
+    float: left;
+    margin-left: 20%;
+    margin-right: 7%;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    background: url('../../../content/images/favii.png') no-repeat center center;
+    background-size: contain;
+  }
+}
 
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -23,7 +35,6 @@ Main page styles
   margin-top: 30px;
   padding-bottom:  20px;
   margin-bottom: 20px;
-  text-align: center;
 }
 .flex-chlid-subheader{
   font-family: 'Roboto Mono', monospace;

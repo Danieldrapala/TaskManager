@@ -18,6 +18,5 @@
     <include file="liquibase/changelog/00000000000001_addTaskTable_schema.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/00000000000002_addBoardColumnTable_schema.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/00000000000003_addHistoryTables_schema.xml" relativeToChangelogFile="false"/>
-    <include file="liquibase/changelog/00000000000004_addBoardColumnTable_schema.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

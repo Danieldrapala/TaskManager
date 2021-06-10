@@ -33,14 +33,14 @@ import java.util.Optional;
 
 @RequestMapping("/api/task")
 @RestController
-public class CommentResource {
+public class CommentController {
 
     @Value("${clientApp.name}")
     private String applicationName;
 
     private final CommentService commentService;
 
-    public CommentResource(CommentService commentService) {
+    public CommentController(CommentService commentService) {
 
         this.commentService = commentService;
 
