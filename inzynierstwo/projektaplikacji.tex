@@ -3,9 +3,9 @@
 W danym rodziale opisana została aplikacja pod względem technicznym. 
 
 \section{Opis systemu}
-Tworzenie aplikacji internetowej to skomplikowany proces, który może przysporzyć wiele problemów w przyszłości. Pierwszym problemem jest utrzymanie istniejącego kodu, to znaczy kontrolowanie stanu aplikacji i naprawianie pojawiających się błędów, związanych z pierwotną implementacją. Drugim problemem jest możliwość rozwoju aplikacji, w momencie w którym aplikacja przynosi zyski i sprawdza się w kontakcie z użytkownikiem, oczywistym podejściem jest rozbudowa aplikacji. W tym celu podczas planowania implementacji trzeba zastanowić się nad odpowiednim podejściem. W tym celu powstały wzorce projektowe, które pomagają programistom uporać się z różnymi problemami w sposób zorganizowany, zoptymalizowany ułatwiając problemy podczas implementacji, zwiększając czytelność kodu. 
+Tworzenie aplikacji internetowej to skomplikowany proces, który może przysporzyć wiele problemów w przyszłości. Pierwszym problemem jest utrzymanie istniejącego kodu, to znaczy kontrolowanie stanu aplikacji i naprawianie pojawiających się błędów, związanych z pierwotną implementacją. Drugim problemem jest możliwość rozwoju aplikacji, w momencie w którym aplikacja przynosi zyski i sprawdza się w kontakcie z użytkownikiem, oczywistym podejściem jest rozbudowa aplikacji. W tym celu podczas planowania implementacji trzeba zastanowić się nad odpowiednim podejściem. W tym celu powstały wzorce projektowe, które pomagają programistom uporać się z różnymi problemami w sposób zorganizowany i zoptymalizowany, ułatwiają rozwiązywanie błędów podczas implementacji oraz zwiększają czytelność kodu.
 
-\section{Wzorzec Architektoniczny Model-View-Controller}
+\section{Wzorzec architektoniczny Model-View-Controller}
 System zbudowany został w oparciu o model MVC, czyli Model-View-Controller.
 Jest to podejście architektoniczne, które dzieli aplikacje na trzy główne komponenty.
 Model, odpowiedzialny za dostęp i przechowywanie danych. View, czyli widok odpowiada za interfejs użytkownika, jak dane są przedstawiane i odbierane. Controller zajmuje się logiką biznesową komunikując się z modelem i widokiem. Widok dostarcza informacje od klienta, które obsługiwane są przez Controller i odpowiednie zmiany wprowadzane są do modelu. \cite{6827095}
@@ -31,7 +31,7 @@ występuje.
 	\item Korzystanie z Tablicy Kanban w celu raportowania postępów w zadaniach
 	\item Wyświetlanie Statystyk projektu w postaci wykresów
 	\item Podstawowa autentykacja użytkownika
-	\item wyświetlanie szczegółów związanych z danym zadaniem. Szczegółowe parametry zadania to:
+	\item Wyświetlanie szczegółów związanych z danym zadaniem. Szczegółowe parametry zadania to:
 	\begin{enumerate}[leftmargin=3em]
 		\item nazwa,
 		\item data do zakończenia zadania,
@@ -45,14 +45,14 @@ występuje.
 \paragraph{Wymagania funkcjonalne dodatkowe dla administratora}
 
 		\begin{enumerate} 
-		\item tworzenie, aktywacja kont użytkowników, dostęp do większej ilości danych w porównaniu do użytkownika
-		\item ustawienie czasu po jakim czyszczona jest historia czynności związanych z zadaniami 
+		\item Tworzenie, aktywacja kont użytkowników, dostęp do większej ilości danych w porównaniu do użytkownika
+		\item Ustawienie czasu po jakim czyszczona jest historia czynności związanych z zadaniami 
 		\item Konfiguracja tablicy:
 	\begin{enumerate}[leftmargin=3em]
 			\item określenie nazwy tablicy i kolumn
 			\item określenie liczby kolumn, 
 			\item wybranie domyślnej kolumny (na którą wprowadzane będą nowe zadania)
-			\item wybranie końcowej kolumny (kolumna,która automatycznie zmienia status zadania na skończony), Opcjonalne
+			\item wybranie końcowej kolumny ( która automatycznie zmienia status zadania na skończony) –  opcjonalne
 		\end{enumerate}
 
 \end{enumerate}
@@ -89,7 +89,7 @@ wyciągania potrzebnych danych z bazy
  jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwera poczynając od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
 \paragraph{service}  to grupa klas z annotacją @Service odpowiedzialnych za wykonywanie logiki związanej z modyfikacją i odpowiednim zapisywaniem danych. Korzysta z pakietu repository, a sam wykorzystywany jest w pakiecie rest.
 \paragraph{rest}  jest odpowiedzialny za transfer danych sposobem REST, czyli udostępnia  metody korzystające z serwisów na podane URI. Przykładowo aplikacja webowa wysyła na serwer zapytanie HTTP POST na URI
-\textit{www.taskManager.com/task}. Serwer odczytuje zapytanie i przygotowywuje odpowiedź, w tym celu odpowiednia klasa z pakietu rest mapuje podane zapytanie do odpowiedniej metody, która wykonuje akurat w tym przykładzie zapisanie zadania do bazy danych i zwraca zwrotną wiadomość. Zobacz przykład ~\ref{przykładowa metoda controllera}.
+\textit{www.taskManager.com/task}. Serwer odczytuje zapytanie i przygotowywuje odpowiedź, w tym celu odpowiednia klasa z pakietu rest mapuje podane zapytanie do odpowiedniej metody, która wykonuje akurat w tym przykładzie zapisanie zadania do bazy danych i zwraca zwrotną wiadomość ~\ref{przykładowa metoda controllera}.
 
 \paragraph{security} zawiera klasy odpowiedzialne za autentykację połączenia, zanim jakiekolwiek zapytanie trafi do metod z pakietu rest, najpierw serwer oczekuje na odpowiedź ze strony klienta odnośnie sukcesu autoryzacji i pozwoleń jakie zalogowany użytkownik posiada.
 

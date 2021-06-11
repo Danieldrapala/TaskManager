@@ -29,7 +29,6 @@ export class TaskService{
       }
     
     updateTask(task: Task): Observable<ITask> {
-        console.log(task);
         return this.http.put<ITask>(`${this.resourceUrl}`, task);
       }
   
