@@ -12,10 +12,120 @@ Widok zaimplementowany jest przy pomocy frameworku Angular korzystającego z HTM
 Kontroler zaimplementowany jest głównie po stronie serwera, lecz komponenty odpowiedzialne za widok posiadają w sobie wstępne modyfikacje na danych otrzymanych od użytkownika takie jak przykładowo walidacja tych danych. Zaletą podejścia, aby funkcje kontrolera spełnianie były praktycznie po otrzymaniu jakichkolwiek danych jest to, że informacje, które przychodzą do serwera, aby przeszły przez główną logikę serwera są danymi nie podatynymi na błędy, więc serwer odpowiedzialny za logikę, nie będzie musiał skupiać się na odsyłaniu błędnych danych z powrotem do widoku, a o wiele częściej będzie otrzymywać już poprawne dane. Wadą takiego podejścia jest większe skomplikowanie w kodzie, ponieważ walidacja odbywa się wtedy zarówno na serwerze jak i po stronie klienta. Aplikacja odpowiedzialna za widoku musi również posiadać wiedzę na temat modelu bazy danych i poszczególne cechy różnych danych, aby odpowiednia logika mogła zostać zastosowana.
 
 \section{Użyte technologie}
-W języku programowania Java taką pomocniczą technologią jest framework Spring boot, który  jak wynika z jego dokumentacji stworzony został, po to, żeby tworzenie projektów w języku Java było prostsze, napisany kod był bardziej przejrzysty, [spring cytat]  szkielet ten jest jednym z najpopularniejszych dla języka Java. Wspomaga on w budowaniu wielopoziomowych aplikacji. 
-\section{Narzędzia pomocnicze i srodowisko programistyczne }
-POSTMAN
-GITHUB
-LIGUIBASE
+W języku programowania Java taką pomocniczą technologią jest szkielet architektoniczny  Spring. Posiada on dużo przeróżnych gałęzi i jest najpopularniejszym pomocniczym narzędziem dla języka Java. Aplikacja TaskManager korzysta z gałęzi Spring Boot, Spring Security oraz Spring Data JPA. 
+ \textit{Spring Security} zapewnia odpowiednie klasy wspomagające konfigurację autoryzacji i kontroli dostępu do zaimplementowanego serwera.  \textit{Spring Data JPA} ułatwia dostęp do bazy danych udostępniając potrzebne metody wyciągające odpowiednie informacje z bazy danych.\cite{SpringData} \cite{SpringSecurity}
+ \textit{Spring Boot} to gałąź, która pomaga uporać się ze wszystkimi możliwościami tego szkieletu i pomaga skonfigurować aplikację. 
+ W tym celu korzystając z narzędzia Spring Boot Initializer \cite{SpringInitializr} cały szkielet projektu został zainicjalizowany i dostępny do pobrania.
+Kolejnym z ważnych  narzędzi pomocniczych użytych podczas implementacji serwera jest \textit{ Maven}. Jest to narzędzie, które ułatwia zarządzanie projektem, ujednolica budowanie i kompliowanie zaawansowanego projektu napisanego w języku Java \cite{ApacheMavenProject}. 
+
+\section{Narzędzia pomocnicze i środowisko programistyczne }
+Program napisany został przy pomocy \textbf{Inteliij IDEA} . Jest to środowisko programistyczne, które w pełni wspomaga pisanie dużych projektów w języku Java. Możliwość debugowania kodu i pomocne wtyczki, które przykładowo pomagają utrzymać czystość kodu to ważny element podczas tworzenia aplikacji.
+Kolejnym niezbędnym narzędziem jest \textbf{Postman }, który pomaga testować zapytania REST. Aby zobaczyć czy widok otrzymuje odpowiednie dane od serwera, wymagane jest przetestowanie zapytań, w tym celu zamiast wywołwać ich ręcznie w aplikacji, wykorzystujemy program Postman, w którym przybieramy rolę klienta serwera i wysyłamy zapytanie, oczekując odpowiedzi. \cite{Postman}
+Cały projekt znajdował się podczas produkcji kodu w systemie kontroli wersji Git, w celu ułatiwionego dostępu i możliwości powrotu do różnych wersji projektu.\cite{git}
+
 	
-\section{Opis ciekawych implementacji}
+\section{Opis ważniejszych  implementacji}
+
+\subsection{Autoryzacja}
+\paragraph{konfiguracja}
+Klasa \textit{SecurityConfiguration} przetrzymuje konfiguracje związane z odpowiednim dostępem w zależności od pozwoleń zalogowanego użytkownika. Tak jak widzimy na kawałku kodu \ref{httpconfig} prawie wszystkie ścieżki są udostępnione dla każdej roli poza ścieżkami \textit{api/admin/**} i \textit{management/**}, do których dostęp ma jedynie użytkownik z rolą administratora
+\begin{lstlisting} [ caption= Metoda określająca dostęp do podanych ścieżek dla zdefiniowanych pozwoleń, captionpos=b, label={httpconfig}]
+         http
+           .authorizeRequests()
+.antMatchers("/api/board").permitAll()
+.antMatchers("/api/task/complete").permitAll()
+.antMatchers("/api/stats/generalcount").permitAll()
+.antMatchers("/api/task/comment").permitAll()
+.antMatchers("/api/board/card").permitAll()
+.antMatchers("/api/board/task").permitAll()
+.antMatchers("/api/board/tasks").permitAll()
+.antMatchers("/api/authenticate").permitAll()
+.antMatchers("/api/task").permitAll()
+.antMatchers("/api/register").permitAll()
+.antMatchers("/api/activate").permitAll()
+.antMatchers("/api/account/reset-password/init").permitAll()
+.antMatchers("/api/account/reset-password/finish").permitAll()
+.antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
+.antMatchers("/api/**").authenticated()
+.antMatchers("/management/health").permitAll()
+.antMatchers("/management/health/**").permitAll()
+.antMatchers("/management/info").permitAll()
+.antMatchers("/management/prometheus").permitAll()
+.antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
+\end{lstlisting}
+\paragraph{Autoryzacja i tworzenie konta}
+Tworzenie konta użytkownika polega na wprowadzeniu potrzebnych informacji takich jak login, hasło i email. Po zaakceptowaniu danych przez serwer stworzona zostaje encja użytkownika nieaktywnego. Generwoany zostaje klucz, który wysyłany jest w postaci linka na podaną wcześniej skrzynkę pocztową. Po wejściu w odpowiednią ścieżkę przez link z wiadomośći użytkownik aktywuje konto i może się zalogować \ref{register}
+
+\clearpage
+\begin{lstlisting} [ caption= Metoda rejestrująca użytkownika , captionpos=b, label={register}]
+public User registerUser(AdminUserDTO userDTO, String password) {
+			
+	User newUser = new User();
+	String encryptedPassword = passwordEncoder.encode(password);
+	newUser.setLogin(userDTO.getLogin().toLowerCase());
+	// new user gets initially a generated password
+	newUser.setPassword(encryptedPassword);
+	newUser.setFirstName(userDTO.getFirstName());
+	newUser.setLastName(userDTO.getLastName());
+	if (userDTO.getEmail() != null) {
+		newUser.setEmail(userDTO.getEmail().toLowerCase());
+	}
+	newUser.setImageUrl(userDTO.getImageUrl());
+	newUser.setLangKey(userDTO.getLangKey());
+	// new user is not active
+	newUser.setActivated(false);
+	// new user gets registration key
+	newUser.setActivationKey(generateRandomAlphanumericString());
+	Set<Authority> authorities = new HashSet<>();
+	authorityRepository.findById(AuthoritiesConstants.USER)
+			.ifPresent(authorities::add);
+	newUser.setAuthorities(authorities);
+	userRepository.save(newUser);
+	log.debug("Created Information for User: {}", newUser);
+	return newUser;
+}
+\end{lstlisting}
+\subsection{ Tablica przeciągnij i upuść}
+Główny widok aplikacji to tablica, na której użytkownik jest w stanie za pomocą wydarzenia przyciskiem myszy przeciągnij i upuść (z ang. drag and drop), aktualizować zadania do odpowiedniej kolumny. W tym celu użyty został moduł z Angulara o nazwie DragDropModule \cite{draganddrop}. Posiada on opisane dyrektywy o określonych funkcjach takich jak:
+\begin{itemize}
+		\item cdkDrag - nadaje elementom możliwość przeciągniecia,
+		\item cdkDropList - element ten określa listę elementów \textit{cdkDrop}, który odpowiednio je sortuje i jest w stanie wywołać wydarzenie wprowadzenia nowego elementu \textit{cdkDropListDropped},
+		\item cdkDropListGroup - jako rodzic elementów \textit{cdkDropList} łączy wszystkie elementy wewnątrz, pozwalając im na siebie współoddziaływać, naprzykład przenieść element \textit{cdkDrop}  z \textit{cdkDropList} A do \textit{cdkDropList} B
+\end{itemize}
+Element \textit{div tasks-container} przetrzymuje wszystkie elementy, które przypisane mają do siebie zadania, a pod wydarzenie przecięgniecia zadania na jedną z list wywoływana jest metoda \textit{drop}, która zapisuje identyfikatory odpowiednio zadania przeciąganego, kolumny z którego zadanie zostało przeciągniete oraz kolumny do której przeciągnieto dany ~\ref{board}.
+
+\clearpage
+\begin{lstlisting} [ caption= skrypt odpowiedzialny za widok tablicy , captionpos=b, label={board}]
+<div class="board-columns" cdkDropListGroup>
+  <div class="board-column" *ngFor="let column of cards">
+    <div class="column-title"> {{ column.name }}</div>
+    <div class="tasks-container"
+       cdkDropList
+       id = "{{column.id}}"
+       [cdkDropListData]="column.tasks"
+       (cdkDropListDropped)="drop($event)">	
+       <div class="task" id="{{task.id}}" 
+         [ngStyle]="{'background-color': task.completed ? '#90EE90':'white'}"
+         *ngFor="let task of column.tasks" 
+         (click)="showTask(task)" 
+         [cdkDragDisabled]="task.completed" cdkDrag>
+           <span class="task-child" >{{task.name}}</span>
+           <div class="verticalLine">
+            Assigned to
+            <span *ngIf="task.assignedTo?.email == this.user.email"> you </span>:
+            <span *ngIf=task.assignedTo class="assignedTo" 
+              [ngStyle]="{'color': task.assignedTo.email == this.user.email ?
+                                     'red':'black'}" >
+                     {{task.assignedTo.email}}
+                    </span>
+              <span *ngIf="task.completed"  
+                     style="margin-left:1%; 
+                     color: cadetblue; ">
+                            <fa-icon icon="check"></fa-icon>  Task Completed
+              </span>
+       </div>
+     </div>
+  </div>
+</div>
+\end{lstlisting}
+\subsection{Rysowanie wykresów}

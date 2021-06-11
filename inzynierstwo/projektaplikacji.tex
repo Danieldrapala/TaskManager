@@ -46,7 +46,7 @@ występuje.
 
 		\begin{enumerate} 
 		\item Tworzenie, aktywacja kont użytkowników, dostęp do większej ilości danych w porównaniu do użytkownika
-		\item Ustawienie czasu po jakim czyszczona jest historia czynności związanych z zadaniami 
+		\item Ustawienie czasu po jakim czyszczona jest historia czynności związanych z zadaniami
 		\item Konfiguracja tablicy:
 	\begin{enumerate}[leftmargin=3em]
 			\item określenie nazwy tablicy i kolumn
@@ -115,6 +115,27 @@ public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO){
 \paragraph{admin} posiada komponenty dostępne tylko dla administratora i wszelką logikę związaną z konfiguracją nowych użytkowników.
 \paragraph{shared} jest to pakiet, na który składają się wszystkie wspólne dla wszystkich innych klas komponenty, czyli bloki wyświetlające błędy, responsywna lista, nagłówek strony, stopka strony. 
 
+\section{ Komunikacja klient - serwer}
+Zbiór założeń, który definiuje komunikację pomiędzy systemami nazywamy API (z angielskiego Application Programming Interface, czyli interfejs programowania aplikacji).  Komunikacja odbywa sie za pomocą protokołów HTTP. Protokół HTTP jest to zestaw reguł odnośnie komunikacji polegający na wysyłaniu żądania i oczekiwaniu na odpowiedź. Klient wysyła zapytania, oczekuje na odpowiedź, a serwer oczekuje na zapytania odsyłając odpowiedź.%  \cite{rfc7230}
+\newline
+Protokół ten składa się z:
+\begin{itemize}
+	\item Metoda protokołu i wersja
+	\item Nagłówka (z ang. header), który posiada wszystkie potrzebne informacje na temat połączenia
+	\item Treści wiadomości (z ang. body)
+	\item wiadomość zwrotna zawsze posiada status odpowiedzi w postaci kodu i wiadomości (naprzykład 200 OK)
+\end{itemize}
+Metody protokołu pozwalają rozróżnić rodzaj wiadomości. W aplikacji używana są metody:
+\begin{itemize}
+	\item POST  - wiadomość przychodząca od klienta, zazwyczaj używany do stworzenia obiektu na bazie danych
+	\item GET - zapytanie o pobór danych za pomocą wskazanej ścieżki
+	może to być lista obiektów z bazy danych czy też jeden specyficzny obiekt, którego identyfikator zawarty jest w ścieżce ( /api/task/1)
+	\item PUT - jest to pokrewna metoda do POST, lecz używana do aktualizowania istniejących danych zamiast wprowadzania nowych
+	\item DELETE - metoda służy do usuwania zasobów z bazy danych
+\end{itemize}
+Klient do komunikacji używa klas zaimplementowanych w pakiecie \textit{services}. Składają się one z prostych metod, które potrzebują jedynie odpowiednią ścieżkę, odpowiednią metodę HTTP i oczekiwany typ danych.
+Klasy w pakiecie \textit{rest} serwera udostępniają metody na poszczególne ścieżki, w których zastosowana jest logika i zwracane zostają odpowiednie dane, wiadomość OK ze statusem 200 [~\ref{przykładowa metoda controllera}].
+
 \section{Projekt bazy danych}
 
 Sekcja ta w pełni skupiona jest na budowie bazy danych. Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
@@ -123,12 +144,39 @@ W celu kontroli wersji projektu bazy danych do serwera podpięta jest biblioteka
 	\centering
 	\includegraphics[width=0.90\textwidth]{liqubase}		
 	\caption{Lista plików tworzących bazę danych }
+	\label{listaplikow}
+\end{figure}
+Bilbioteka liquibase dodaje dwie tabele \ref{liqutable}, które dotyczą powyższej listy plików \ref{listaplikow}. Tabela zapisuje nazwę pliku i jej sumę kontrolną, więc zapobiega to zmianom na plikach inicjalizujących bazę danych. Trzeba stworzyć następny plik i pozsotawić po sobie ślad. Jest to bardzo pomocna rzecz, służy jako kontrola wersji bazy danych, aby w każdym momencie można było wrócić do wcześniejszych struktur bazy danych.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.50\textwidth]{liquibasetables}
+	\caption{ Tabele kontroli wersji}
+	\label{liqutable}
+\end{figure}
+Pierwszym rodzajem danych jest \textit{Tablica} ( board), która przetrzymuje informacje o tablicy. Kolejnym typem jest  \textit{Kolumna} ( column). Ważnym typem danych jest  \textit{Użytkownik}  (user), to jedna z najbardziej skomplikowanych tabel w całej bazie. Tabela z użytkownikami przetrzmuje informacje dotyczące korzystania z aplikacji i te  pozwalające autoryzować sesję po stronie klienta. Posiada również relacje z tabelą authority, która znowu odpowiedzialna jest za nadawnianie odpowiednich uprawnień do korzystania z aplikacji. Ostatnimi  danymi są \textit{Zadanie} (task) i \textit{Komentarz} (comment). Wszystkie relacje zostały przedstawione na diagramie ~\ref{projektdb}.
+Oprócz głównych tabel do bazy danych dodane zostały również trzy nierelacyjne tabele, które audytują trzy zachowania, przeciąganie zadania z jednej kolumny na drugą (task\_drag\_drop), przetrzymywanie daty skończenia (task\_completed) i daty przypięcia zadania do użytkownika (task\_assignment) \ref{nierel}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.90\textwidth]{diagram-bazy}
+
+	\caption{ Diagram bazy danych}
+		\label{projektdb}
 \end{figure}
 
 
-Pierwszym rodzajem danych jest Tablica (tabela board), która przetrzymuje informacje o tablicy, z ilu  składa się kolumn, która kolumna jest kolumną domyslna, a która zamykającą zadania.
-Kolejnym typem potrzebnym do przechowywania będzie wyżej wspomniana Kolumna (), która przechowuje status nazwę, kolejnosć wyswietlania na tablicy. Kolejnym typem jest Użytkownik, to jedna z najbardziej skomplikowanych tabel w całej bazie, ponieważ jest ona w relacji z zadaniami, które stworzył (mapowane poprzez pole ownedBy), w relacji z zadaniami do których jest aktualnie przypisany (pole assignedTo). Tabela z użytkownikami przetrzmuje informacje dotyczące korzystania z aplikacji i te  pozwalające autoryzować sesję po stronie klienta. Posiada również relacje z tabelą authority, która znowu odpowiedzialna jest za nadawnianie odpowiednich uprawnień do korzystania z aplikacji. Ostatnim z ważniejszych typów danych jest Zadanie i Komentarz. Zadanie jest to typ opisujący jak tylko może zadanie, przechowuje status w zależnosci od kolumny w której zadanie się znajduje, użytkowników powiązanych z utworzeniem zadania, pracą nad zadaniem, a ostatnim typem będzie komentarz czyli tabela przetrzymująca komentarze odnoszące się do różnych zadań.
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{nierelacyjne}
 
+	\caption{ Nierelacyjne tabele odpowiedzialne za przetrzymywanie danych potrzebnych do statystyk }
+	\label{nierel}
+\end{figure}
+\clearpage
+\subsection{Normalizacja bazy danych}
+~\ref{projektdb}
+
+\clearpage
 \section{Przypadki użycia}
 
 W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplikacji.
@@ -141,7 +189,7 @@ W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplik
 	\hline
 	\multicolumn{2}{|c|}{Rejestracja nowego użytkownika} \\
 	\hline
-	Aktorzy: &klient , serwer autoryzacyjny administrator\\
+	Aktorzy: &klient, serwer autoryzacyjny administrator\\
 	\hline
 	Warunki wstępne: & sesja klienta nie jest autoryzowana\\ 
 	\hline
@@ -162,8 +210,7 @@ W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplik
 	\end{enumerate}
 		
 		\item  gdy walidacja zauważyła błędy w formularzu: wyświetla się komunikat błędu, zaznaczone zostają błędne pola
-			\end{enumerate}
-\\
+			\end{enumerate}\\
 	\hline
 
 \end{tabular}
@@ -225,7 +272,7 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i jest on na stronie "Bo
 \begin{enumerate}
 	\item Użytkownik przechodzi do panelu tworzenia nowego zadania po wciśnięciu przycisku "Create Task" zarówno na stronie "Board" jak i "Tasks List"
 	\item pojawia się formularz z informacjami do podania na temat zadania, niektóre niezbędne do stworzenia zadania, niektóre opcjonalne
-	\item po ukończeniu wypełniania formularza i kliknięciu przycisku "OK" system waliduje poprawność otrzymanych danych:
+	\item po ukończeniu wypełniania formularza i kliknięciu przycisku "Save" system waliduje poprawność otrzymanych danych:
 	\begin{enumerate}
 		\item gdy dane odnośnie zadania zgadzają się, użytkownik przekierowywany jest na stronę, z której otworzył panel tworzenia zadania
 		\item gdy dane odnośnie zadania nie zgadzają się, panel prezenetujący wyświetla pola z błędnymi informacjami
@@ -256,23 +303,18 @@ Warunki wstępne: & sesja użytkownika jest autoryzowana i jest on na stronie "B
 	\item Użytkownik przechodzi do panelu uaktualniania istniejącego zadania po wciśnięciu przycisku "Go To Task", który wyświetlany jest dla każdego zadania na jednej z kolumn  listy zadań w panelu "Tasks List" 
 	\item Użytkownik może również przejść do panelu uaktualniania za pomocą kliknięcia w kontener wizualizujący zadanie na tablicy kanban w panelu "Board"
 		\begin{enumerate}
-		\item system prezentujący wyświetla wszystkie informacje na temat istniejącego zadania oraz trzy przyciski " Delete" "Edit" "Go Back"
+		\item system prezentujący wyświetla wszystkie informacje na temat istniejącego zadania oraz dwa przyciski " Go Back" "Save"
+
 		\begin{enumerate}
-			\item użytkownik wciskając przycisk "Delete" pytany jest ponownie o potwierdzenie, za pomocą wyskakującego komunikatu
-			\item po potwierdzeniu za pomocą przycisku "OK" system obsługujący dane usuwa  zadanie z bazy danych
-			\item użytkownik przekierowywany jest spowrotem do wcześniejszego widoku
-		\end{enumerate}
-		\begin{enumerate}
-			\item użytkownik używa przycisku Edit, przez co system prezentujący nadaje kontenerom prezentującym informacje funkcję formularza i pojawia się przycisk "Ok", przez co użytkownik może uaktualnić odpowiednie pola i zatwierdzić zmiany przyciskiem 'ok' i 
-		\end{enumerate}
-		\begin{enumerate}
+			\item użytkownik używa przycisku Save, informacje zawarte w formularzu wysyłane są do serwera w celu zaktualizowania zadania
+
 			\item użytkownik po obejrzeniu informacji na temat zadania może za pomocą przycisku " go Back" wrócić do wcześniej odwiedzanego panelu
 		\end{enumerate}
 	\end{enumerate}
 \end{enumerate}\\
 \hline
 \end{tabular}
-\caption{Przypadek użycia - Oglądanie szczegółów Zadania, edytowania zadania i usunięcie zadania}
+\caption{Przypadek użycia - Oglądanie szczegółów zadania, edytowania zadania}
 \end{table}
 
 \begin{table}[h!]
@@ -319,6 +361,7 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i wyświetlony jest pane
 		\item użytkownik klikając na nazwę kolumny jest w stanie sortować ją rosnąco lub malejąco
 		\item ostatnią kolumną jest przycisk "Go to Task", dzięki któremu możemy przejść do panelu danego taska
 		\end{enumerate}\\
+	\hline
 	\end{tabular}
 	\caption{Przypadek użycia - Przeglądanie listy użytkowników}
 \end{table}
@@ -343,7 +386,7 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i wyświetlony jest pane
 			\item wyświetlane są przez system prezentujący  informacje na temat projektu i 3 wykresy związane ogólnie ze statystykami projektu
 			\item niżej znajdują się dwie listy do wyboru, lista użytkowników i zadań.
 			\item użytkownik wybiera odpowiednich użytkowników na liście, aby wyświetlić wykresy związane z ich wynikami w ostatnich 6 miesiącach
-			\item użytkwnik wybiera odpowiednie zadania na liście, po czym wyświetalne zostają wykresy dla każdego odznaczonego zadania pokazującego cykl życia zadania,
+			\item użytkownik wybiera odpowiednie zadania na liście, po czym wyświetalne zostają wykresy dla każdego odznaczonego zadania.
 		\end{enumerate}\\
 	\hline
 	\end{tabular}
@@ -391,8 +434,8 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i wyświetlony jest pane
 		Scenariusz: &
 		\begin{enumerate}
 			\item użytkownik wchodzi na panelu "Manage Board" z poziomu nagłówka strony 
-			\item system wyświetla formularz związany z informacjami tablicy, czyli nazwy i id kolumny która jest kolumną domyślną i kolumną zamykającą cykl zadania
-			\item  użytkownik zmienia odpowiednie parametry, a końcowe informacje wysyła do serwera po zaakceptowaniu przyciskiem "Ok"
+			\item system wyświetla formularz związany z informacjami tablicy, czyli nazwy i identyfikatory kolumny  domyślnej i  zamykającej, która ustawiaa zadanie na ukończone.
+			\item  użytkownik zmienia odpowiednie parametry, a końcowe informacje wysyła do serwera po zaakceptowaniu przyciskiem "save"
 			\item serwer weryfikuje poprawność danych i aktualizuje potrzebne informacje
 		\end{enumerate}\\
 		\hline
@@ -401,4 +444,23 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i wyświetlony jest pane
 \end{table}
 
 
-
+\begin{table}[h!]
+	\begin{tabular}{|p{2cm}||p{13cm}|}
+		\hline
+		\multicolumn{2}{|c|}{ Edycja użytkowników przez administratora} \\
+		\hline
+		Akotrzy: & administrator, serwer \\
+		\hline
+		Warunki wstępne: & sesja użytkownika jest autoryzowana jako administrator  \\
+		\hline
+		Scenariusz: &
+		\begin{enumerate}
+			\item użytkownik wchodzi na panelu "Manage users" z poziomu nagłówka strony
+			\item system wyświetla formularz związany z informacjami użytkowników, informacji jest więcej niż na liście udostępnionej dla użytkownika
+			\item  administrator jest w stanie usunąć, stworzyć nowe konto, ale też dezaktywować istniejące.
+			\item gdy administrator kliknie "create user" musi wypełnić wyskakujący formularz, po wypełnieniu serwer wysyła na odpowiedni adres email informacje o utworzeniu konta przez użytkownika
+		\end{enumerate}\\
+		\hline
+	\end{tabular}
+	\caption{Przypadek użycia - edycja użytkowników przez  administratora}
+\end{table}

@@ -1,5 +1,33 @@
 \begin{thebibliography}{1}
 
+\bibitem{ApacheMavenProject}
+Apache maven project documentation.
+\newblock Web pages: \url{https://maven.apache.org/what-is-maven.html}.
+
+\bibitem{draganddrop}
+Drag drop event angular overview.
+\newblock Web pages: \url{https://material.angular.io/cdk/drag-drop/overview}.
+
+\bibitem{git}
+Git version control documentation.
+\newblock Web pages: \url{https://git-scm.com/doc}.
+
+\bibitem{Postman}
+Postman documentation.
+\newblock Web pages: \url{https://www.postman.com/api-documentation-tool/}.
+
+\bibitem{SpringData}
+Spring data overview.
+\newblock Web pages: \url{https://spring.io/projects/spring-data}.
+
+\bibitem{SpringInitializr}
+Spring initializr.
+\newblock Web pages: \url{https://start.spring.io}.
+
+\bibitem{SpringSecurity}
+Spring security overview.
+\newblock Web pages: \url{https://spring.io/projects/spring-security}.
+
 \bibitem{6827095}
 A.~Syromiatnikov,  D.~Weyns.
 \newblock A journey through the land of model-view-design patterns.

@@ -12,26 +12,31 @@
 \BOOKMARK [1][-]{section.3.2}{Wzorzec architektoniczny Model-View-Controller}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.3}{Wymagania funkcjonalne i niefunkcjonalne}{chapter.3}% 13
 \BOOKMARK [1][-]{section.3.4}{Diagram pakiet\363w}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.5}{Projekt bazy danych}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.6}{Przypadki uzycia}{chapter.3}% 16
-\BOOKMARK [0][-]{chapter.4}{Interfejs uzytkownika}{}% 17
-\BOOKMARK [1][-]{section.4.1}{Widok Logowania}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.2}{Widok Listy Zadan}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.3}{Widok Admina}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.4}{Widok Statystyk}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.5}{Widok Tablicy}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.6}{Widok Szczeg\363\233\363w Zadania}{chapter.4}% 23
-\BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 24
-\BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 25
-\BOOKMARK [2][-]{subsection.5.1.1}{Model}{section.5.1}% 26
-\BOOKMARK [2][-]{subsection.5.1.2}{View - Widok}{section.5.1}% 27
-\BOOKMARK [2][-]{subsection.5.1.3}{Controller - Kontroler}{section.5.1}% 28
-\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 29
-\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 30
-\BOOKMARK [1][-]{section.5.4}{Opis ciekawych implementacji}{chapter.5}% 31
-\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 32
-\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 33
-\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 34
-\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 35
-\BOOKMARK [0][-]{chapter*.30}{Bibliografia}{}% 36
-\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 37
+\BOOKMARK [1][-]{section.3.5}{ Komunikacja klient - serwer}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.6}{Projekt bazy danych}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.6.1}{Normalizacja bazy danych}{section.3.6}% 17
+\BOOKMARK [1][-]{section.3.7}{Przypadki uzycia}{chapter.3}% 18
+\BOOKMARK [0][-]{chapter.4}{Interfejs uzytkownika}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Widok Logowania}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Widok Listy Zadan}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{Widok Admina}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.4}{Widok Statystyk}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.5}{Widok Tablicy}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.6}{Widok Szczeg\363\233\363w Zadania}{chapter.4}% 25
+\BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 26
+\BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.1.1}{Model}{section.5.1}% 28
+\BOOKMARK [2][-]{subsection.5.1.2}{View - Widok}{section.5.1}% 29
+\BOOKMARK [2][-]{subsection.5.1.3}{Controller - Kontroler}{section.5.1}% 30
+\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.4}{Opis wazniejszych implementacji}{chapter.5}% 33
+\BOOKMARK [2][-]{subsection.5.4.1}{Autoryzacja}{section.5.4}% 34
+\BOOKMARK [2][-]{subsection.5.4.2}{ Tablica przeciagnij i upusc}{section.5.4}% 35
+\BOOKMARK [2][-]{subsection.5.4.3}{Rysowanie wykres\363w}{section.5.4}% 36
+\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 37
+\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 38
+\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 39
+\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 40
+\BOOKMARK [0][-]{chapter*.36}{Bibliografia}{}% 41
+\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 42
