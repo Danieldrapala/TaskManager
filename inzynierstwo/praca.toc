@@ -15,45 +15,45 @@
 \contentsline {paragraph}{Wymagania funkcjonalne dodatkowe dla administratora}{8}{paragraph*.5}%
 \contentsline {paragraph}{Wymagania niefunkcjonalne}{8}{paragraph*.6}%
 \contentsline {section}{\numberline {3.4}Diagram pakietów}{9}{section.3.4}%
-\contentsline {paragraph}{Serwer }{9}{paragraph*.8}%
-\contentsline {paragraph}{Repository}{9}{paragraph*.9}%
-\contentsline {paragraph}{domain}{9}{paragraph*.10}%
-\contentsline {paragraph}{config}{9}{paragraph*.11}%
-\contentsline {paragraph}{service}{9}{paragraph*.12}%
-\contentsline {paragraph}{rest}{9}{paragraph*.13}%
-\contentsline {paragraph}{security}{10}{paragraph*.14}%
-\contentsline {paragraph}{aplikacja webowa}{10}{paragraph*.15}%
-\contentsline {paragraph}{config, model i service}{10}{paragraph*.16}%
-\contentsline {paragraph}{user-view}{10}{paragraph*.17}%
-\contentsline {paragraph}{admin}{10}{paragraph*.18}%
-\contentsline {paragraph}{shared}{10}{paragraph*.19}%
-\contentsline {section}{\numberline {3.5} Komunikacja klient - serwer}{10}{section.3.5}%
+\contentsline {paragraph}{Serwer }{9}{paragraph*.7}%
+\contentsline {paragraph}{Repository}{9}{paragraph*.8}%
+\contentsline {paragraph}{domain}{9}{paragraph*.9}%
+\contentsline {paragraph}{config}{9}{paragraph*.10}%
+\contentsline {paragraph}{service}{9}{paragraph*.11}%
+\contentsline {paragraph}{rest}{9}{paragraph*.12}%
+\contentsline {paragraph}{security}{9}{paragraph*.13}%
+\contentsline {paragraph}{aplikacja webowa}{9}{paragraph*.14}%
+\contentsline {paragraph}{config, model i service}{9}{paragraph*.15}%
+\contentsline {paragraph}{user-view}{9}{paragraph*.16}%
+\contentsline {paragraph}{admin}{10}{paragraph*.17}%
+\contentsline {paragraph}{shared}{10}{paragraph*.18}%
+\contentsline {section}{\numberline {3.5}Komunikacja klient - serwer}{10}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Projekt bazy danych}{11}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Normalizacja bazy danych}{14}{subsection.3.6.1}%
+\contentsline {subsubsection}{Normalizacja bazy danych}{14}{subsubsection*.24}%
 \contentsline {section}{\numberline {3.7}Przypadki użycia}{15}{section.3.7}%
-\contentsline {chapter}{\numberline {4}Interfejs użytkownika}{21}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Widok Logowania}{21}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Widok Listy Zadań}{21}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Widok Admina}{21}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Widok Statystyk}{21}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Widok Tablicy}{21}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Widok Szczegółów Zadania}{21}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Implementacja systemu}{23}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Implementacja wzorca MVC}{23}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Model}{23}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}View - Widok}{23}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Controller - Kontroler}{23}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}Użyte technologie}{23}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Narzędzia pomocnicze i środowisko programistyczne }{24}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Opis ważniejszych implementacji}{24}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Autoryzacja}{24}{subsection.5.4.1}%
-\contentsline {paragraph}{konfiguracja}{24}{paragraph*.34}%
-\contentsline {paragraph}{Autoryzacja i tworzenie konta}{24}{paragraph*.35}%
-\contentsline {subsection}{\numberline {5.4.2} Tablica przeciągnij i upuść}{25}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Rysowanie wykresów}{26}{subsection.5.4.3}%
-\contentsline {chapter}{\numberline {6}Instalacja i wdrożenie}{27}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Podsumowanie}{29}{chapter.7}%
-\contentsline {section}{\numberline {7.1}podsumowanie pracy}{29}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Plany rozwoju aplikacji}{29}{section.7.2}%
-\contentsline {chapter}{Bibliografia}{31}{chapter*.36}%
-\contentsline {chapter}{\numberline {A}Zawartość płyty CD}{33}{appendix.A}%
+\contentsline {chapter}{\numberline {4}Interfejs użytkownika}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Widok Logowania}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Widok Listy Zadań}{23}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Widok Admina}{23}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Widok Statystyk}{23}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Widok Tablicy}{23}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Widok Szczegółów Zadania}{23}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Implementacja systemu}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Implementacja wzorca MVC}{25}{section.5.1}%
+\contentsline {paragraph}{Model}{25}{paragraph*.36}%
+\contentsline {paragraph}{View - Widok}{25}{paragraph*.37}%
+\contentsline {paragraph}{Controller - Kontroler}{25}{paragraph*.38}%
+\contentsline {section}{\numberline {5.2}Użyte technologie}{25}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Narzędzia pomocnicze i środowisko programistyczne }{26}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Opis ważniejszych implementacji}{26}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Bezpieczeństwo aplikacji}{26}{subsection.5.4.1}%
+\contentsline {subsubsection}{konfiguracja}{26}{subsubsection*.39}%
+\contentsline {subsubsection}{Autoryzacja i tworzenie konta}{26}{subsubsection*.40}%
+\contentsline {subsection}{\numberline {5.4.2}Tablica przeciągnij i upuść}{28}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Rysowanie wykresów}{29}{subsection.5.4.3}%
+\contentsline {chapter}{\numberline {6}Instalacja i wdrożenie}{31}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Podsumowanie}{33}{chapter.7}%
+\contentsline {section}{\numberline {7.1}podsumowanie pracy}{33}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Plany rozwoju aplikacji}{33}{section.7.2}%
+\contentsline {chapter}{Bibliografia}{41}{chapter*.41}%
+\contentsline {chapter}{\numberline {A}Zawartość płyty CD}{43}{appendix.A}%

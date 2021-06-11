@@ -1,8 +1,12 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{ApacheMavenProject}
 Apache maven project documentation.
 \newblock Web pages: \url{https://maven.apache.org/what-is-maven.html}.
+
+\bibitem{diagrams}
+Diagrams tool.
+\newblock Web pages: \url{https://www.diagrams.net/}.
 
 \bibitem{draganddrop}
 Drag drop event angular overview.
@@ -27,6 +31,16 @@ Spring initializr.
 \bibitem{SpringSecurity}
 Spring security overview.
 \newblock Web pages: \url{https://spring.io/projects/spring-security}.
+
+\bibitem{MdbAngularBootstrap}
+Spring security overview.
+\newblock Web pages:
+  \url{https://mdbootstrap.com/docs/angular/advanced/charts/#docsTabsOverview}.
+
+\bibitem{rfc7230}
+R.~T. Fielding,  J.~Reschke.
+\newblock {Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing}.
+\newblock RFC 7230, Czerw. 2014.
 
 \bibitem{6827095}
 A.~Syromiatnikov,  D.~Weyns.

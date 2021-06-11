@@ -482,38 +482,43 @@
 	prze-ka-za-nym skoń-czo-nym moż-esz na-tu-ral-na cią-gu tab-li-cy
 	prze-ka-za-nej od-po-wied-nio}
 
-
+\def\blankpage{%
+	\clearpage%
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\null%
+	\clearpage}
 
 \frontmatter
-
+	\renewcommand{\lstlistlistingname}{Spis kodów źródłowych}
+	
 \begin{document}
 
 	\begin{titlingpage}
-		\vspace*{\fill}
-		\begin{center}
-			\begin{picture}(300,510)
-				\put(11,520){\makebox(0,0)[l]{\large \textsc{Wydział Podstawowych Problemów Techniki}}}
-				\put(11,500){\makebox(0,0)[l]{\large \textsc{Politechnika Wrocławska}}}
-				\put(80,320){\Huge \textsc{Aplikacja wspomagająca}}
-				\put(80,280){\Huge \textsc{zarządzanie}}
-				\put(80,240){\Huge \textsc{zadaniami}}
-				\put(90,200){\makebox(0,0)[l]{\large \textsc{Daniel Drapała}}}
-				\put(90,180){\makebox(0,0)[l]{\large \textsc{Nr indeksu: 244939}}}
-				\put(200,100){\makebox(0,0)[l]{\large Praca inżynierska napisana}}
-				\put(200,80){\makebox(0,0)[l]{\large pod kierunkiem}}
-				\put(200,60){\makebox(0,0)[l]{\large dr Marcin Kik}}
-				
-				\put(115,-70){\includegraphics[width=0.15\textwidth]{pwr}}
-				\put(106,-80){\makebox(0,0)[bl]{\large \textsc{Wrocław 2021}}}
-			\end{picture}
-		\end{center}	
-		\vspace*{\fill}
-	\end{titlingpage}
-	
-        \cleardoublepage
-		
-	\pagenumbering{Roman}
+	\vspace*{\fill}
+	\begin{center}
+		\begin{picture}(300,510)
+			\put(11,520){\makebox(0,0)[l]{\large \textsc{Wydział Podstawowych Problemów Techniki}}}
+			\put(11,500){\makebox(0,0)[l]{\large \textsc{Politechnika Wrocławska}}}
+			\put(70,320){\Huge \textsc{Aplikacja wspomagająca}}
+			\put(70,280){\Huge \textsc{zarządzanie zadaniami}}
+
+			\put(90,200){\makebox(0,0)[l]{\large \textsc{Daniel Drapała}}}
+			\put(90,180){\makebox(0,0)[l]{\large \textsc{Nr indeksu: 244939}}}
+			\put(200,100){\makebox(0,0)[l]{\large Praca inżynierska napisana}}
+			\put(200,80){\makebox(0,0)[l]{\large pod kierunkiem}}
+			\put(200,60){\makebox(0,0)[l]{\large dr Marcin Kik}}
+			
+			\put(115,-70){\includegraphics[width=0.15\textwidth]{pwr}}
+			\put(106,-80){\makebox(0,0)[bl]{\large \textsc{Wrocław 2021}}}
+		\end{picture}
+	\end{center}	
+	\vspace*{\fill}
+\end{titlingpage}
+
+\blankpage
 	\pagestyle{tableOfContentStyle}
+		\pagenumbering{Roman}
 	\tableofcontents
 
 		
@@ -547,9 +552,8 @@
 	\cleardoublepage
 	
 	\input{podsumowanie}
+	
 	\cleardoublepage
-	
-	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAFIA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -558,10 +562,14 @@
 	\bibliographystyle{plabbrv}
 	\bibliography{literatura}
 	\thispagestyle{chapterBeginStyle}
-        \addcontentsline{toc}{chapter}{Bibliografia}
+    \addcontentsline{toc}{chapter}{Bibliografia}
 
 	\cleardoublepage
-	
+
+	\listoffigures
+	\cleardoublepage
+	\lstlistoflistings
+	\cleardoublepage
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DODATKI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

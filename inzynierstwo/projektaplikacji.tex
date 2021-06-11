@@ -67,46 +67,35 @@ występuje.
 \clearpage
 \section{Diagram pakietów}
 
-
-\begin{figure}[h]
-	
-	\centering
-	\includegraphics[width=0.90\textwidth]{pakiety}		
-	\caption{Diagram pakietów z których złożona jest cała aplikacja }
-	\label{pakiet}
-\end{figure}
-
 Pakiety podzielone są na elementy serwera i aplikacji webowej, przedstawione zostały na diagramie ~\ref{pakiet}.
 \paragraph{Serwer }
 \paragraph{Repository}
- posiada charakterystyczne dla wzorca architektonicznego Spring Data klasy z annotacją @Repository. Są to klasy, które udostępniają gotowe metody do
+posiada charakterystyczne dla wzorca architektonicznego Spring Data klasy z annotacją @Repository. Są to klasy, które udostępniają gotowe metody do
 wyciągania potrzebnych danych z bazy
 
 \paragraph{domain}
 
- definiuje model danych. Są to Tabele i ich wszystkie atrybuty przepisane na klasę z której korzystają klasy z pakietu repository
+definiuje model danych. Są to Tabele i ich wszystkie atrybuty przepisane na klasę z której korzystają klasy z pakietu repository
 \paragraph{config}
- jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwera poczynając od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
+jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwera poczynając od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
 \paragraph{service}  to grupa klas z annotacją @Service odpowiedzialnych za wykonywanie logiki związanej z modyfikacją i odpowiednim zapisywaniem danych. Korzysta z pakietu repository, a sam wykorzystywany jest w pakiecie rest.
 \paragraph{rest}  jest odpowiedzialny za transfer danych sposobem REST, czyli udostępnia  metody korzystające z serwisów na podane URI. Przykładowo aplikacja webowa wysyła na serwer zapytanie HTTP POST na URI
 \textit{www.taskManager.com/task}. Serwer odczytuje zapytanie i przygotowywuje odpowiedź, w tym celu odpowiednia klasa z pakietu rest mapuje podane zapytanie do odpowiedniej metody, która wykonuje akurat w tym przykładzie zapisanie zadania do bazy danych i zwraca zwrotną wiadomość ~\ref{przykładowa metoda controllera}.
 
 \paragraph{security} zawiera klasy odpowiedzialne za autentykację połączenia, zanim jakiekolwiek zapytanie trafi do metod z pakietu rest, najpierw serwer oczekuje na odpowiedź ze strony klienta odnośnie sukcesu autoryzacji i pozwoleń jakie zalogowany użytkownik posiada.
 
-\begin{lstlisting} [ caption=Przykładowa metoda controllera z pakietu rest, captionpos=b, label={przykładowa metoda controllera}]
-
-@PostMapping("/task")
-public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO){
-	log.debug("REST request to save Task : {}", taskDTO);
-	if (taskDTO.getId() != null) {
-		(...)
+\begin{lstlisting} [ caption=Uproszczona metoda kontrolera z pakietu rest, captionpos=b, label={przykładowa metoda controllera}]
+	
+	@PostMapping("/task")
+	public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO){
+		if (taskDTO.getId() != null) {
+			(...)
 		}
-	return ResponseEntity
-	.created(new URI("/task/" + task.getId()))
-	.headers(HeaderUtil.createAlert(applicationName))
-	.body(task);
+		return ResponseEntity
+		.headers(HeaderUtil.createAlert(applicationName))
+		.body(task);
 	}
-
+	
 \end{lstlisting}
 
 \paragraph{aplikacja webowa}
@@ -115,8 +104,18 @@ public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDTO taskDTO){
 \paragraph{admin} posiada komponenty dostępne tylko dla administratora i wszelką logikę związaną z konfiguracją nowych użytkowników.
 \paragraph{shared} jest to pakiet, na który składają się wszystkie wspólne dla wszystkich innych klas komponenty, czyli bloki wyświetlające błędy, responsywna lista, nagłówek strony, stopka strony. 
 
-\section{ Komunikacja klient - serwer}
-Zbiór założeń, który definiuje komunikację pomiędzy systemami nazywamy API (z angielskiego Application Programming Interface, czyli interfejs programowania aplikacji).  Komunikacja odbywa sie za pomocą protokołów HTTP. Protokół HTTP jest to zestaw reguł odnośnie komunikacji polegający na wysyłaniu żądania i oczekiwaniu na odpowiedź. Klient wysyła zapytania, oczekuje na odpowiedź, a serwer oczekuje na zapytania odsyłając odpowiedź.%  \cite{rfc7230}
+ Poniżej znajduje się diagram pakietów projektu wygenerowany przez narzędzie do rysowania diagramów diagrams.net \cite{diagrams}
+\begin{figure}[h]
+	
+	\centering
+	\includegraphics[width=0.90\textwidth]{pakiety}		
+	\caption{Diagram pakietów z których złożona jest cała aplikacja }
+	\label{pakiet}
+\end{figure}
+
+
+\section{Komunikacja klient - serwer}
+Zbiór założeń, który definiuje komunikację pomiędzy systemami nazywamy API (z angielskiego Application Programming Interface, czyli interfejs programowania aplikacji).  Komunikacja odbywa sie za pomocą protokołów HTTP. Protokół HTTP jest to zestaw reguł odnośnie komunikacji polegający na wysyłaniu żądania i oczekiwaniu na odpowiedź. Klient wysyła zapytania, oczekuje na odpowiedź, a serwer oczekuje na zapytania odsyłając odpowiedź \cite{rfc7230}.
 \newline
 Protokół ten składa się z:
 \begin{itemize}
@@ -136,8 +135,9 @@ Metody protokołu pozwalają rozróżnić rodzaj wiadomości. W aplikacji używa
 Klient do komunikacji używa klas zaimplementowanych w pakiecie \textit{services}. Składają się one z prostych metod, które potrzebują jedynie odpowiednią ścieżkę, odpowiednią metodę HTTP i oczekiwany typ danych.
 Klasy w pakiecie \textit{rest} serwera udostępniają metody na poszczególne ścieżki, w których zastosowana jest logika i zwracane zostają odpowiednie dane, wiadomość OK ze statusem 200 [~\ref{przykładowa metoda controllera}].
 
-\section{Projekt bazy danych}
+\section{Baza danych}
 
+\subsubsection{Projekt}
 Sekcja ta w pełni skupiona jest na budowie bazy danych. Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
 W celu kontroli wersji projektu bazy danych do serwera podpięta jest biblioteka zwana Liquibase, która przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w formacie XML. Liquibase pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
 \begin{figure}[h]
@@ -173,7 +173,7 @@ Oprócz głównych tabel do bazy danych dodane zostały również trzy nierelacy
 	\label{nierel}
 \end{figure}
 \clearpage
-\subsection{Normalizacja bazy danych}
+\subsubsection{Normalizacja}
 ~\ref{projektdb}
 
 \clearpage
@@ -222,7 +222,7 @@ W tym podrozdziale przedstawione zostały najważniejsze przypadki użycia aplik
 \begin{tabular}{ |p{2cm}||p{13cm}|  }
 	
 	\hline
-	\multicolumn{2}{|c|}{Logowaniea} \\
+	\multicolumn{2}{|c|}{Logowanie} \\
 	\hline
 Aktorzy: &klient , serwer autoryzacyjny, system prezentujący\\
 	\hline
@@ -230,7 +230,7 @@ Warunki wstępne: & sesja klienta nie jest autoryzowana, klient posiada aktywne 
 	\hline
 	Scenariusz: &
 	\begin{enumerate}
-		\item klient wchodzi na panel logowania za pomocą linka "Log int" lub używając przycisku na nagłówku strony 
+		\item klient wchodzi na panel logowania za pomocą linka "Sign in" lub używając przycisku na nagłówku strony 
 		\item klient wprowadza prawidłowe dane, nie zaznacza pola 'remember me'
 		\begin{enumerate}
 			\item system sprawdza czy istnieje użytkownik o podanych informacjach kwalifikujących
@@ -242,6 +242,7 @@ Warunki wstępne: & sesja klienta nie jest autoryzowana, klient posiada aktywne 
 			\item system autoryzacyjny odnajduje w bazie użytkownika,
 			\item system autoryzacyjny tworzy 20-cyfrowy unikalny kod zwany tokenem i umieszcza go dla danego użytkownika
 			\item system wysyła do systemu prezentującego wiadomość o poprawnym procesie weryfikacji, więc użytkownik zostaje przekierowany do widoku głównego po udanym logowaniu i przyznawane są prawa do przeglądania stron odpowiednich dla roli użytkownika, czyli ROLE\_ADMIN lub ROLE\_USER
+			\item sesja użytkownika zostaje zapamiętana
 		\end{enumerate}
 		\item klient wprowadza złe dane
 		\begin{enumerate}
@@ -283,6 +284,33 @@ Warunki wstępne: &sesja użytkownika jest autoryzowana i jest on na stronie "Bo
 \end{tabular}
 	\caption{Przypadek użycia - Dodawanie Zadania}
 \end{table}
+
+
+
+\begin{table}[h!]
+\begin{tabular}{ |p{2cm}||p{13cm}|  }
+
+\hline
+\multicolumn{2}{|c|}{Tworzenie tablicy} \\
+\hline
+Aktorzy: &użytkownik, serwer prezentujący,\\
+\hline
+Warunki wstępne: &sesja użytkownika jest autoryzowana i jest on na stronie "Board", lecz w bazie danych nie ma żadnych informacje odnośnie kolumn i tablicy\\
+\hline
+Scenariusz: &
+
+\begin{enumerate}
+	\item Użytkownik przechodzi do panelu "Board", serwer nie znajduję istniejącej tablicy, więc przekierowywuje użytkownika do formularzu tworzenia Tablicy
+	\item pojawia się formularz z informacjami do podania na temat tablicy
+	\item potrzebne do wypełnienia pola to nazwa tablicy, kolejno nazwa kolumny, po kliknięciu przycisku "Add Column", wyskakuje kolejne pole z nazwą dla kolejnej kolumny
+	\item po dodaniu kolumn wybierane zostają kolumny domyślna i zamykająca zadania
+	\item użytkownik po kliknięciu "Save" przekierowany jest na stronę "board", gdzie widzi uprzednio utworzoną tablicę
+\end{enumerate}\\
+\hline
+\end{tabular}
+\caption{Przypadek użycia -  Tworzenie tablicy}
+\end{table}
+
 
 \begin{table}[h!]
 		
