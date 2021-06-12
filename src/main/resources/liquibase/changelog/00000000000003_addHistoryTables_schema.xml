@@ -66,10 +66,6 @@
 <!--                                 referencedColumnNames="card_id"-->
 <!--                                 referencedTableName="card"/>-->
 
-        <addColumn tableName="column">
-            <column name="default" type="boolean"/>
-            <column name="completed_state" type="boolean"/>
-        </addColumn>
         <addColumn tableName="task">
             <column name="assigned_to" type="bigint"/>
         </addColumn>

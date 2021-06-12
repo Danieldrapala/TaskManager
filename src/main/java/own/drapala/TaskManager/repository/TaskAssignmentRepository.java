@@ -29,9 +29,9 @@ public interface TaskAssignmentRepository extends JpaRepository<TaskAssignment,L
                     "FROM " +
                     "    TaskAssignment ta " +
                     "WHERE " +
-                    "MONTH(ta.status) = :month AND YEAR(ta.status) = :year " +
+                    "dayofweek(ta.status) = :day AND MONTH(ta.status) = :month AND YEAR(ta.status) = :year " +
                     "AND ta.task = :task_id " +
                     "order by ta.task "
     )
-    Long getAssignmentCount(Long task_id, Integer month, Integer year );
+    Long getAssignmentCount(Long task_id, Integer day, Integer year, Integer month );
 }

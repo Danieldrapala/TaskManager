@@ -1,8 +1,149 @@
 \chapter{Interfejs użytkownika}
 wstawienie skrinów aplikacji zauważenie ciekawych mechanizmów html css cytat książka html css
-\section{Widok Logowania}
-\section{Widok Listy Zadań}
-\section{Widok Admina}
+\section{Widok strony głównej}
+Widok strony głównej zależy od tego czy sesja użytkownika jest autoryzowana. Przed zalogowaniem wyświetlane są informace na temat aplikacji. Po zalogowaniu zobaczyć możemy przyciski przekierowywujące użytkownika do głównych podmiotów aplikacji.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{home-not-auth}
+	
+	\caption{Widok strony głównej przed zalogowaniem.}
+	\label{not-auth-home}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{home-auth}
+	
+	\caption{Widok strony głównej po zalogowaniu.}
+\label{auth-home}
+\end{figure}
+
+\section{Widok nagłówka strony}
+Na rysunku \ref{navbar-states} przedstawiony został widok nagłówka, który jest elementem umiejscowionym na górze strony na każdym dostępnym widoku. Posiada przyciski przekierowywujące do innych podmiotów aplikacji.
+Stan z najmniejszą liczbą dostępnych opcji jest wyświetlany dla użytkownika niezalogowanego. Jedynymi możliwościami jest wtedy strona startowa, strona rejestracjyjna oraz strona z formularzem logowania.
+Drugi stan jest wyświetlany dla administratora, który oprócz funkcji użytkownika posiada również zakładkę \linebreak \textit{Administration}, gdzie może przejść do zarządzania użytkownikami lub tablicą.
+Trzeci stan dla użytkownika o zwykłych uprawnieniach składa się z odnośnika do strony startowej, ale również wszystkie dostępne podmioty storny: 
+\begin{itemize}
+	\item lista użytkowników, która jest jedynie listą podglądową, nie posiada ona licznych funkcji jak lista dla administratora \ref{users-list}
+	\item tablica kanban
+	\item lista zadań
+	\item wykresy
+	\item ustawienia konta
+	\item zmiana hasła
+	\item aktywne, zapisane sesje
+	\item przycisk wylogowania się z sesji
+\end{itemize}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{navbar-states}
+	
+	\caption{Widok nagłówka w trzech stanach.}
+	\label{navbar-states}
+\end{figure}
+\clearpage
+
+\section{Widoki rejestracji i logowania}
+Widok rejestracji i logowania składają się z formularza do wypełnienia, aby dostarczyć serwerowi odpowiednie dane do autoryzacji.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.60\textwidth]{loginstate}
+	
+	\caption{Widok logowania.}
+	\label{login-state}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.60\textwidth]{register}
+	
+	\caption{Widok rejestracji nowego użytkownika.}
+	\label{register-state}
+\end{figure}
+\clearpage
+\subsection{Widok zmiany hasła}
+Widok \ref{change-pass} prezentuje formularz ze zmianą hasła. Ciekawym dodatkiem wprowadzonym do danego widoku jest pasek siły hasła. Jest to styl składający się z pięciu bloków kolorowanych odpowiednio na kolor czerwony pomarańczowy i zielony w zależności od tego jak silne hasło zostało wprowadzone. Odpowiedzialna za kolorwanie tych bloków metoda analizuje wprowadzone hasło pod kątem skomplikowania za pomocą wyrażeń regularnych.
+Sprawdzane zostaje czy w haśle użyty został conajmniej jeden symbol specjalny, jedna wielka litera, jedna mała litera oraz liczba.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{change-pass}
+	
+	\caption{Widok zmiany hasła.}
+	\label{change-pass}
+\end{figure}
+\clearpage
+
+\section{Widok listy zadań i użytkowników}
+Widok list dostępnych z aplikacji składają się z responsywnych list, które wyświetlają informacje wyciągane z bazy danych w postaci stron. Serwis wysyłający zapytanie odnośnie listy użytkowników, bądź zadań przesyła informacje odnośnie ograniczeń. Podane listy ograniczone są do dwudziestupięciu elementów na stronę. Serwer wysyła maksymalną liczbę elementów oraz informację odnośnie liczby pozostałych elementów. Za pomocą tych danych otrzymujemy listę podzieloną na strony. Przejście na kolejną strone skutkowałoby wysłaniem zapytania o kolejne dwadzieścia pięć elemntów.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{taskslist}
+	
+	\caption{Widok listy zadań.}
+	\label{tasklist}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{users-lists}
+	
+	\caption{Widok listy użytkowników dla administratora.}
+	\label{users-list}
+\end{figure}
+\clearpage
+
 \section{Widok Statystyk}
-\section{Widok Tablicy}
+Statystyki przedstawione są na przejrzystym panelu. Na początku strony wyświetlane zostają informacje na temat projektu wraz z wykresami kołowymi przedstawiające ogólny postęp wykonanych zadań.
+Niżej widnieje lista użytkowników oraz lista zadań. Po wybraniu odpowiednich rekordów z listy wyświetlane zostają po kolei wykresy dla poszczególnych zadań jak na rysunku \ref{scrolledstatistics} 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{statistics}
+	
+	\caption{Widok statystyk.}
+	
+	\label{statistics}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.60\textwidth]{scrolledstatistics}
+	
+	\caption{Widok statystyk dla wymienionych z listy zadań.}
+	
+	\label{scrolledstatistics}
+\end{figure}
+\clearpage
+\section{Widoki związane z tablicą}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.60\textwidth]{addboard}
+	
+	\caption{Widok dodawania tablicy.}
+	\label{addb}
+\end{figure}
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.60\textwidth]{boardedit}
+	
+	\caption{Widok edycji tablicy.}
+	\label{boardedit}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{kanban-view}
+	
+	\caption{Widok tablicy.}
+	\label{board}
+\end{figure}
+\clearpage
 \section{Widok Szczegółów Zadania}
+ Widok \ref{taskcomm} przedstawiający szczegóły zadania za pomocą formularza, który może zostać w każdej chwili zaktualizowany. W szczegółach zadania możemy wprowadzać odpowiednio komentarze dotyczące zadania. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.90\textwidth]{taskcomm}
+	
+	\caption{Widok szczegółów zadania.}
+	\label{taskcomm}
+\end{figure}

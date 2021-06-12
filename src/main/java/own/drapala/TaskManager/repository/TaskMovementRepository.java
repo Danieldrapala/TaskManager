@@ -14,10 +14,11 @@ public interface TaskMovementRepository extends JpaRepository<TaskMovement,Long>
                     "FROM " +
                     "    TaskMovement tm " +
                     "WHERE " +
-                    "   MONTH(tm.timestamp) = :month " +
+                    "   dayofweek(tm.timestamp) = :day " +
+                    "   AND MONTH(tm.timestamp) = :month " +
                     "   AND YEAR(tm.timestamp) = :year " +
                     "   AND tm.task = :task_id " +
                     "order by tm.task "
     )
-    Long getDragNDropFlow(Long task_id, Integer month, Integer year );
+    Long getDragNDropFlow(Long task_id, Integer day , Integer year, Integer month );
 }

@@ -48,7 +48,7 @@ public class Task {
     private User assignedTo;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "column_id")
+    @JoinColumn(name = "card_id")
     private Card card;
 
     public long daysLeftUntilDeadline(LocalDate date) {

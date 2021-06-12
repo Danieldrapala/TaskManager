@@ -21,7 +21,7 @@ export class LineChartTaskComponent {
   ngOnInit(): void {
       this.getTaskAssignedTo(this.taskId!);
       this.getTaskTerms(this.taskId!);
-      this.getSixMonths();
+      this.getSortedDays();
   }
 
   getTaskTerms(id: number) {
@@ -32,11 +32,11 @@ export class LineChartTaskComponent {
     }); 
   }
 
-  getSixMonths() {
+  getSortedDays() {
     let date = new Date();
     var step;
-    for (step = 5; step >= 0; step--) {
-     this.chartLabels.push(this.chartMapLabels.get((date.getMonth()-step)%12)!)
+    for (step = 6; step >= 0; step--) {
+     this.chartLabels.push(this.chartMapLabels.get(this.mod((date.getDay()  - step), 7))!)
     }
   }
 
@@ -53,29 +53,30 @@ export class LineChartTaskComponent {
  
   }
 
+  mod(n: number, m: number) {
+    return ((n % m) + m) % m;
+  }
+
   public chartType: string = 'line';
 
   public dataSets: Array<any> = 
   [{  data: this.assignmentCount , label: 'Assingment count'}, {  data: this.dragAndDropCount  , label: 'DragAndDrop events count'}];
 
   public chartMapLabels: Map<number,string> =new Map([
-    [0, "January"],
-    [1, "February"],
-    [2, "March"],
-    [3, "April"],
-    [4, "May"],
-    [5, "June"],
-    [6, "July"],
-    [7, "August"],
-    [8, "September"],
-    [9, "October"],
-    [10, "November"],
-    [11, "December"]]);
+    [0, "Sunday"],
+    [1, "Monday"],
+    [2, "Tuesday"],
+    [3, "Wendsday"],
+    [4, "Thursday"],
+    [5, "Friday"],
+    [6, "Saturday"]
+  ]);
 
   public chartOptions: any = {
     responsive: true
   };
 
+  
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 }

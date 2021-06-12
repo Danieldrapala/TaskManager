@@ -21,7 +21,7 @@
             </column>
             <column name="is_completed" type="boolean"/>
             <column name="owner_id" type="bigint"/>
-            <column name="column_id" type="bigint"/>
+            <column name="card_id" type="bigint"/>
 
         </createTable>
         <addAutoIncrement

@@ -13,8 +13,8 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(200)"/>
-            <column name="default_column" type="bigint"/>
-            <column name="closing_column" type="bigint"/>
+            <column name="default_card" type="bigint"/>
+            <column name="closing_card" type="bigint"/>
 
         </createTable>
         <addAutoIncrement
@@ -24,8 +24,8 @@
                 schemaName="taskmanager"
                 startWith="1"
                 tableName="board"/>
-        <createTable tableName="column">
-            <column name="column_id" type="bigint">
+        <createTable tableName="card">
+            <column name="card_id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(30)">
@@ -35,19 +35,19 @@
         </createTable>
         <addAutoIncrement
                 columnDataType="bigint"
-                columnName="column_id"
+                columnName="card_id"
                 incrementBy="1"
                 schemaName="taskmanager"
                 startWith="1"
-                tableName="column"/>
-        <addForeignKeyConstraint baseColumnNames="column_id"
+                tableName="card"/>
+        <addForeignKeyConstraint baseColumnNames="card_id"
                                  baseTableName="task"
-                                 constraintName="fk_column_assigned_id"
-                                 referencedColumnNames="column_id"
-                                 referencedTableName="column"/>
+                                 constraintName="fk_card_assigned_id"
+                                 referencedColumnNames="card_id"
+                                 referencedTableName="card"/>
 
         <addForeignKeyConstraint baseColumnNames="board_id"
-                                 baseTableName="column"
+                                 baseTableName="card"
                                  constraintName="fk_board_id"
                                  referencedColumnNames="board_id"
                                  referencedTableName="board"/>

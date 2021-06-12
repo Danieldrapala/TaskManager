@@ -69,8 +69,8 @@ public class StatisticsServiceImpl implements StatisticsService{
         LocalDateTime actualTime = LocalDateTime.now();
 
         List<Long> actualCount = new ArrayList<>();
-        for(int i=5; i>=0; i--)
-            actualCount.add(taskAssignmentRepository.getAssignmentCount(id,actualTime.minusMonths(i).getMonthValue(), actualTime.getYear()));
+        for(int i=6; i>=0; i--)
+            actualCount.add(taskAssignmentRepository.getAssignmentCount(id,(actualTime.minusDays(i).getDayOfWeek().getValue()%7+1)%8, actualTime.getYear(), actualTime.getMonth().getValue()));
         return Optional.of(actualCount);
     }
 
@@ -79,8 +79,8 @@ public class StatisticsServiceImpl implements StatisticsService{
         LocalDateTime actualTime = LocalDateTime.now();
 
         List<Long> actualCount = new ArrayList<>();
-        for(int i=5; i>=0; i--)
-            actualCount.add(taskMovementRepository.getDragNDropFlow(id,actualTime.minusMonths(i).getMonthValue(), actualTime.getYear()));
+        for(int i=6; i>=0; i--)
+            actualCount.add(taskMovementRepository.getDragNDropFlow(id,(actualTime.minusDays(i).getDayOfWeek().getValue()%7+1)%8, actualTime.getYear(), actualTime.getMonth().getValue()));
         return Optional.of(actualCount);
     }
 }

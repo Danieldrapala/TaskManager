@@ -18,25 +18,27 @@
 \BOOKMARK [2][-]{subsection.3.6.2}{Normalizacja}{section.3.6}% 18
 \BOOKMARK [1][-]{section.3.7}{Przypadki uzycia}{chapter.3}% 19
 \BOOKMARK [0][-]{chapter.4}{Interfejs uzytkownika}{}% 20
-\BOOKMARK [1][-]{section.4.1}{Widok Logowania}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.2}{Widok Listy Zadan}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.3}{Widok Admina}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.4}{Widok Statystyk}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.5}{Widok Tablicy}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.6}{Widok Szczeg\363\233\363w Zadania}{chapter.4}% 26
-\BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 27
-\BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 28
-\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 29
-\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 30
-\BOOKMARK [1][-]{section.5.4}{Opis wazniejszych implementacji}{chapter.5}% 31
-\BOOKMARK [2][-]{subsection.5.4.1}{Bezpieczenstwo aplikacji}{section.5.4}% 32
-\BOOKMARK [2][-]{subsection.5.4.2}{Tablica przeciagnij i upusc}{section.5.4}% 33
-\BOOKMARK [2][-]{subsection.5.4.3}{Rysowanie wykres\363w}{section.5.4}% 34
-\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 35
-\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 36
-\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 37
-\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 38
-\BOOKMARK [0][-]{chapter*.43}{Bibliografia}{}% 39
-\BOOKMARK [0][-]{chapter*.43}{Spis rysunk\363w}{}% 40
-\BOOKMARK [0][-]{chapter*.43}{Spis kod\363w zr\363d\233owych}{}% 41
-\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 42
+\BOOKMARK [1][-]{section.4.1}{Widok strony g\233\363wnej}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.2}{Widok nag\233\363wka strony}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{Widoki rejestracji i logowania}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.3.1}{Widok zmiany has\233a}{section.4.3}% 24
+\BOOKMARK [1][-]{section.4.4}{Widok listy zadan i uzytkownik\363w}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.5}{Widok Statystyk}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.6}{Widoki zwiazane z tablica}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.7}{Widok Szczeg\363\233\363w Zadania}{chapter.4}% 28
+\BOOKMARK [0][-]{chapter.5}{Implementacja systemu}{}% 29
+\BOOKMARK [1][-]{section.5.1}{Implementacja wzorca MVC}{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.2}{Uzyte technologie}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.3}{Narzedzia pomocnicze i srodowisko programistyczne }{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.4}{Opis wazniejszych implementacji}{chapter.5}% 33
+\BOOKMARK [2][-]{subsection.5.4.1}{Bezpieczenstwo aplikacji}{section.5.4}% 34
+\BOOKMARK [2][-]{subsection.5.4.2}{Tablica przeciagnij i upusc}{section.5.4}% 35
+\BOOKMARK [2][-]{subsection.5.4.3}{Rysowanie wykres\363w}{section.5.4}% 36
+\BOOKMARK [0][-]{chapter.6}{Instalacja i wdrozenie}{}% 37
+\BOOKMARK [0][-]{chapter.7}{Podsumowanie}{}% 38
+\BOOKMARK [1][-]{section.7.1}{podsumowanie pracy}{chapter.7}% 39
+\BOOKMARK [1][-]{section.7.2}{Plany rozwoju aplikacji}{chapter.7}% 40
+\BOOKMARK [0][-]{chapter*.57}{Bibliografia}{}% 41
+\BOOKMARK [0][-]{chapter*.57}{Spis rysunk\363w}{}% 42
+\BOOKMARK [0][-]{chapter*.57}{Spis kod\363w zr\363d\233owych}{}% 43
+\BOOKMARK [0][-]{appendix.A}{Zawartosc p\233yty CD}{}% 44

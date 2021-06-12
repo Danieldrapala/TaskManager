@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: cadetblue;
 
 }
 
@@ -20,7 +19,13 @@
 
 
 .board {
+    background-color: cadetblue;
     display: flex;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+
     flex-direction: column;
     flex-grow: 1;
         margin-left: 20px;
@@ -32,32 +37,35 @@
     min-height: 0;
 
     .board-bar {
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+
         background: cadetblue;
-        padding: 0px 15px;
+        padding-top: 20px ;
+        padding-left: 15px;
+        padding-right: 15px;
         display: block;
         .board-name {
+            padding-top: 20px;
+            align-content: flex-end;
             margin-left: 2%;
             align-self: center;
             font-size: 30px;
             font-weight: bold;
             color: #55595C;
-            margin-bottom: 0%;
-        }
-        .add-task-btn{
-            
-            margin-right: 30px;
         }
  
+ 
     }
-    .board-button{
-        margin: 20px;
-    }
+
     .board-wrapper {
         display: flex;
         flex-grow: 1;
         overflow-x: auto;
 
         .board-columns {
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
 
             display: flex;
             flex-grow: 1;
@@ -65,16 +73,20 @@
             min-height: 500px;
             .board-column {
                 
+        
+
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
                 flex-basis: 0; // to force the columns to all be the same size, regardless of content
 
                 min-width: 250px;
-                margin: 20px 40px;
+                margin-bottom: 20px;
+                margin-right: 40px;
+                margin-left: 40px;
                 padding: 25px;
 
-                border-radius: 4px;
+                border-radius: 25px;
 
                 background: rgba(white, 0.5);
 

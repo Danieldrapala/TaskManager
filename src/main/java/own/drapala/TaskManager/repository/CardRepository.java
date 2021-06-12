@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface CardRepository extends JpaRepository<Card,Long> {
 
     @Query("SELECT c FROM Card c  " +
-            "join Board b on c.board = b.id\n" +
+            "JOIN  Board b on c.board = b.id\n" +
             "WHERE b.id = :board_id")
     Optional<List<Card>> findAllCardForGivenBoardId(Long board_id);
 }

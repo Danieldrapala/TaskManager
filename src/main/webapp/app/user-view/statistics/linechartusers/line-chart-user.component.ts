@@ -28,7 +28,7 @@ export class LineChartUserComponent {
     let date = new Date();
     var step;
     for (step = 5; step >= 0; step--) {
-     this.chartLabels.push(this.chartMapLabels.get((date.getMonth()-step)%12)!)
+     this.chartLabels.push(this.chartMapLabels.get(this.mod((date.getMonth()-step),12))!)
     }
   }
 
@@ -79,6 +79,10 @@ export class LineChartUserComponent {
     responsive: true,
     
   };
+
+  mod(n: number, m: number) {
+    return ((n % m) + m) % m;
+  }
 
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }

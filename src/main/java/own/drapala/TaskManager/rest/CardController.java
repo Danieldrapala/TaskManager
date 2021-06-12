@@ -43,7 +43,7 @@ public class CardController {
         Card card= cardService.createColumn(cardDto);
 
         return ResponseEntity
-                .created(new URI("/api/board/" + card.getId()))
+                .created(new URI("/api/board/card" + card.getId()))
                 .headers(
                         HeaderUtil.createAlert(applicationName, "A Column is created with identifier " + card.getId(), card.getName())
                 )

@@ -47,7 +47,7 @@
                 <div class="form-group" >
                   <label for="assignedTo" >Assign To</label>
                   <div style="display: block;">
-                    <mat-select style="width: 70%; margin-right: 5%;" type= "select" formControlName="assignedTo" id="assignedTo" name="assignedTo" >
+                    <mat-select  class="form-control" style="width: 70%; margin-right: 5%;" type= "select" formControlName="assignedTo" id="assignedTo" name="assignedTo" >
                     <mat-option *ngFor="let user of users"  [value]="user.id" >
                       {{ user.email }}
                     </mat-option>

@@ -14,7 +14,6 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe();
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.updateTitle();
@@ -25,14 +24,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  getBackgroundColor() {
-        if (this.router.url === '/board'){
-          return 'cadetblue'
-        } else {
-        return '#ffffff'
-        }
-  
-}
+
 
   private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
     let title: string = routeSnapshot.data['pageTitle'] ?? '';
