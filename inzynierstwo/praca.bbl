@@ -37,6 +37,11 @@ Spring security overview.
 \newblock Web pages:
   \url{https://mdbootstrap.com/docs/angular/advanced/charts/#docsTabsOverview}.
 
+\bibitem{db}
+C.~J. Date.
+\newblock {\em An Introduction to Database Systems}.
+\newblock Pearson, 2003.
+
 \bibitem{rfc7230}
 R.~T. Fielding,  J.~Reschke.
 \newblock {Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing}.

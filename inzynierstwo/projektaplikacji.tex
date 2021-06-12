@@ -137,7 +137,7 @@ Klasy w pakiecie \textit{rest} serwera udostępniają metody na poszczególne ś
 
 \section{Baza danych}
 
-\subsubsection{Projekt}
+\subsection{Projekt}
 Sekcja ta w pełni skupiona jest na budowie bazy danych. Jako baza danych wykorzystana została baza dystrubucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
 W celu kontroli wersji projektu bazy danych do serwera podpięta jest biblioteka zwana Liquibase, która przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w formacie XML. Liquibase pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
 \begin{figure}[h]
@@ -173,9 +173,29 @@ Oprócz głównych tabel do bazy danych dodane zostały również trzy nierelacy
 	\label{nierel}
 \end{figure}
 \clearpage
-\subsubsection{Normalizacja}
-~\ref{projektdb}
+\subsection{Normalizacja}
+Schemat bazy danych stworzony może zostać na wiele, niekoniecznie dobrych sposobów. Normalizacja to czynność, która prowadzi do zoptymalizowania sposobu przetrzymywania danych]. Polega ona na odpowiednich zmianach na tabelach i relacjach, zgodnie z pewnym zbiorem zasad, w celu wyeliminowania niepotrzebnych relacji oraz redundancji danych. Pierwsze trzy zbiory reguł normalizacyjnych nazwane i zdefiniowane zostały przez Edgara Franka Codda. Jest to pierwsza postać normalna (1NF), druga postać normalna (2NF) i trzecia postać normalna (3NF). Zbiory te mają ze sobą pewną zależność. Pierwsza postać normalna jest podzbiorem reguł drugiej postaci normalnej, a druga postać normalna jest podzbiorem trzeciej postaci normalnej. Istnieje więcej postaci normalnych, lecz projekt bazy danych opisywanej aplikacji poddany został normalizacji do 3NF. \cite{db}
 
+\subsubsection{Pierwsza postać normalna}
+	\begin{definition}
+ 		Relacja jest w pierwszej postaci normalnej jeśli każda krotka posiada dokładnie jedną wartość dla danego atrybutu oraz nie istnieją powtarzające się krotki.
+	\end{definition}
+Wszystkie tabele spełniają pierwszą postać normalną. Każda tabela dzieli dane na kolumny o atomowych wartościach. Nigdzie nie występują krotki posiadające listę wartości. Wartości typu imię i nazwisko użytkownika zostały podzielone na osobne kolumny. Krotki nie powtarzają się, ponieważ każda tabela posiada klucz główny.
+	
+\subsubsection{Druga  postać normalna}
+	\begin{definition}
+Relacja jest w drugiej postaci normalnej jeśli jest w pierwszej postaci normalnej oraz żaden atrybut niekluczowy nie jest zależny funkcyjnie od właściwego podzbioru
+klucza minimalnego
+	\end{definition}
+
+\subsubsection{Trzecia  postać normalna}
+	\begin{definition}
+Relacja jest w trzeciej postaci normalnej wtedy i tylko wtedy, gdy jest w drugiej postaci normalnej oraz
+wszystkie niekluczowe atrybuty zależą tylko od pełnego klucza
+minimalnego.
+	\end{definition}
+
+Główne tabele w bazie danych tworzone zostały tak, aby kluczem głównym był tylko i wyłącznie jeden atrybut jakim jest identyfikator, więc atrybuty niekluczowe są zależnie funkcyjnie tylko i wyłącznie od klucza głównego. Jedna para atrybutów niekluczowych jest zależna funkcyjnie. Jest to klucz prywatny column\_id oraz atrybut is\_completed w tabeli task. Tabela board posiada informacje odnośnie identyfikatora, która kolumna zamyka zadania. Klucz obcy oznaczający kolumne w której zadanie aktualnie przebywa przenosi nam jednocześnie informacje o tym czy dane zadanie jest zamknięte. Jednak na potrzeby dobrej czytelności atrybut is\_completed pozostał w bazie jako że typem danych w tej kolumnie  jest boolean czyli jednobitowa informacja prawda lub fałsz.
 \clearpage
 \section{Przypadki użycia}
 

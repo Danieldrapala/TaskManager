@@ -1,4 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: praca.aux
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: praca.aux
 The style file: plabbrv.bst
 Database file #1: literatura.bib
 Warning--to sort, need author or key in diagrams
@@ -10,4 +12,45 @@ Warning--to sort, need author or key in Postman
 Warning--to sort, need author or key in git
 Warning--to sort, need author or key in draganddrop
 Warning--to sort, need author or key in MdbAngularBootstrap
+You've used 12 entries,
+            2129 wiz_defined-function locations,
+            553 strings with 5050 characters,
+and the built_in function-call counts, 2327 in all, are:
+= -- 218
+> -- 42
+< -- 1
++ -- 24
+- -- 10
+* -- 90
+:= -- 300
+add.period$ -- 27
+call.type$ -- 12
+change.case$ -- 40
+chr.to.int$ -- 0
+cite$ -- 21
+duplicate$ -- 103
+empty$ -- 290
+format.name$ -- 10
+if$ -- 558
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 3
+newline$ -- 54
+num.names$ -- 6
+pop$ -- 97
+preamble$ -- 1
+purify$ -- 29
+quote$ -- 0
+skip$ -- 103
+stack$ -- 0
+substring$ -- 82
+swap$ -- 20
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 46
+warning$ -- 9
+while$ -- 8
+width$ -- 14
+write$ -- 96
 (There were 9 warnings)
