@@ -10,11 +10,11 @@ Każda tabela posiada swój serwis. Jest to komponent, który odpowiedzialny jes
 \paragraph{View - Widok}
 
 
-Widok zaimplementowany jest przy pomocy szkieletu architektonicznego Angular korzystającego z HTML oraz TypeScript. Podstawowym obiektem w szkielecie jest komponent, na który składa się również skryptowy plik html i css lub scss. Komponent jest definicją jednego z wielu widoków w aplikacji, które Angular przedstawia na głównej stronie 
+Widok zaimplementowany jest przy pomocy szkieletu architektonicznego Angular korzystającego z HTML oraz TypeScript. Podstawowym obiektem w szkielecie jest komponent, na który składa się również skryptowy plik html i css lub scss. Komponent jest definicją jednego z wielu widoków w aplikacji, które \textit{Angular} przedstawia na głównej stronie. Dużą rolę podczas implementacji widoku tworzy moduł \textit{ReactiveForms}. Jest to zbiór pomocniczych komponentów udostępnianych przez biblioteki szkieletu \textit{Angular}, które służą do budowania formularzy. Otrzymywanie wiadomości od użytkownika polega na wyświetlaniu formularzy z polami, które wspólnie tworzą szkielet obiektu. Dane wprowadzone przez użytkownika do formularza są treścią zapytania do bazy danych o stworzenie lub zaktualizowanie informacji.  Przykładowe widoki z wcześniejszego rozdziału takie jak dodanie tablicy ~\ref{addb}, szczegóły zadania ~\ref{taskcomm}, czy sam proces logowania ~\ref{login-state}, polegają głównie na przedstawieniu formularzu do wypełniania dla klienta.
 \paragraph{Controller - Kontroler}
 
 
-Kontroler zaimplementowany jest głównie po stronie serwera, lecz komponenty odpowiedzialne za widok posiadają w sobie wstępne modyfikacje na danych otrzymanych od użytkownika takie jak przykładowo walidacja tych danych. Zaletą podejścia, aby funkcje kontrolera spełnianie były praktycznie po otrzymaniu jakichkolwiek danych jest to, że informacje, które przychodzą do serwera, aby przeszły przez główną logikę serwera są danymi nie podatnymi na błędy, więc serwer odpowiedzialny za logikę, nie będzie musiał skupiać się na odsyłaniu błędnych danych z powrotem do widoku, a o wiele częściej będzie otrzymywać już poprawne dane. Wadą takiego podejścia jest większe skomplikowanie w kodzie, ponieważ walidacja odbywa się wtedy zarówno na serwerze jak i po stronie klienta. Aplikacja odpowiedzialna za widoku musi również posiadać wiedzę na temat modelu bazy danych i poszczególne cechy różnych danych, aby odpowiednia logika mogła zostać zastosowana.
+Kontroler zaimplementowany jest głównie po stronie serwera, lecz komponenty odpowiedzialne za widok posiadają w sobie wstępne modyfikacje na danych otrzymanych od użytkownika takie jak przykładowo walidacja tych danych. Zaletą podejścia, aby funkcje kontrolera spełniane były po otrzymaniu jakichkolwiek danych jest to, że informacje, które przychodzą do serwera, aby przeszły przez główną logikę serwera są danymi nie podatnymi na błędy, więc serwer odpowiedzialny za logikę, nie będzie musiał skupiać się na odsyłaniu błędnych danych z powrotem do widoku, a o wiele częściej będzie otrzymywać już poprawne dane. Wadą takiego podejścia jest większe skomplikowanie w kodzie, ponieważ walidacja odbywa się wtedy zarówno na serwerze jak i po stronie klienta. Aplikacja odpowiedzialna za widoku musi również posiadać wiedzę na temat modelu bazy danych i poszczególne cechy różnych danych, aby odpowiednia logika mogła zostać zastosowana.
 
 
 \section{Użyte technologie}
@@ -25,30 +25,30 @@ Projekt w pełni kompatybilny z systemem Windows 10 wykorzystuje z najważniejsz
 	\item Bootstrap 4.6
 	
 \end{itemize}
-W języku programowania Java taką pomocniczą technologią jest szkielet architektoniczny Spring. Posiada on dużo przeróżnych gałęzi i jest najpopularniejszym pomocniczym narzędziem dla języka Java. Aplikacja TaskManager korzysta z gałęzi Spring Boot, Spring Security oraz Spring Data JPA. 
+W języku programowania Java pomocniczą technologią jest szkielet architektoniczny Spring. Posiada on dużo przeróżnych gałęzi i jest najpopularniejszym pomocniczym narzędziem dla języka Java. Aplikacja TaskManager korzysta z gałęzi Spring Boot, Spring Security oraz Spring Data JPA. 
 
 \textit{Spring Security} zapewnia odpowiednie klasy wspomagające konfigurację autoryzacji i kontroli dostępu do zaimplementowanego serwera. \cite{SpringSecurity}   
 
 \textit{Spring Data JPA} ułatwia dostęp do bazy danych udostępniając potrzebne metody wyciągające odpowiednie informacje z bazy danych.\cite{SpringData}  
 
-\textit{Spring Boot} to gałąź, która pomaga uporać się ze wszystkimi możliwościami tego szkieletu i pomaga skonfigurować aplikację. 
-W tym celu korzystając z narzędzia Spring Boot Initializer \cite{SpringInitializr} cały szkielet projektu został zainicjalizowany i dostępny do pobrania.
-Kolejnym z ważnych narzędzi pomocniczych użytych podczas implementacji serwera jest \textit{ Maven}. Jest to narzędzie, które ułatwia zarządzanie projektem, ujednolica budowanie i kompilowanie zaawansowanego projektu napisanego w języku Java \cite{ApacheMavenProject}. 
+\textit{Spring Boot} to gałąź, która pomaga ze wszystkimi możliwościami tego szkieletu i konfiguruje aplikację. 
+W tym celu korzystając z narzędzia Spring Boot Initializer \cite{SpringInitializr} cały szkielet projektu został zainicjalizowany i udostępniony do pobrania.
+Kolejnym z ważnych narzędzi pomocniczych użytych podczas implementacji serwera jest \textit{package manager Maven}. Jest to narzędzie, które ułatwia zarządzanie projektem, ujednolica budowanie i kompilowanie zaawansowanego projektu napisanego w języku Java \cite{ApacheMavenProject}. 
 
 \section{Narzędzia pomocnicze i środowisko programistyczne }
 Program napisany został przy pomocy \textbf{Inteliij IDEA} . Jest to środowisko programistyczne, które w pełni wspomaga pisanie dużych projektów w języku Java. Możliwość debugowania kodu i pomocne wtyczki, które przykładowo pomagają utrzymać czystość kodu to ważny element podczas tworzenia aplikacji.
-Kolejnym niezbędnym narzędziem jest \textbf{Postman }, który pomaga testować zapytania do serwerowego API. Aby zobaczyć, czy widok otrzymuje odpowiednie dane od serwera, wymagane jest przetestowanie zapytań, w tym celu zamiast wywoływać ich ręcznie w aplikacji, wykorzystujemy dany program, w którym przybieramy rolę klienta serwera i wysyłamy odpowiednie zapytania, oczekując prawidłowych odpowiedzi. \cite{Postman}
-Cały projekt znajdował się podczas produkcji kodu w systemie kontroli wersji Git, w celu ułatwionego dostępu i możliwości powrotu do różnych wersji projektu.\cite{git}
+Kolejnym niezbędnym narzędziem jest \textbf{Postman }, który pomaga testować zapytania do serwerowego API. Aby zobaczyć, czy widok otrzymuje odpowiednie dane od serwera, wymagane jest przetestowanie zapytań, w tym celu zamiast wywoływać je ręcznie w aplikacji, wykorzystujemy dany program, w którym przybieramy rolę klienta serwera i wysyłamy odpowiednie zapytania, oczekując prawidłowych odpowiedzi \cite{Postman}.
+Cały projekt znajdował się podczas produkcji kodu w systemie kontroli wersji Git, w celu ułatwionego dostępu i możliwości powrotu do różnych wersji projektu\cite{git}.
 
 
 \section{Opis ważniejszych  implementacji}
 
 \subsection{Bezpieczeństwo aplikacji}
 \subsubsection{konfiguracja}
-Klasa \textit{SecurityConfiguration} przetrzymuje konfiguracje związane z odpowiednim dostępem w zależności od pozwoleń zalogowanego użytkownika. Tak jak widzimy na kawałku kodu ~\ref{httpconfig} prawie wszystkie ścieżki są udostępnione dla każdej roli poza ścieżkami \textit{api/admin/**} i \textit{management/**}, do których dostęp ma jedynie użytkownik z rolą administratora
+Klasa \textit{SecurityConfiguration} przetrzymuje konfiguracje związane z odpowiednim dostępem w zależności od pozwoleń zalogowanego użytkownika. Na przedstawionym fragmencie kodu~\ref{httpconfig} prawie wszystkie ścieżki udostępnione są dla każdej roli poza ścieżkami \textit{api/admin/**} i \textit{management/**}, do których dostęp ma jedynie użytkownik z rolą administratora
 
 \subsubsection{Autoryzacja i tworzenie konta}
-Tworzenie konta użytkownika polega na wprowadzeniu potrzebnych informacji takich jak login, hasło i email. Po zaakceptowaniu danych przez serwer stworzona zostaje encja użytkownika nieaktywnego. Generowany zostaje klucz, który wysyłany jest w postaci linka na podaną wcześniej skrzynkę pocztową. Po wejściu w odpowiednią ścieżkę przez link z wiadomości użytkownik aktywuje konto i może się zalogować ~\ref{register}
+Tworzenie konta użytkownika polega na wprowadzeniu potrzebnych informacji takich jak login, hasło i e-mail. Po zaakceptowaniu danych przez serwer stworzona zostaje encja użytkownika nieaktywnego. Generowany zostaje klucz, który wysyłany jest w postaci linka na podaną wcześniej skrzynkę pocztową. Po wejściu w odpowiednią ścieżkę przez link z wiadomości użytkownik aktywuje konto i może się zalogować~\ref{register}
 
 \clearpage
 \begin{lstlisting} [ caption= Uproszczona metoda określająca dostęp do podanych ścieżek, captionpos=b, label={httpconfig}]

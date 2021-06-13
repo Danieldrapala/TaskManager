@@ -92,7 +92,7 @@ Widok list dostępnych z aplikacji składają się z responsywnych list, które 
 
 \section{Widok Statystyk}
 Statystyki przedstawione są na przejrzystym panelu. Na początku strony wyświetlane zostają informacje na temat projektu wraz z wykresami kołowymi przedstawiające ogólny postęp wykonanych zadań.
-Niżej widnieje lista użytkowników oraz lista zadań. Po wybraniu odpowiednich rekordów z listy wyświetlane zostają po kolei wykresy dla poszczególnych zadań jak na rysunku \ref{scrolledstatistics} 
+Niżej widnieje lista użytkowników oraz lista zadań. Po wybraniu odpowiednich rekordów z listy wyświetlane zostają po kolei wykresy dla poszczególnych zadań jak na rysunku \ref{scrolledstatistics}.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.90\textwidth]{statistics}
@@ -128,7 +128,15 @@ Niżej widnieje lista użytkowników oraz lista zadań. Po wybraniu odpowiednich
 	\caption{Widok edycji tablicy.}
 	\label{boardedit}
 \end{figure}
-
+\clearpage
+\paragraph{Główny widok tablicy}
+Widok tablicy składa się z kontenera o kolorze \textit{cadetblue}. Przechowuje on trzy kontenery odpowiadające kolumną tablicy \textit{kanban}.
+Zadania wyświetlane są w postaci białych bloków, które przedstawiają najważniejsze informacje:
+\begin{itemize}
+	\item nazwę zadania
+	\item do kogo zadanie zostało przypisane (zaznaczone na czerwono jeśli przypisane zostało do użytkownika przeglądającego tablicę)
+	\item przeniesienie zadania do kolumny kończącej zadanie edytuje styl bloku na zielony i dopisana zostaje informacja, że podane zadanie zostało wykonane
+\end{itemize}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.90\textwidth]{kanban-view}

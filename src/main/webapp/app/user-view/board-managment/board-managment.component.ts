@@ -44,8 +44,13 @@ export class BoardManagmentComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     this.updateBoard(this.board);
-
-  }
+    if (this.board.id !== undefined) {
+      this.boardService.updateBoard(this.board).subscribe(
+        () => this.onSaveSuccess(),
+        () => this.onSaveError()
+      );
+      }
+    }
 
   private updateForm(board: Board): void {
     this.editForm.patchValue({

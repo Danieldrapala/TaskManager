@@ -13,6 +13,10 @@ Apache maven project documentation.
 Diagrams tool.
 \newblock Web pages: \url{https://www.diagrams.net/}.
 
+\bibitem{docker}
+Docker overview.
+\newblock Web pages: \url{https://docs.docker.com/get-started/}.
+
 \bibitem{draganddrop}
 Drag drop event angular overview.
 \newblock Web pages: \url{https://material.angular.io/cdk/drag-drop/overview}.

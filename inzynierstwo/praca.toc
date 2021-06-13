@@ -12,7 +12,7 @@
 \contentsline {section}{\numberline {3.2}Wzorzec architektoniczny Model-View-Controller}{7}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Wymagania funkcjonalne i niefunkcjonalne}{8}{section.3.3}%
 \contentsline {paragraph}{Wymagania funkcjonalne}{8}{paragraph*.5}%
-\contentsline {paragraph}{Wymagania funkcjonalne dodatkowe dla administratora}{8}{paragraph*.6}%
+\contentsline {paragraph}{Dodatkowe wymagania funkcjonalne dla administratora}{8}{paragraph*.6}%
 \contentsline {paragraph}{Wymagania niefunkcjonalne}{8}{paragraph*.7}%
 \contentsline {section}{\numberline {3.4}Komunikacja klient - serwer}{9}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Diagram pakietów}{10}{section.3.5}%
@@ -23,7 +23,7 @@
 \contentsline {paragraph}{service}{10}{paragraph*.12}%
 \contentsline {paragraph}{rest}{10}{paragraph*.13}%
 \contentsline {paragraph}{security}{10}{paragraph*.14}%
-\contentsline {paragraph}{aplikacja webowa}{10}{paragraph*.15}%
+\contentsline {paragraph}{aplikacja internetowa (webapp)}{10}{paragraph*.15}%
 \contentsline {paragraph}{config, model i service}{10}{paragraph*.16}%
 \contentsline {paragraph}{user-view}{10}{paragraph*.17}%
 \contentsline {paragraph}{admin}{10}{paragraph*.18}%
@@ -43,25 +43,29 @@
 \contentsline {section}{\numberline {4.4}Widok listy zadań i użytkowników}{27}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Widok Statystyk}{28}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Widoki związane z tablicą}{29}{section.4.6}%
+\contentsline {paragraph}{Główny widok tablicy}{30}{paragraph*.50}%
 \contentsline {section}{\numberline {4.7}Widok Szczegółów Zadania}{31}{section.4.7}%
 \contentsline {chapter}{\numberline {5}Implementacja systemu}{33}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Implementacja wzorca MVC}{33}{section.5.1}%
-\contentsline {paragraph}{Model}{33}{paragraph*.52}%
-\contentsline {paragraph}{View - Widok}{33}{paragraph*.53}%
-\contentsline {paragraph}{Controller - Kontroler}{33}{paragraph*.54}%
+\contentsline {paragraph}{Model}{33}{paragraph*.53}%
+\contentsline {paragraph}{View - Widok}{33}{paragraph*.54}%
+\contentsline {paragraph}{Controller - Kontroler}{33}{paragraph*.55}%
 \contentsline {section}{\numberline {5.2}Użyte technologie}{33}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Narzędzia pomocnicze i środowisko programistyczne }{34}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Opis ważniejszych implementacji}{34}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}Bezpieczeństwo aplikacji}{34}{subsection.5.4.1}%
-\contentsline {subsubsection}{konfiguracja}{34}{subsubsection*.55}%
-\contentsline {subsubsection}{Autoryzacja i tworzenie konta}{34}{subsubsection*.56}%
+\contentsline {subsubsection}{konfiguracja}{34}{subsubsection*.56}%
+\contentsline {subsubsection}{Autoryzacja i tworzenie konta}{34}{subsubsection*.57}%
 \contentsline {subsection}{\numberline {5.4.2}Tablica przeciągnij i upuść}{36}{subsection.5.4.2}%
 \contentsline {subsection}{\numberline {5.4.3}Rysowanie wykresów}{37}{subsection.5.4.3}%
 \contentsline {chapter}{\numberline {6}Instalacja i wdrożenie}{39}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Uruchomienie serwera}{39}{section.6.1}%
+\contentsline {paragraph}{Instalacja programu Docker}{39}{paragraph*.58}%
+\contentsline {section}{\numberline {6.2}Uruchomienie klienta}{40}{section.6.2}%
 \contentsline {chapter}{\numberline {7}Podsumowanie}{41}{chapter.7}%
-\contentsline {section}{\numberline {7.1}podsumowanie pracy}{41}{section.7.1}%
+\contentsline {section}{\numberline {7.1}Podsumowanie pracy}{41}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Plany rozwoju aplikacji}{41}{section.7.2}%
-\contentsline {chapter}{Bibliografia}{43}{chapter*.57}%
-\contentsline {chapter}{Spis rysunków}{45}{chapter*.57}%
-\contentsline {chapter}{Spis kodów źródłowych}{47}{chapter*.57}%
+\contentsline {chapter}{Bibliografia}{43}{chapter*.59}%
+\contentsline {chapter}{Spis rysunków}{45}{chapter*.59}%
+\contentsline {chapter}{Spis kodów źródłowych}{47}{chapter*.59}%
 \contentsline {chapter}{\numberline {A}Zawartość płyty CD}{49}{appendix.A}%

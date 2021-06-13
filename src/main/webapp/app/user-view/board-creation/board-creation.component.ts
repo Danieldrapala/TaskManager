@@ -97,6 +97,7 @@ export class BoardCreationComponent implements OnInit {
         this.board.id = resultBoard.id;
           this.cardsName.controls.forEach(
             (element: AbstractControl) => {
+              console.log(+this.getControlName(element)!);
               let card = new Card([],undefined, +this.getControlName(element)! ,resultBoard.id, element.value)
               this.boardServiceImpl.addCard(card).subscribe(
                 card => {

@@ -38,11 +38,9 @@ export class PieChartColumnComponent {
                 this.counts.push(count);
               }
               console.log(this.cards);
-              if(this.counts.length > 3){
-               
-                this.chartLabels = this.cards;
-                this.chartDatasets =  [{ data: this.counts, label: 'Tasks singlechart Status' }];
-              }
+              this.chartLabels = this.cards;
+              this.chartDatasets =  [{ data: this.counts, label: 'Tasks singlechart Status' }];
+              
             });
           });
         });

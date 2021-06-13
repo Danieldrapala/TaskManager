@@ -8,7 +8,7 @@ Tworzenie aplikacji internetowej to skomplikowany proces, który może przysporz
 \section{Wzorzec architektoniczny Model-View-Controller}
 System zbudowany został w oparciu o model MVC (\textit{Model-View-Controller}).
 Jest to podejście architektoniczne, które dzieli aplikację na trzy główne komponenty.
-\textit{Model}, odpowiedzialny za dostęp i przechowywanie danych. \textit{View}, czyli widok odpowiada za interfejs użytkownika, jak dane są przedstawiane i odbierane. \textit{Controller} zajmuje się logiką biznesową, komunikując się z modelem i widokiem. Widok dostarcza informacje od klienta, które obsługiwane są przez \textit{Controller} i odpowiednie zmiany wprowadzane są do modelu. \cite{6827095}
+\textit{Model}, odpowiedzialny za dostęp i przechowywanie danych. \textit{View}, czyli widok odpowiada za interfejs użytkownika, jak dane są przedstawiane i odbierane. \textit{Controller} zajmuje się logiką biznesową, komunikując się z modelem i widokiem. Widok dostarcza informacje od klienta, które obsługiwane są przez \textit{Controller} i odpowiednie zmiany wprowadzane są do modelu\cite{6827095}.
 
 \begin{figure}[h]
 	
@@ -28,26 +28,25 @@ Wymaganiami funkcjonalnymi nazywamy zbiór szczegółów, pomagających określi
 	\item Przegląd listy użytkowników
 	\item Przegląd listy zadań 
 	\item Tworzenie, edytowanie, usuwanie zadań
-	\item Korzystanie z Tablicy Kanban w celu raportowania postępów w zadaniach
-	\item Wyświetlanie Statystyk projektu w postaci wykresów
+	\item Korzystanie z tablicy \textit{Kanban} w celu raportowania postępów w zadaniach
+	\item Wyświetlanie statystyk projektu w postaci wykresów
 	\item Podstawowa autentykacja użytkownika
 	\item Wyświetlanie szczegółów związanych z danym zadaniem. Szczegółowe parametry zadania to:
 	\begin{enumerate}[leftmargin=3em]
 		\item nazwa
-		\item data do zakończenia zadania
+		\item data zakończenia zadania
 		\item użytkownik przypisany do zadania
 		\item kolumna, w której aktualnie znajduje się dane zadanie
 		\item opis zadania
 		\item sekcja komentarzy
-		\item nazwa użytkownika tworzącego zadanie
+		\item nazwa użytkownika zlecającego zadanie
 	\end{enumerate}
 \end{enumerate}
-\paragraph{Wymagania funkcjonalne dodatkowe dla administratora}
+\paragraph{Dodatkowe wymagania funkcjonalne dla administratora}
 
 \begin{enumerate} 
 	\item Tworzenie, aktywacja kont użytkowników, dostęp do większej ilości danych w porównaniu do użytkownika
-	\item Ustawienie czasu po jakim czyszczona jest historia czynności związanych z zadaniami
-	\item Konfiguracja tablicy:
+	\item Konfiguracja tablicy podczas inicjalizacji:
 	\begin{enumerate}[leftmargin=3em]
 		\item określenie nazwy tablicy i kolumn
 		\item określenie liczby kolumn
@@ -60,8 +59,8 @@ Wymaganiami funkcjonalnymi nazywamy zbiór szczegółów, pomagających określi
 \paragraph{Wymagania niefunkcjonalne}
 \begin{enumerate}
 	\item prostota w użytkowaniu
-	\item aplikacja responsywna na tyle, aby można było skorzystać z głównych funkcji systemu za pomocą urządzenia mobilnego
-	\item 
+	\item aplikacja responsywna, aby możliwe było korzystanie z głównych funkcji systemu z poziomu urządzenia mobilnego
+
 \end{enumerate}
 
 \clearpage
@@ -94,23 +93,23 @@ State Transfer (REST)}. Jest to podejście architektoniczne, które spełniając
 \end{itemize}
 Przestrzegając powyższych zasad usprawniamy czytelność,  niezawodność i skalowalność procesu komunikacji. Żądanie posiada wszystkie szczegóły potrzebne do otrzymania odpowiedzi, więc jest czytelniejsze, zwalnia serwer z niepotrzebnych odpowiedzialności oraz dodawanie nowej ścieżki nie dodaje żadnej informacji do przechowywania dla systemu. \cite{Rest}
 
-Klient do komunikacji używa klas zaimplementowanych w pakiecie \textit{services}. Składają się one z prostych metod, które potrzebują jedynie odpowiednią ścieżkę, odpowiednią metodę HTTP i oczekiwany typ danych.
+Klient do komunikacji używa klas zaimplementowanych w pakiecie \textit{services}. Składają się one z prostych metod, które potrzebują jedynie odpowiedniej ścieżki, rodzaj protokołu HTTP i oczekiwany typ danych.
 Przykładowa klasa z pakietu \textit{rest}  \ref{przykładowa metoda controllera}  udostępnia metodę na ścieżkę \textit{"./task"}. Metoda wykonuje walidację i próbę zapisania przysłanego obiektu w bazie danych, jeśli proces powiedzie się odsyłana jest wiadomość OK ze statusem 200 i stworzonym obiektem.
 
 \clearpage
 \section{Diagram pakietów}
 
-Pakiety podzielone są na elementy serwera i aplikacji webowej, przedstawione zostały na diagramie ~\ref{pakiet}.
+Pakiety podzielone są na serwer i aplikację internetową. Przedstawione zostały na diagramie pakietów ~\ref{pakiet}.
 \paragraph{Serwer }
 \paragraph{repository}
-posiada charakterystyczne dla wzorca architektonicznego Spring Data klasy z adnotacją \linebreak \texttt{@Repository}. Są to klasy, które udostępniają gotowe proste zapytania dobazy danych.
+posiada charakterystyczne dla wzorca architektonicznego Spring Data klasy z adnotacją \linebreak \texttt{@Repository}. Są to klasy, które udostępniają gotowe proste zapytania do
+bazy danych.
 \paragraph{domain}
 
 definiuje model danych. Są to tabele i ich wszystkie atrybuty przepisane do klas języka Java.
-\paragraph{config}
-jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwera poczynając od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
+\paragraph{config} posiada wszystkie klasy związane z konfiguracją serwera. Od sposobu formatowania dat, wyboru domyślnego języka strony, czy też konfigurację dostępu użytkowników do potrzebnych interfejsów.
 \paragraph{service}  to grupa klas z adnotacją  \texttt{@Service} odpowiedzialnych za wykonywanie logiki związanej z modyfikacją i odpowiednim zapisywaniem danych. Korzysta z pakietu repository, a sam wykorzystywany jest w pakiecie rest.
-\paragraph{rest}  jest odpowiedzialny za schemat API serwera. Udostępnia  metody na podane ścieżki zwane URL, które umożliwiają komunikowanie się z serwerem. Przykładowo aplikacja webowa wysyła na serwer zapytanie HTTP POST na URL
+\paragraph{rest}  jest odpowiedzialny za schemat \textit{API} serwera. Udostępnia  metody na podane ścieżki zwane \textit{URL}, które umożliwiają komunikowanie się z serwerem. Przykładowo aplikacja webowa wysyła na serwer zapytanie \textit{HTTP POST} na \textit{URL}
 \textit{www.taskManager.com/task}. Serwer odczytuje zapytanie i przygotowuje odpowiedź. W tym celu odpowiednia klasa z pakietu rest mapuje podane zapytanie do odpowiedniej metody, która wykonuje akurat w tym przykładzie zapisanie zadania do bazy danych i zwraca zwrotną wiadomość ~\ref{przykładowa metoda controllera}.
 
 \paragraph{security} zawiera klasy odpowiedzialne za autentykację połączenia, zanim jakiekolwiek zapytanie trafi do metod z pakietu rest, najpierw serwer oczekuje na odpowiedź ze strony klienta z informacją o sukcesie autoryzacji i pozwoleń jakie zalogowany użytkownik posiada.
@@ -129,13 +128,15 @@ jak sama nazwa wskazuje posiada wszystkie klasy związane z konfiguracją serwer
 	
 \end{lstlisting}
 
-\paragraph{aplikacja webowa}
+\paragraph{aplikacja internetowa (webapp)}
 \paragraph{config, model i service} to pakiety o tych samych właściwościach co w serwerze. Warto zauważyć, że model zapisany po stronie klienta może być ograniczony do atrybutów potrzebnych jedynie do odpowiedniego wyświetlenia interfejsu dla użytkownika. 
 \paragraph{user-view} posiada wszystkie komponenty widoków dostępne dla użytkownika i administratora, są to główne widoki aplikacji, takie jak tablica, statystyki, lista zadań i tym podobne.
 \paragraph{admin} posiada komponenty dostępne tylko dla administratora i wszelką logikę związaną z konfiguracją nowych użytkowników.
 \paragraph{shared} jest to pakiet, na który składają się wszystkie wspólne dla wszystkich innych klas komponenty, czyli bloki wyświetlające błędy, responsywna lista, nagłówek strony, stopka strony. 
+\newline
 
-Poniżej znajduje się diagram pakietów projektu wygenerowany przez narzędzie do rysowania diagramów diagrams.net \cite{diagrams}
+
+Poniżej znajduje się diagram pakietów projektu wygenerowany przez narzędzie do rysowania diagramów diagrams.net \cite{diagrams}.
 \begin{figure}[h]
 	
 	\centering
@@ -149,11 +150,11 @@ Poniżej znajduje się diagram pakietów projektu wygenerowany przez narzędzie 
 
 \subsection{Projekt}
 Sekcja ta w pełni skupiona jest na budowie bazy danych. Jako baza danych wykorzystana została baza dystrybucji MySql jako że jest to jedna z relacyjnych baz danych ogólnodostępnych. MySql cechuje się skalowalnością i przede wszystkim ochroną danych. Wraz z możliwościami rozwoju danej aplikacji, postawiono na uniwersalną bazę danych, którą bez problemu można rozbudować i skomplikować.
-W celu kontroli wersji projektu bazy danych do serwera zaimplementowała zostało narzędzie zwane \textit{Liquibase}, które przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w plikach o formacie XML. Liquibase pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
+W celu kontroli wersji projektu bazy danych do serwera zaimplementowała zostało narzędzie zwane \textit{liquibase}, które przechowuje wszystkie skrypty związane z tworzeniem bazy danych, modyfikacją tabel lub danych w plikach o formacie XML. \textit{liquibase} pomaga wprowadzać zmiany na istniejącej bazie danych przy zachowaniu poprzedniego stanu, zostawiając po udanej modyfikacji historię zmian. 
 
 
-Narzędzie \textit{Liquibase} generuje dwie tabele \ref{liqutable} w bazie danych. Tabela zapisuje nazwę pliku i jej sumę kontrolną, więc zapobiega to zmianom na plikach inicjalizujących bazę danych.
-Jest to bardzo pomocna rzecz dla aplikacji produkcyjnych, ponieważ bazy danych dużych systemów wykorzystywanych w czasie rzeczywistym są bardzo ważne i niebędna jest szczególna kontrola zmian na szkielecie bazy danych.
+Narzędzie \textit{liquibase} generuje dwie tabele \ref{liqutable} w bazie danych. Tabela zapisuje nazwę pliku i jej sumę kontrolną, więc zapobiega to zmianom na plikach inicjalizujących bazę danych.
+Jest to bardzo pomocna rzecz dla aplikacji produkcyjnych, ponieważ bazy danych dużych systemów wykorzystywanych w czasie rzeczywistym są bardzo ważne i niebędna jest szczególna kontrola zmian w szkielecie bazy danych.
 \clearpage
 \begin{figure}[h]
 	\centering
@@ -195,7 +196,7 @@ Oprócz głównych tabel do bazy danych dodane zostały również trzy nierelacy
 \end{figure}
 \clearpage
 \subsection{Normalizacja}
-Schemat bazy danych stworzony może zostać na wiele, niekoniecznie dobrych sposobów. Normalizacja to czynność, która prowadzi do zoptymalizowania sposobu przetrzymywania danych]. Polega ona na odpowiednich zmianach na tabelach i relacjach, zgodnie z pewnym zbiorem zasad, w celu wyeliminowania niepotrzebnych relacji oraz redundancji danych. Pierwsze trzy zbiory reguł normalizacyjnych nazwane i zdefiniowane zostały przez Edgara Franka Codda. Jest to pierwsza postać normalna (1NF), druga postać normalna (2NF) i trzecia postać normalna (3NF). Zbiory te mają ze sobą pewną zależność. Pierwsza postać normalna jest podzbiorem reguł drugiej postaci normalnej, a druga postać normalna jest podzbiorem trzeciej postaci normalnej. Istnieje więcej postaci normalnych, lecz projekt bazy danych opisywanej aplikacji poddany został normalizacji do 3NF. \cite{db}
+Schemat bazy danych stworzony może zostać na wiele, niekoniecznie dobrych sposobów. Normalizacja to czynność, która prowadzi do zoptymalizowania sposobu przetrzymywania danych. Polega ona na odpowiednich zmianach na tabelach i relacjach, zgodnie z pewnym zbiorem zasad, w celu wyeliminowania niepotrzebnych relacji oraz redundancji danych. Pierwsze trzy zbiory reguł normalizacyjnych nazwane i zdefiniowane zostały przez Edgara Franka Codda. Jest to pierwsza postać normalna (1NF), druga postać normalna (2NF) i trzecia postać normalna (3NF). Zbiory te mają ze sobą pewną zależność. Pierwsza postać normalna jest podzbiorem reguł drugiej postaci normalnej, a druga postać normalna jest podzbiorem trzeciej postaci normalnej. Istnieje więcej postaci normalnych, lecz projekt bazy danych opisywanej aplikacji poddany został normalizacji do 3NF. \cite{db}
 
 \subsubsection{Pierwsza postać normalna}
 \begin{definition}
