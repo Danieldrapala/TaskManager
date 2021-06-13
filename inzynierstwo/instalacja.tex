@@ -1,6 +1,6 @@
 \chapter{Instalacja i wdrożenie}
 \thispagestyle{chapterBeginStyle}
-W tym rodziale przeprowadzone zostały instrukcje do uruchomienia aplikacji
+Rozdział ten przedstawia instrukcje dotyczące uruchomienia aplikacji.
 \section{Uruchomienie serwera}
  Osoba zainteresowana, która chciałaby uruchomić daną aplikację lokalnie na swojej maszynie, musi liczyć się z tym, że rozbudowana aplikacja posiada wiele zależności z innymi programami i konfiguracji, dlatego serwer oraz baza danych zostały skonteneryzowane.  Konteneryzacja to wprowadzenie aplikacji ze wszystkimi zależnościami i wymaganymi do uruchomienia programami do wirtualnej jednostki zwanej kontenerem. Kontener to proces odizolowany od wszystkich innych procesów na maszynie hosta. Proces ten przeprowadzony został za pomocą programu \textit{Docker} \cite{docker}. 
  \paragraph{Instalacja programu Docker} 
@@ -18,40 +18,40 @@ Stworzone zostaną dwa kontenery, które przetrzymują serwer aplikacji i serwer
 docker ps
 \end{lstlisting}
 
-Dzięki temu, że aplikacja została zkonteneryzowana, wystarczy pobrać \textit{dockera}, aby wywołać odpowiednie kontenery, które same doinstalują i zbudują projekt serwera. Aplikacja klienta nie została zdokeryzowana (inaczej konteneryzacja dzięki \textit{Docker}), ponieważ nie było to optymalne rozwiązanie. Framework \textit{Angular} wczystuje sporą liczbę plików przy budowaniu projektu przez co kontener ważyłby o wiele więcej. Podczas próby konteneryzacji trzech elementów, zauważony został zauważalny wzrost czasu załadowywania widoków na stronie oraz wydłużyła się komunikacja między serwerem.
+Wystarczy pobrać \textit{dockera}, aby wywołać odpowiednie kontenery, które same doinstalują i zbudują projekt serwera. Aplikacja klienta nie została zdokeryzowana (inaczej konteneryzacja dzięki \textit{Docker}), ponieważ nie było to optymalne rozwiązanie. Framework \textit{Angular} wczytuje sporą liczbę plików przy budowaniu projektu, dlatego kontener ważyłby o wiele więcej. Podczas próby konteneryzacji trzech elementów, zauważony został zauważalny wzrost czasu załadowywania widoków na stronie oraz wydłużyła się komunikacja między serwerem.
 \clearpage
 \section{Uruchomienie klienta}
 Kolejnym krokiem jest uruchomienie aplikacji klienta.
 W tym celu potrzebujemy środowisko \textit{node.js}, aby zainstalować szkielet \textit{Angular}. W tym celu pobieramy ze strony: \textit{\url{https://nodejs.org/en/download/}} 
-Podczas instalacji powinno kierować się domyślnymi konfiguracjami, które dodają odpowiednio program \textit{node} oraz \textit{npm}. Po instalacji można sprawdzić czy dane programy zostały odpowiednio zainstalowane za pomocą komend
+Podczas instalacji należy kierować się domyślnymi konfiguracjami, które dodają odpowiednio program \textit{node} oraz \textit{npm}. Po instalacji można sprawdzić czy dane programy zostały odpowiednio zainstalowane za pomocą komendy:
  \begin{lstlisting}
-	node --version
+    node --version
 \end{lstlisting}
-oraz
+oraz:
 \begin{lstlisting}
-	npm --version
-\end{lstlisting}. Powinny zostać wyświetlone informacje na temat programu i jego zainstalowanej wersji. 
-
-Kolejnym krokiem jest za pomocą programów wcześniej zainstalowanych instalacja szkieletu \textit{Angular}
+    npm --version
+\end{lstlisting}
+Powinny zostać wyświetlone informacje na temat programu i jego zainstalowanej wersji. 
+Kolejnym krokiem jest instalacja szkieletu \textit{Angular} za pomocą programów wcześniej zainstalowanych. 
 Należy w wierszu poleceń wpisać następującą komendę:
 \begin{lstlisting}
-npm install -g @angular/cli
+    npm install -g @angular/cli
 \end{lstlisting}
 Dzięki wszystkim programom zainstalowanym powyższymi komendami możemy ostatecznie przejść do głównego folderu z aplikacją w wierszy poleceń: \begin{lstlisting}
-	cd /path/to/rootfolder/tmapp/
+    cd /path/to/rootfolder/tmapp/
 \end{lstlisting}
 Kiedy wiersz polecenia wskazuje na główny folder systemu, w którym znajduje się plik \textit{package.json}, zbudujemy projekt za pomocą komendy:
 
 \begin{lstlisting}
-npm install
+    npm install
 \end{lstlisting}
 
-Po pomyślnej inicjalizacji projektu i doinstalowaniu wszystkich potrzebnych paczek zewnętrznych powinien zostać wyświetlony komunikat o sukcesie.
+Po pomyślnej instalacji wszystkich zależności potrzebnych do uruchomienia projektu powinien zostać wyświetlony komunikat o sukcesie.
 Ostatnim krokiem zostało włączenie aplikacji za pomocą komendy:
 \begin{lstlisting}
-ng serve
+    ng serve
 \end{lstlisting}
-Gdy dany proces włączania aplikacji przejdzie pomyślnie, strona \textit{http://localhost:9000} zostanie włączona automatycznie w domyślnej przeglądarce internetowej danej maszyny.
+Gdy dany proces włączania aplikacji przejdzie pomyślnie, strona \textit{http://localhost:9000} zostanie włączona automatycznie w domyślnej przeglądarce internetowej danego systemu.
 
 
 

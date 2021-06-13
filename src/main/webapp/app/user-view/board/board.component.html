@@ -14,7 +14,7 @@
                     </div>
                     <div class="tasks-container"
                          cdkDropList
-                         id = "{{column.id}}"
+                         id = "{{column!.id}}"
                          [cdkDropListData]="column.tasks"
                          (cdkDropListDropped)="drop($event)">
                         <div class="task" id="{{task.id}}" [ngStyle]="{'background-color': task.completed ? '#90EE90 ': 'white'}" 

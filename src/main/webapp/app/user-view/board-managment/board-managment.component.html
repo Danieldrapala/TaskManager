@@ -23,19 +23,34 @@
               </small>
             </div>
           </div>
-  
-          <div class="form-group">
-            <label class="form-control-label">Default Column</label>
-            <input type="text" class="form-control" name="defaultCard" formControlName="defaultCard" />
-          </div>
-  
-          <div class="form-group">
-            <label>Column for task closing (last in project cycle)</label>
-            <input type="select" class="form-control" name="closingCard" formControlName="closingCard" />
-          </div>
+          <mat-form-field>
+
+            <mat-select type= "select"        
+            formControlName="defaultCard"        
+            placeholder="Default Column"
+            >
+
+              <mat-option *ngFor="let card of cards"  [value]="card.id" >
+                {{card.id}}. {{ card.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+
+            <mat-select type= "select"        
+            formControlName="closingCard"        
+            placeholder="Column for task closing"
+            >
+
+              <mat-option *ngFor="let card of cards"  [value]="card.id" >
+                {{card.id}}. {{ card.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
         </div>
-
-
         <div *ngIf="board">
           <button type="button" class="btn btn-secondary" (click)="previousState()">
             <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>

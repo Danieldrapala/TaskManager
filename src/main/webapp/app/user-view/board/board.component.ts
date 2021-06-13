@@ -100,9 +100,9 @@ export class BoardComponent implements OnInit {
   getTasks() {
     this.boardServiceImpl.getCards().subscribe( cards =>{
       this.cards = cards
-      cards.sort((a,b)=>a.priority! - b.priority!).forEach(card=>{
+      cards.sort((a,b)=>a.id! - b.id!).forEach(card=>{
         this.boardServiceImpl.getTasks(card.id).subscribe( tasks=>{
-          this.cards[card.priority!].tasks=tasks;
+          this.cards[card.id!-1].tasks=tasks;
         })
       })
 

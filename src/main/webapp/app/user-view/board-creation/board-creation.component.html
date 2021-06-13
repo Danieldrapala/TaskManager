@@ -4,20 +4,29 @@
       <div class="child" >
         <span class="header">Board</span>
       </div>
-      <form class= "formStyles" name="boardForm" role="form" novalidate (ngSubmit)="saveBoard()" [formGroup]="boardForm">
+      <form *ngIf="!board" class= "formStyles" name="boardForm" role="form" novalidate (ngSubmit)="saveBoard()" [formGroup]="boardFormName">
             <alert-error></alert-error>
     
             <div class="form-group">
               <label class="form-control-label">Name</label>
               <input type="text" class="form-control" name="name" formControlName="name" />
             </div>
+            <button type="submit" [disabled]="boardFormName.invalid || isSaving" class="btn btn-primary">
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+            </button>
+          </form>
+        <form *ngIf="board" class= "formStyles" name="boardForm" role="form" novalidate (ngSubmit)="saveCardsAndUpdateBoard()" [formGroup]="boardForm">
+
             <div class="form-group"  formArrayName="cardsName">
-              <span style="font-size: large;">Columns</span> 
+              <span style="font-size: large;">Columns {{cardslength.length}}</span> 
               <button type="button" class="btn-primary"  (click)="addCard()">Add Column</button>                
-              <div style="padding-top: 2%;" *ngFor="let column of cardsName.controls; let i=index">
+              <div style="padding-top: 2%;" *ngFor="let column of cardslength; let i=index">
                 <label>
                   Column name:
-                  <input type="text" class="form-control" [formControlName]="i">
+                  <input type="text" class="form-control" id= "{{i}}">
+                  <button type="button" (click)="saveCard(i)" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                  </button>                
                 </label>
               </div>
             </div>
@@ -29,8 +38,8 @@
               formControlName="defaultCard"
               type= "select" 
               >
-                  <mat-option *ngFor="let column of boardForm.get('cardsName')?.value"  [value]="column" >
-                      {{ column }}
+                  <mat-option *ngFor="let column of cards"  [value]="column.id" >
+                      {{ column.id }} {{column.name}}
                   </mat-option>            
               </mat-select>
             </div>
@@ -41,14 +50,14 @@
               formControlName="closingCard"
               type= "select" 
               >
-                  <mat-option *ngFor="let column of boardForm.get('cardsName')?.value"  [value]="column" >
-                      {{ column }}
+                  <mat-option *ngFor="let column of cards"  [value]="column.id" >
+                    {{ column.id }} {{column.name}}
                   </mat-option>            
               </mat-select>
             </div>
             
 
-            <button type="submit" [disabled]="boardForm.invalid || isSaving" class="btn btn-primary">
+            <button type="submit" [disabled]="boardForm.invalid" class="btn btn-primary">
               <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
             </button>
       </form>
