@@ -11,23 +11,23 @@
 \contentsline {section}{\numberline {3.1}Opis systemu}{7}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Wzorzec architektoniczny Model-View-Controller}{7}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Wymagania funkcjonalne i niefunkcjonalne}{8}{section.3.3}%
-\contentsline {paragraph}{Wymagania funkcjonalne}{8}{paragraph*.4}%
-\contentsline {paragraph}{Wymagania funkcjonalne dodatkowe dla administratora}{8}{paragraph*.5}%
-\contentsline {paragraph}{Wymagania niefunkcjonalne}{8}{paragraph*.6}%
-\contentsline {section}{\numberline {3.4}Diagram pakietów}{9}{section.3.4}%
-\contentsline {paragraph}{Serwer }{9}{paragraph*.7}%
-\contentsline {paragraph}{Repository}{9}{paragraph*.8}%
-\contentsline {paragraph}{domain}{9}{paragraph*.9}%
-\contentsline {paragraph}{config}{9}{paragraph*.10}%
-\contentsline {paragraph}{service}{9}{paragraph*.11}%
-\contentsline {paragraph}{rest}{9}{paragraph*.12}%
-\contentsline {paragraph}{security}{9}{paragraph*.13}%
-\contentsline {paragraph}{aplikacja webowa}{9}{paragraph*.14}%
-\contentsline {paragraph}{config, model i service}{9}{paragraph*.15}%
-\contentsline {paragraph}{user-view}{9}{paragraph*.16}%
-\contentsline {paragraph}{admin}{10}{paragraph*.17}%
-\contentsline {paragraph}{shared}{10}{paragraph*.18}%
-\contentsline {section}{\numberline {3.5}Komunikacja klient - serwer}{10}{section.3.5}%
+\contentsline {paragraph}{Wymagania funkcjonalne}{8}{paragraph*.5}%
+\contentsline {paragraph}{Wymagania funkcjonalne dodatkowe dla administratora}{8}{paragraph*.6}%
+\contentsline {paragraph}{Wymagania niefunkcjonalne}{8}{paragraph*.7}%
+\contentsline {section}{\numberline {3.4}Komunikacja klient - serwer}{9}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Diagram pakietów}{10}{section.3.5}%
+\contentsline {paragraph}{Serwer }{10}{paragraph*.8}%
+\contentsline {paragraph}{repository}{10}{paragraph*.9}%
+\contentsline {paragraph}{domain}{10}{paragraph*.10}%
+\contentsline {paragraph}{config}{10}{paragraph*.11}%
+\contentsline {paragraph}{service}{10}{paragraph*.12}%
+\contentsline {paragraph}{rest}{10}{paragraph*.13}%
+\contentsline {paragraph}{security}{10}{paragraph*.14}%
+\contentsline {paragraph}{aplikacja webowa}{10}{paragraph*.15}%
+\contentsline {paragraph}{config, model i service}{10}{paragraph*.16}%
+\contentsline {paragraph}{user-view}{10}{paragraph*.17}%
+\contentsline {paragraph}{admin}{10}{paragraph*.18}%
+\contentsline {paragraph}{shared}{11}{paragraph*.19}%
 \contentsline {section}{\numberline {3.6}Baza danych}{11}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Projekt}{11}{subsection.3.6.1}%
 \contentsline {subsection}{\numberline {3.6.2}Normalizacja}{14}{subsection.3.6.2}%

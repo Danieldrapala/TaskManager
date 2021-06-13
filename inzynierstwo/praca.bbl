@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{MdbAngularBootstrap}
+Angular charts bootstrap.
+\newblock Web pages:
+  \url{https://mdbootstrap.com/docs/angular/advanced/charts/#docsTabsOverview}.
+
 \bibitem{ApacheMavenProject}
 Apache maven project documentation.
 \newblock Web pages: \url{https://maven.apache.org/what-is-maven.html}.
@@ -32,11 +37,6 @@ Spring initializr.
 Spring security overview.
 \newblock Web pages: \url{https://spring.io/projects/spring-security}.
 
-\bibitem{MdbAngularBootstrap}
-Spring security overview.
-\newblock Web pages:
-  \url{https://mdbootstrap.com/docs/angular/advanced/charts/#docsTabsOverview}.
-
 \bibitem{db}
 C.~J. Date.
 \newblock {\em An Introduction to Database Systems}.
@@ -46,6 +46,11 @@ C.~J. Date.
 R.~T. Fielding,  J.~Reschke.
 \newblock {Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing}.
 \newblock RFC 7230, Czerw. 2014.
+
+\bibitem{Rest}
+B.~Mehta.
+\newblock {\em RESTful Java Patterns and Best Practices}.
+\newblock Packt Publishing, 2014.
 
 \bibitem{6827095}
 A.~Syromiatnikov,  D.~Weyns.
